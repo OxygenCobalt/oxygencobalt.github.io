@@ -7,20 +7,20 @@
     height: 250px;
 }
 
-.portrait {
-    width: 175px;
-}
-
-.landscape {
-    width: 500px;
-}
-
 .icon {
     width: 175px;
 }
 
+.screenshot {
+    width: 175px;
+}
+
+.clamp {
+    max-width: 300px;
+}
+
 .btn-icon {
-    height: 32px;
+    height: 24px;
 }
 
 .btn-github {
