@@ -4,19 +4,23 @@
 
 .pfp {
     width: 250px;
-    height: 250px;
+    height: auto;
+    max-width: 100%;
 }
 
 .icon {
     width: 175px;
+    max-width: 100%;
 }
 
 .logo {
     width: 400px;
+    max-width: 100%;
 }
 
 .screenshot {
     width: 175px;
+    max-width: 100%;
 }
 
 .clamp {
