@@ -12,7 +12,6 @@
     --hover-bg: #f0f0f0;
     --active-bg: #f0f0f0;
     --sidebar-border: #dddddd;
-    --sidebar-width: 27.5%;
     --sidebar-padding: 20px;
     --transition-speed: 0.3s;
     --border-width: 2px;
@@ -155,13 +154,15 @@ body {
 
 /* Sidebar styles */
 .sidebar {
-    width: var(--sidebar-width);
+    width: fit-content;
+    min-width: 200px;
     padding: var(--sidebar-padding);
     border-right: var(--border-width) solid var(--sidebar-border);
     display: flex;
     flex-direction: column;
     gap: 15px;
     background-color: var(--bg-color);
+    align-items: center; /* Center the name box */
 }
 
 .name-box {
@@ -182,8 +183,12 @@ body {
         0% calc(100% - var(--container-corner-cut)), 
         0% var(--container-corner-cut)
     );
-    height: var(--name-box-height); /* Increased height */
+    height: var(--name-box-height);
     overflow: hidden;
+    width: fit-content;
+    min-width: 400px; /* Increased minimum width to accommodate longer text */
+    margin-left: auto;
+    margin-right: auto;
 }
 
 /* Pseudo-element for border effect */
@@ -261,6 +266,8 @@ body {
     text-rendering: optimizeLegibility;
     font-weight: bold;
     color: var(--text-color);
+    white-space: nowrap; /* Prevent text wrapping */
+    padding: 0 20px; /* Add some padding to prevent text from touching edges */
 }
 
 @keyframes scrollText {
@@ -276,6 +283,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 15px;
+    width: 100%; /* Make tabs container full width */
 }
 
 .tab-button {
@@ -297,6 +305,8 @@ body {
     line-height: 22px;
     background-color: var(--border-color);
     transition: background-color var(--transition-speed);
+    width: 100%; /* Make button take full width */
+    box-sizing: border-box; /* Ensure padding is included in width */
 }
 
 /* Pseudo-element for border effect with rounded corners */
@@ -393,6 +403,7 @@ body {
         0% calc(100% - var(--container-corner-cut)), 
         0% var(--container-corner-cut)
     );
+    min-width: 0; /* Prevent flex item from overflowing */
 }
 
 /* Gradient overlay for content container top */
