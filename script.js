@@ -1,24 +1,67 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // Add no-transition class initially
+    document.documentElement.classList.add('no-tab-transition');
+    
     // Tab functionality
     const tabButtons = document.querySelectorAll('.tab-button');
     const tabContents = document.querySelectorAll('.tab-content');
     
-    tabButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            const tabId = button.getAttribute('data-tab');
-            
-            tabButtons.forEach(btn => btn.classList.remove('active'));
-            tabContents.forEach(content => content.classList.remove('active'));
-            
-            button.classList.add('active');
-            document.getElementById(tabId).classList.add('active');
+    // Function to activate a specific tab
+    function activateTab(tabId) {
+        // Remove active class from all tabs
+        tabButtons.forEach(btn => btn.classList.remove('active'));
+        tabContents.forEach(content => content.classList.remove('active'));
+        
+        // Add active class to selected tab
+        const selectedButton = document.querySelector(`.tab-button[data-tab="${tabId}"]`);
+        const selectedContent = document.getElementById(tabId);
+        
+        if (selectedButton && selectedContent) {
+            selectedButton.classList.add('active');
+            selectedContent.classList.add('active');
             
             // On mobile, close the menu when a tab is selected
             if (window.innerWidth <= 768) {
                 toggleMobileMenu(false);
             }
+        }
+    }
+    
+    // Handle tab button clicks
+    tabButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const tabId = button.getAttribute('data-tab');
+            window.location.hash = tabId; // Update URL hash
         });
     });
+    
+    // Handle URL hash changes
+    function handleHashChange() {
+        let tabId = window.location.hash.slice(1); // Remove the # from the hash
+        
+        // If no hash or invalid tab, default to 'home'
+        if (!tabId || !document.getElementById(tabId)) {
+            tabId = 'home';
+            // Only update URL if it's not already at the default
+            if (window.location.hash !== '#home') {
+                window.location.hash = tabId;
+                return; // handleHashChange will be called again by the hash change
+            }
+        }
+        
+        activateTab(tabId);
+    }
+    
+    // Listen for hash changes
+    window.addEventListener('hashchange', handleHashChange);
+    
+    // Initial tab setup
+    handleHashChange();
+    
+    // Remove no-transition class after a brief delay
+    setTimeout(() => {
+        document.documentElement.classList.remove('no-tab-transition');
+    }, 100);
     
     // Mobile menu functionality
     const menuToggle = document.querySelector('.menu-toggle');

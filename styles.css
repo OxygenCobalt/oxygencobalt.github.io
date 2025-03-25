@@ -13,7 +13,7 @@
     --text-color:  rgb(26 27 33);
     --border-color: rgb(117 118 128);
     --hover-bg: rgb(232 231 239);
-    --active-bg: rgb(244 243 250);
+    --active-bg: rgb(238 237 244);
     --sidebar-border: rgb(227 226 233);
     --sidebar-padding: 20px;
     --transition-speed: 0.3s;
@@ -35,7 +35,7 @@
         --text-color: rgb(227 226 233);
         --border-color: rgb(143 144 154);
         --hover-bg:  rgb(41 42 47);
-        --active-bg:  rgb(26 27 33);
+        --active-bg:  rgb(30 31 37);
         --sidebar-border: rgb(69 70 79);
         --hover-border-color: rgb(179 197 255);
     }
@@ -50,6 +50,14 @@ body {
     line-height: 1.6;
     background-color: var(--bg-color);
     color: var(--text-color);
+}
+
+/* Disable tab transitions initially */
+.no-tab-transition .tab-button,
+.no-tab-transition .tab-content,
+.no-tab-transition .tab-button::before,
+.no-tab-transition .tab-button::after {
+    transition: none !important;
 }
 
 /* Heading styles */
