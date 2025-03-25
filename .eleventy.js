@@ -113,10 +113,21 @@ module.exports = function(eleventyConfig) {
             // Create corresponding partial
             const partialPath = path.join(partialDir, path.basename(filePath));
             
-            // Create new frontmatter for partial
-            const partialContent = `---
-permalink: ${partialUrl}
----
+            // Create new frontmatter with all original properties except 'layout'
+            const partialFrontmatter = { ...data };
+            if (partialFrontmatter.layout === "blog-post.njk") {
+                partialFrontmatter.layout = "blog-partial.njk"
+                console.log(partialFrontmatter.layout)
+            } else {
+                delete partialFrontmatter.layout;
+            }
+            partialFrontmatter.permalink = partialUrl; // Set new permalink
+            
+            // Convert frontmatter to YAML string
+            const yamlFrontmatter = matter.stringify('', partialFrontmatter).trim();
+            
+            // Create the partial content with frontmatter and original content
+            const partialContent = `${yamlFrontmatter}
 ${content}`;
             
             // Write the partial file

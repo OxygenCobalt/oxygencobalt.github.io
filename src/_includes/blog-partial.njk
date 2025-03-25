@@ -1,0 +1,36 @@
+---
+---
+
+<h1>{{ title }}</h1>
+<div class="post-metadata">
+  <span class="post-date">{{ date }}</span>
+</div>
+
+<div class="post-content">
+  {{ content | safe }}
+</div>
+
+<div class="post-navigation">
+  <div class="prev-next">
+    {% if collections.blog %}
+      {% set previousPost = collections.blog | getPreviousCollectionItem %}
+      {% set nextPost = collections.blog | getNextCollectionItem %}
+      
+      {% if previousPost %}
+        <a href="{{ previousPost.url }}" class="prev-post" hx-get="/partials{{ previousPost.url }}" hx-target="#tab-content" hx-push-url="{{ previousPost.url }}" hx-swap="innerHTML transition:true">
+          &larr; {{ previousPost.data.title }}
+        </a>
+      {% endif %}
+      
+      {% if nextPost %}
+        <a href="{{ nextPost.url }}" class="next-post" hx-get="/partials{{ nextPost.url }}" hx-target="#tab-content" hx-push-url="{{ nextPost.url }}" hx-swap="innerHTML transition:true">
+          {{ nextPost.data.title }} &rarr;
+        </a>
+      {% endif %}
+    {% endif %}
+  </div>
+  
+  <a href="/" class="back-to-blog" hx-get="/partials/" hx-target="#tab-content" hx-push-url="/" hx-swap="innerHTML transition:true">
+    Back to Blog List
+  </a>
+</div> 
