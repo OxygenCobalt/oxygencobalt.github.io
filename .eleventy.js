@@ -11,6 +11,22 @@ module.exports = function(eleventyConfig) {
     eleventyConfig.addWatchTarget("src/assets/styles/");
     eleventyConfig.addWatchTarget("src/assets/scripts/");
     
+    // Add blog collection
+    eleventyConfig.addCollection("blog", function(collectionApi) {
+        return collectionApi.getFilteredByTag("blog")
+            .sort((a, b) => a.date - b.date);
+    });
+    
+    // Add date filter for formatting dates
+    eleventyConfig.addFilter("date", function(date, format) {
+        const options = { 
+            year: 'numeric', 
+            month: 'long', 
+            day: 'numeric' 
+        };
+        return new Date(date).toLocaleDateString('en-US', options);
+    });
+
     // Add shortcode for checking active state
     eleventyConfig.addShortcode("isActive", function(currentPage, itemUrl) {
         return currentPage === itemUrl ? "active" : "";
@@ -31,14 +47,31 @@ module.exports = function(eleventyConfig) {
             fs.mkdirSync(partialsDir, { recursive: true });
         }
         
-        // Read all files in content directory
-        const contentFiles = fs.readdirSync(contentDir, { withFileTypes: true })
-            .filter(dirent => !dirent.isDirectory() && dirent.name.endsWith('.md'));
+        // Read all files in content directory recursively
+        function readDirRecursively(dir) {
+            let results = [];
+            const list = fs.readdirSync(dir, { withFileTypes: true });
+            
+            for (const file of list) {
+                const fullPath = path.join(dir, file.name);
+                
+                if (file.isDirectory()) {
+                    // Skip the partials directory
+                    if (file.name !== 'partials') {
+                        results = results.concat(readDirRecursively(fullPath));
+                    }
+                } else if (file.name.endsWith('.md')) {
+                    results.push(fullPath);
+                }
+            }
+            
+            return results;
+        }
+        
+        const contentFiles = readDirRecursively(contentDir);
         
         // Process each content file
-        for (const file of contentFiles) {
-            const filePath = path.join(contentDir, file.name);
-            
+        for (const filePath of contentFiles) {
             // Skip if the file is in the partials directory
             if (filePath.includes('partials')) continue;
             
@@ -47,25 +80,38 @@ module.exports = function(eleventyConfig) {
             // Parse frontmatter
             const { data, content } = matter(fileContent);
             
+            // Get the relative path from content directory
+            const relativePath = path.relative(contentDir, filePath);
+            const relativeDir = path.dirname(relativePath);
+            
             // Get the base name without extension
-            const baseName = path.basename(file.name, '.md');
+            const baseName = path.basename(filePath, '.md');
             
             // Determine the partial URL
             let partialUrl;
             if (data.permalink) {
-                // Extract the path from the permalink
+                // Use the same URL structure but with /partials prefix
                 let permalinkPath = data.permalink;
+                
                 // Remove trailing slash if present
                 if (permalinkPath.endsWith('/')) {
                     permalinkPath = permalinkPath.slice(0, -1);
                 }
+                
                 partialUrl = `/partials${permalinkPath}/`;
             } else {
-                partialUrl = `/partials/${baseName}/`;
+                const dirPart = relativeDir !== '.' ? `/${relativeDir}` : '';
+                partialUrl = `/partials${dirPart}/${baseName}/`;
+            }
+            
+            // Create corresponding partial directory if it doesn't exist
+            const partialDir = path.join(partialsDir, relativeDir);
+            if (!fs.existsSync(partialDir)) {
+                fs.mkdirSync(partialDir, { recursive: true });
             }
             
             // Create corresponding partial
-            const partialPath = path.join(partialsDir, file.name);
+            const partialPath = path.join(partialDir, path.basename(filePath));
             
             // Create new frontmatter for partial
             const partialContent = `---
