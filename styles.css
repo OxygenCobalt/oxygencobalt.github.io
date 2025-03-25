@@ -1,3 +1,6 @@
+/* Import Inter font */
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
 /* Basic reset */
 * {
     margin: 0;
@@ -6,42 +9,109 @@
 }
 
 :root {
-    --bg-color: #ffffff;
-    --text-color: #333333;
-    --border-color: #555555;
-    --hover-bg: #f0f0f0;
-    --active-bg: #f0f0f0;
-    --sidebar-border: #dddddd;
+    --bg-color: rgb(250 248 255);
+    --text-color:  rgb(26 27 33);
+    --border-color: rgb(117 118 128);
+    --hover-bg: rgb(232 231 239);
+    --active-bg: rgb(244 243 250);
+    --sidebar-border: rgb(227 226 233);
     --sidebar-padding: 20px;
     --transition-speed: 0.3s;
     --border-width: 2px;
     --hover-border-width: 4px;
-    --hover-border-color: #4285f4;
+    --hover-border-color: rgb(74 92 146);
     --corner-cut: 20px;
     --container-corner-cut: 20px;
+    --menu-bar-corner-cut: 1.5px; /* New variable for menu bar corner cuts */
     --scroll-height: 80px; /* Height of all scrolling items combined */
-    --item-height: 40px; /* Height of each text item */
-    --name-box-height: 100px; /* Increased height for name box */
+    --item-height: 35px; /* Height of each text item */
+    --name-box-height: 70px; /* Increased height for name box */
     --mobile-item-height: 20px; /* Height for mobile text items */
 }
 
 @media (prefers-color-scheme: dark) {
     :root {
-        --bg-color: #000000;
-        --text-color: #ffffff;
-        --border-color: #444444;
-        --hover-bg: #111111;
-        --active-bg: #222222;
-        --sidebar-border: #333333;
-        --hover-border-color: #4285f4;
+        --bg-color: rgb(18 19 24);
+        --text-color: rgb(227 226 233);
+        --border-color: rgb(143 144 154);
+        --hover-bg:  rgb(41 42 47);
+        --active-bg:  rgb(26 27 33);
+        --sidebar-border: rgb(69 70 79);
+        --hover-border-color: rgb(179 197 255);
     }
 }
 
+/* Base font styles */
 body {
-    font-family: Arial, sans-serif;
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
     line-height: 1.6;
     background-color: var(--bg-color);
     color: var(--text-color);
+}
+
+/* Heading styles */
+h1, h2, h3, h4, h5, h6 {
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+}
+
+/* Button text */
+.tab-button {
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+}
+
+/* Scrolling text items */
+.text-item {
+    height: var(--item-height);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.75rem;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    font-weight: 600;
+    color: var(--text-color);
+    white-space: nowrap; /* Prevent text wrapping */
+    padding: 0 20px; /* Add some padding to prevent text from touching edges */
+}
+
+@keyframes scrollText {
+    0% {
+        transform: translateY(calc(var(--item-height) * -1));
+    }
+    100% {
+        transform: translateY(calc(var(--item-height) * -3)); /* Scroll through both names */
+    }
+}
+
+/* Mobile text items */
+.text-item-mobile {
+    height: var(--mobile-item-height);
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    font-size: 1rem;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+@keyframes scrollTextMobile {
+    0% {
+        transform: translateY(calc(var(--mobile-item-height) * -1));
+    }
+    100% {
+        transform: translateY(calc(var(--mobile-item-height) * -3)); /* Scroll through both names */
+    }
 }
 
 /* Mobile header - hidden by default on desktop */
@@ -107,27 +177,6 @@ body {
     padding: 10px 0;
 }
 
-.text-item-mobile {
-    height: var(--mobile-item-height);
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    font-size: 1rem;
-    -webkit-font-smoothing: antialiased;
-    text-rendering: optimizeLegibility;
-    font-weight: bold;
-    color: var(--text-color);
-}
-
-@keyframes scrollTextMobile {
-    0% {
-        transform: translateY(calc(var(--mobile-item-height) * -1));
-    }
-    100% {
-        transform: translateY(calc(var(--mobile-item-height) * -3)); /* Scroll through both names */
-    }
-}
-
 .menu-toggle {
     display: flex;
     flex-direction: column;
@@ -145,6 +194,23 @@ body {
     height: 3px;
     background-color: var(--text-color);
     transition: var(--transition-speed);
+    /* Hexagonal shape using clip-path with smaller corner cuts */
+    clip-path: polygon(var(--menu-bar-corner-cut) 0%, calc(100% - var(--menu-bar-corner-cut)) 0%, 100% 50%, calc(100% - var(--menu-bar-corner-cut)) 100%, var(--menu-bar-corner-cut) 100%, 0% 50%);
+}
+
+/* Adjust the rotation animation to work with hexagonal bars */
+.menu-toggle.active .bar:nth-child(1) {
+    transform: translateY(11px) rotate(45deg);
+    clip-path: polygon(var(--menu-bar-corner-cut) 0%, calc(100% - var(--menu-bar-corner-cut)) 0%, 100% 50%, calc(100% - var(--menu-bar-corner-cut)) 100%, var(--menu-bar-corner-cut) 100%, 0% 50%);
+}
+
+.menu-toggle.active .bar:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-toggle.active .bar:nth-child(3) {
+    transform: translateY(-11px) rotate(-45deg);
+    clip-path: polygon(var(--menu-bar-corner-cut) 0%, calc(100% - var(--menu-bar-corner-cut)) 0%, 100% 50%, calc(100% - var(--menu-bar-corner-cut)) 100%, var(--menu-bar-corner-cut) 100%, 0% 50%);
 }
 
 .container {
@@ -170,7 +236,6 @@ body {
     border: none;
     padding: 0;
     text-align: center;
-    margin-bottom: 20px;
     background-color: var(--border-color);
     /* Octagonal shape using clip-path */
     clip-path: polygon(
@@ -186,7 +251,7 @@ body {
     height: var(--name-box-height);
     overflow: hidden;
     width: fit-content;
-    min-width: 400px; /* Increased minimum width to accommodate longer text */
+    min-width: 325px; /* Increased minimum width to accommodate longer text */
     margin-left: auto;
     margin-right: auto;
 }
@@ -254,29 +319,6 @@ body {
     will-change: transform;
     backface-visibility: hidden;
     padding: 30px 0;
-}
-
-.text-item {
-    height: var(--item-height);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2rem;
-    -webkit-font-smoothing: antialiased;
-    text-rendering: optimizeLegibility;
-    font-weight: bold;
-    color: var(--text-color);
-    white-space: nowrap; /* Prevent text wrapping */
-    padding: 0 20px; /* Add some padding to prevent text from touching edges */
-}
-
-@keyframes scrollText {
-    0% {
-        transform: translateY(calc(var(--item-height) * -1));
-    }
-    100% {
-        transform: translateY(calc(var(--item-height) * -3)); /* Scroll through both names */
-    }
 }
 
 .tabs {
@@ -362,6 +404,10 @@ body {
     opacity: 0;
 }
 
+.tab-button.active::before {
+    background-color: var(--active-bg);
+}
+
 .tab-button:hover::before {
     background-color: var(--hover-bg);
     top: var(--hover-border-width);
@@ -377,10 +423,6 @@ body {
         calc(var(--corner-cut) - var(--hover-border-width) * 0.5) 100%, 
         calc(var(--hover-border-width) * 0.5) 50%
     );
-}
-
-.tab-button.active::before {
-    background-color: var(--hover-bg);
 }
 
 /* Content area */
