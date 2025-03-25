@@ -1,0 +1,9 @@
+{
+    "items": [
+        { "text": "Home", "url": "/", "partial": "/partials/" },
+        { "text": "About", "url": "/about/", "partial": "/partials/about/" },
+        { "text": "Resume", "url": "/resume/", "partial": "/partials/resume/" },
+        { "text": "Portfolio", "url": "/portfolio/", "partial": "/partials/portfolio/" },
+        { "text": "Currently", "url": "/currently/", "partial": "/partials/currently/" }
+    ]
+}

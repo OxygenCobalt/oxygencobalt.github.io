@@ -3,20 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alexander Capehart</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Alexander Capehart | {{ title }}</title>
+    <link rel="stylesheet" href="/assets/styles/styles.css">
+    <script src="/assets/scripts/htmx.min.js"></script>
 </head>
 <body>
     <div class="mobile-header">
         <div class="name-box-mobile">
             <div class="scroll-container-mobile">
                 <div class="scroll-wrapper-mobile">
-                    <!-- Upper in-progress item -->
                     <div class="text-item-mobile">OxygenCobalt.</div>
-                    <!-- Original set -->
                     <div class="text-item-mobile">Alexander Capehart.</div>
                     <div class="text-item-mobile">OxygenCobalt.</div>
-                    <!-- Duplicate set for continuous scrolling -->
                     <div class="text-item-mobile">Alexander Capehart.</div>
                     <div class="text-item-mobile">OxygenCobalt.</div>
                 </div>
@@ -34,48 +32,49 @@
             <div class="name-box">
                 <div class="scroll-container">
                     <div class="scroll-wrapper">
-                        <!-- Original set -->
                         <div class="text-item">OxygenCobalt.</div>
                         <div class="text-item">Alexander Capehart.</div>
                         <div class="text-item">OxygenCobalt.</div>
-                        <!-- Duplicate set for continuous scrolling -->
                         <div class="text-item">Alexander Capehart.</div>
                         <div class="text-item">OxygenCobalt.</div>
                     </div>
                 </div>
             </div>
             <nav class="tabs">
-                <button class="tab-button" data-tab="home">Home</button>
-                <button class="tab-button" data-tab="about">About</button>
-                <button class="tab-button" data-tab="resume">Resume</button>
-                <button class="tab-button" data-tab="portfolio">Portfolio</button>
-                <button class="tab-button" data-tab="currently">Currently</button>
+                {% for item in navigation.items %}
+                {% set isActive = page.url == item.url or (page.url == "/" and item.url == "/") %}
+                <button class="tab-button {% if isActive %}active{% endif %}"
+                        hx-get="{{ item.partial }}"
+                        hx-target="#tab-content"
+                        hx-push-url="{{ item.url }}"
+                        hx-swap="innerHTML transition:true"
+                        hx-trigger="click">
+                    {{ item.text }}
+                </button>
+                {% endfor %}
             </nav>
         </div>
         <div class="content">
-            <div class="tab-content active" id="home">
-                <h1>Content</h1>
-                <p>(Scrolls)</p>
-            </div>
-            <div class="tab-content" id="about">
-                <h1>About</h1>
-                <p>(Content will go here)</p>
-            </div>
-            <div class="tab-content" id="resume">
-                <h1>Resume</h1>
-                <p>(Content will go here)</p>
-            </div>
-            <div class="tab-content" id="portfolio">
-                <h1>Portfolio</h1>
-                <p>(Content will go here)</p>
-            </div>
-            <div class="tab-content" id="currently">
-                <h1>Currently</h1>
-                <p>(Content will go here)</p>
+            <div id="tab-content" class="tab-content active">
+                {{ content | safe }}
             </div>
             <div class="content-fade-bottom"></div>
         </div>
     </div>
-    <script src="script.js"></script>
+    <script src="/assets/scripts/script.js"></script>
+    <script>
+        // Update active state when HTMX navigation occurs
+        document.body.addEventListener('htmx:afterSettle', function(event) {
+            // Remove active class from all buttons
+            document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+            
+            // Find the button that matches the current URL and make it active
+            const currentPath = window.location.pathname;
+            const activeButton = document.querySelector(`.tab-button[hx-push-url="${currentPath}"]`);
+            if (activeButton) {
+                activeButton.classList.add('active');
+            }
+        });
+    </script>
 </body>
 </html> 

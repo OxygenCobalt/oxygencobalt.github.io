@@ -2,67 +2,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // Add no-transition class initially
     document.documentElement.classList.add('no-tab-transition');
     
-    // Tab functionality
-    const tabButtons = document.querySelectorAll('.tab-button');
-    const tabContents = document.querySelectorAll('.tab-content');
-    
-    // Function to activate a specific tab
-    function activateTab(tabId) {
-        // Remove active class from all tabs
-        tabButtons.forEach(btn => btn.classList.remove('active'));
-        tabContents.forEach(content => content.classList.remove('active'));
-        
-        // Add active class to selected tab
-        const selectedButton = document.querySelector(`.tab-button[data-tab="${tabId}"]`);
-        const selectedContent = document.getElementById(tabId);
-        
-        if (selectedButton && selectedContent) {
-            selectedButton.classList.add('active');
-            selectedContent.classList.add('active');
-            
-            // On mobile, close the menu when a tab is selected
-            if (window.innerWidth <= 768) {
-                toggleMobileMenu(false);
-            }
-        }
-    }
-    
-    // Handle tab button clicks
-    tabButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            const tabId = button.getAttribute('data-tab');
-            window.location.hash = tabId; // Update URL hash
-        });
-    });
-    
-    // Handle URL hash changes
-    function handleHashChange() {
-        let tabId = window.location.hash.slice(1); // Remove the # from the hash
-        
-        // If no hash or invalid tab, default to 'home'
-        if (!tabId || !document.getElementById(tabId)) {
-            tabId = 'home';
-            // Only update URL if it's not already at the default
-            if (window.location.hash !== '#home') {
-                window.location.hash = tabId;
-                return; // handleHashChange will be called again by the hash change
-            }
-        }
-        
-        activateTab(tabId);
-    }
-    
-    // Listen for hash changes
-    window.addEventListener('hashchange', handleHashChange);
-    
-    // Initial tab setup
-    handleHashChange();
-    
-    // Remove no-transition class after a brief delay
-    setTimeout(() => {
-        document.documentElement.classList.remove('no-tab-transition');
-    }, 100);
-    
     // Mobile menu functionality
     const menuToggle = document.querySelector('.menu-toggle');
     const sidebar = document.querySelector('.sidebar');
@@ -119,6 +58,13 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
+    // Close mobile menu when HTMX navigation occurs
+    document.body.addEventListener('htmx:afterOnLoad', function() {
+        if (window.innerWidth <= 768) {
+            toggleMobileMenu(false);
+        }
+    });
+    
     // Theme detection based on system preference
     const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
     
@@ -133,4 +79,9 @@ document.addEventListener('DOMContentLoaded', function() {
     prefersDarkScheme.addEventListener('change', e => {
         setTheme(e.matches);
     });
+
+    // Remove no-transition class after a brief delay
+    setTimeout(() => {
+        document.documentElement.classList.remove('no-tab-transition');
+    }, 100);
 });
