@@ -8,15 +8,15 @@
 :root {
     --bg-color: #ffffff;
     --text-color: #333333;
-    --border-color: #000000;
+    --border-color: #555555;
     --hover-bg: #f0f0f0;
     --active-bg: #f0f0f0;
     --sidebar-border: #dddddd;
     --sidebar-width: 25%;
     --sidebar-padding: 20px;
     --transition-speed: 0.3s;
-    --border-width: 1px;
-    --hover-border-width: 3px;
+    --border-width: 2px;
+    --hover-border-width: 4px;
     --hover-border-color: #4285f4;
     --corner-cut: 20px;
     --container-corner-cut: 20px;
@@ -157,7 +157,7 @@ body {
 .sidebar {
     width: var(--sidebar-width);
     padding: var(--sidebar-padding);
-    border-right: 1px solid var(--sidebar-border);
+    border-right: var(--border-width) solid var(--sidebar-border);
     display: flex;
     flex-direction: column;
     gap: 15px;
@@ -338,7 +338,7 @@ body {
     /* Gradient overlay, radiating from center */
     background: radial-gradient(
         circle at center,
-        transparent 40%,
+        transparent 80%,
         var(--bg-color) 120%
     );
 }
@@ -406,7 +406,6 @@ body {
     background: linear-gradient(to bottom, var(--bg-color), transparent);
     z-index: 1;
     pointer-events: none;
-    opacity: 0.9;
 }
 
 /* Inner background with border effect */
@@ -438,11 +437,10 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    height: calc(var(--container-corner-cut) / 2);
+    height: calc(var(--container-corner-cut));
     background: linear-gradient(to top, var(--bg-color), transparent);
     z-index: 1;
     pointer-events: none;
-    opacity: 0.9;
 }
 
 /* Make content appear above the pseudo-element but below the gradients */
