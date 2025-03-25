@@ -89,12 +89,12 @@ body {
 
 .scroll-container-mobile::before {
     top: 0;
-    background: linear-gradient(to bottom, var(--bg-color) 0%, transparent 100%);
+    background: linear-gradient(to bottom, var(--bg-color) 10%, transparent 110%);
 }
 
 .scroll-container-mobile::after {
     bottom: 0;
-    background: linear-gradient(to top, var(--bg-color) 0%, transparent 100%);
+    background: linear-gradient(to top, var(--bg-color) 10%, transparent 110%);
 }
 
 .scroll-wrapper-mobile {
@@ -238,12 +238,12 @@ body {
 
 .scroll-container::before {
     top: 0;
-    background: linear-gradient(to bottom, var(--bg-color) 0%, transparent 100%);
+    background: linear-gradient(to bottom, var(--bg-color) 10%, transparent 110%);
 }
 
 .scroll-container::after {
     bottom: 0;
-    background: linear-gradient(to top, var(--bg-color) 0%, transparent 100%);
+    background: linear-gradient(to top, var(--bg-color) 10%, transparent 110%);
 }
 
 .scroll-wrapper {
@@ -414,7 +414,7 @@ body {
     right: 0;
     top: 0;
     height: var(--container-corner-cut);
-    background: linear-gradient(to bottom, var(--bg-color), transparent);
+    background: linear-gradient(to bottom, var(--bg-color) 10%, transparent 110%);
     z-index: 1;
     pointer-events: none;
 }
@@ -449,7 +449,7 @@ body {
     right: 0;
     bottom: 0;
     height: calc(var(--container-corner-cut));
-    background: linear-gradient(to top, var(--bg-color), transparent);
+    background: linear-gradient(to top, var(--bg-color) 10%, transparent 110%);
     z-index: 1;
     pointer-events: none;
 }
