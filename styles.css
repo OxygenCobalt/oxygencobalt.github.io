@@ -12,11 +12,17 @@
     --hover-bg: #f0f0f0;
     --active-bg: #f0f0f0;
     --sidebar-border: #dddddd;
-    --sidebar-width: clamp(200px, 25%, 300px);
+    --sidebar-width: 25%;
     --sidebar-padding: 20px;
     --transition-speed: 0.3s;
+    --border-width: 1px;
+    --hover-border-width: 3px;
+    --hover-border-color: #4285f4;
     --corner-cut: 20px;
     --container-corner-cut: 20px;
+    --scroll-height: 80px; /* Height of all scrolling items combined */
+    --item-height: 40px; /* Height of each text item */
+    --name-box-height: 100px; /* Increased height for name box */
 }
 
 @media (prefers-color-scheme: dark) {
@@ -27,6 +33,7 @@
         --hover-bg: #111111;
         --active-bg: #222222;
         --sidebar-border: #333333;
+        --hover-border-color: #4285f4;
     }
 }
 
@@ -94,7 +101,7 @@ body {
 .name-box {
     position: relative;
     border: none;
-    padding: 20px;
+    padding: 0;
     text-align: center;
     margin-bottom: 20px;
     background-color: var(--border-color);
@@ -109,35 +116,94 @@ body {
         0% calc(100% - var(--container-corner-cut)), 
         0% var(--container-corner-cut)
     );
+    height: var(--name-box-height); /* Increased height */
+    overflow: hidden;
 }
 
 /* Pseudo-element for border effect */
 .name-box::before {
     content: '';
     position: absolute;
-    top: 1px;
-    left: 1px;
-    right: 1px;
-    bottom: 1px;
+    top: var(--border-width);
+    left: var(--border-width);
+    right: var(--border-width);
+    bottom: var(--border-width);
     background-color: var(--bg-color);
     z-index: -1;
-    /* Octagonal shape using clip-path */
+    /* Calculate inset octagonal shape */
     clip-path: polygon(
-        var(--container-corner-cut) 0%, 
-        calc(100% - var(--container-corner-cut)) 0%, 
-        100% var(--container-corner-cut), 
-        100% calc(100% - var(--container-corner-cut)), 
-        calc(100% - var(--container-corner-cut)) 100%, 
-        var(--container-corner-cut) 100%, 
-        0% calc(100% - var(--container-corner-cut)), 
-        0% var(--container-corner-cut)
+        calc(var(--container-corner-cut) - var(--border-width) * 0.5) 0%, 
+        calc(100% - var(--container-corner-cut) + var(--border-width) * 0.5) 0%, 
+        100% calc(var(--container-corner-cut) - var(--border-width) * 0.5), 
+        100% calc(100% - var(--container-corner-cut) + var(--border-width) * 0.5), 
+        calc(100% - var(--container-corner-cut) + var(--border-width) * 0.5) 100%, 
+        calc(var(--container-corner-cut) - var(--border-width) * 0.5) 100%, 
+        0% calc(100% - var(--container-corner-cut) + var(--border-width) * 0.5), 
+        0% calc(var(--container-corner-cut) - var(--border-width) * 0.5)
     );
 }
 
-/* Make text in name-box appear above the pseudo-element */
-.name-box h1 {
+/* Scrolling text container */
+.scroll-container {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
     position: relative;
     z-index: 1;
+    padding: 0;
+}
+
+/* Gradient overlay for fade effects */
+.scroll-container::before,
+.scroll-container::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: var(--container-corner-cut);
+    z-index: 2;
+    pointer-events: none;
+}
+
+.scroll-container::before {
+    top: 0;
+    background: linear-gradient(to bottom, var(--bg-color) 0%, transparent 100%);
+}
+
+.scroll-container::after {
+    bottom: 0;
+    background: linear-gradient(to top, var(--bg-color) 0%, transparent 100%);
+}
+
+.scroll-wrapper {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    animation: scrollText 8s linear infinite;
+    will-change: transform;
+    backface-visibility: hidden;
+    padding: 30px 0;
+}
+
+.text-item {
+    height: var(--item-height);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    font-weight: bold;
+    color: var(--text-color);
+}
+
+@keyframes scrollText {
+    0% {
+        transform: translateY(calc(var(--item-height) * -1));
+    }
+    100% {
+        transform: translateY(calc(var(--item-height) * -3)); /* Scroll through both names */
+    }
 }
 
 .tabs {
@@ -153,7 +219,7 @@ body {
     background: none;
     cursor: pointer;
     font-size: 16px;
-    transition: background-color var(--transition-speed);
+    transition: background-color var(--transition-speed), transform var(--transition-speed);
     color: var(--text-color);
     text-align: center;
     /* Hexagonal shape using clip-path */
@@ -163,29 +229,51 @@ body {
     /* Add consistent height to ensure proper alignment */
     height: 42px;
     line-height: 22px;
+    background-color: var(--border-color);
+    transition: background-color var(--transition-speed);
 }
 
 /* Pseudo-element for border effect with rounded corners */
 .tab-button::before {
     content: '';
     position: absolute;
-    top: 1px;
-    left: 1px;
-    right: 1px;
-    bottom: 1px;
+    top: var(--border-width);
+    left: var(--border-width);
+    right: var(--border-width);
+    bottom: var(--border-width);
     background-color: var(--bg-color);
     z-index: -1;
-    clip-path: polygon(var(--corner-cut) 0%, calc(100% - var(--corner-cut)) 0%, 100% 50%, calc(100% - var(--corner-cut)) 100%, var(--corner-cut) 100%, 0% 50%);
-    transition: background-color var(--transition-speed);
+    /* Calculate inset hexagonal shape */
+    clip-path: polygon(
+        calc(var(--corner-cut) - var(--border-width) * 0.5) 0%, 
+        calc(100% - var(--corner-cut) + var(--border-width) * 0.5) 0%, 
+        calc(100% - var(--border-width) * 0.5) 50%, 
+        calc(100% - var(--corner-cut) + var(--border-width) * 0.5) 100%, 
+        calc(var(--corner-cut) - var(--border-width) * 0.5) 100%, 
+        calc(var(--border-width) * 0.5) 50%
+    );
+    transition: all var(--transition-speed);
 }
 
-/* Apply border as background on the button */
-.tab-button {
-    background-color: var(--border-color);
+.tab-button:hover, .tab-button.active {
+    background-color: var(--hover-border-color);
 }
 
 .tab-button:hover::before {
     background-color: var(--hover-bg);
+    top: var(--hover-border-width);
+    left: var(--hover-border-width);
+    right: var(--hover-border-width);
+    bottom: var(--hover-border-width);
+    /* Recalculate inset hexagonal shape for thicker border */
+    clip-path: polygon(
+        calc(var(--corner-cut) - var(--hover-border-width) * 0.5) 0%, 
+        calc(100% - var(--corner-cut) + var(--hover-border-width) * 0.5) 0%, 
+        calc(100% - var(--hover-border-width) * 0.5) 50%, 
+        calc(100% - var(--corner-cut) + var(--hover-border-width) * 0.5) 100%, 
+        calc(var(--corner-cut) - var(--hover-border-width) * 0.5) 100%, 
+        calc(var(--hover-border-width) * 0.5) 50%
+    );
 }
 
 .tab-button.active::before {
@@ -214,33 +302,60 @@ body {
     );
 }
 
-/* Pseudo-element for content area inner background */
+/* Gradient overlay for content container top */
+.content::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: var(--container-corner-cut);
+    background: linear-gradient(to bottom, var(--bg-color), transparent);
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0.9;
+}
+
+/* Inner background with border effect */
 .content::before {
     content: '';
     position: absolute;
-    top: 1px;
-    left: 1px;
-    right: 1px;
-    bottom: 1px;
+    top: var(--border-width);
+    left: var(--border-width);
+    right: var(--border-width);
+    bottom: var(--border-width);
     background-color: var(--bg-color);
     z-index: -1;
-    /* Octagonal shape using clip-path */
+    /* Calculate inset octagonal shape */
     clip-path: polygon(
-        var(--container-corner-cut) 0%, 
-        calc(100% - var(--container-corner-cut)) 0%, 
-        100% var(--container-corner-cut), 
-        100% calc(100% - var(--container-corner-cut)), 
-        calc(100% - var(--container-corner-cut)) 100%, 
-        var(--container-corner-cut) 100%, 
-        0% calc(100% - var(--container-corner-cut)), 
-        0% var(--container-corner-cut)
+        calc(var(--container-corner-cut) - var(--border-width) * 0.5) 0%, 
+        calc(100% - var(--container-corner-cut) + var(--border-width) * 0.5) 0%, 
+        100% calc(var(--container-corner-cut) - var(--border-width) * 0.5), 
+        100% calc(100% - var(--container-corner-cut) + var(--border-width) * 0.5), 
+        calc(100% - var(--container-corner-cut) + var(--border-width) * 0.5) 100%, 
+        calc(var(--container-corner-cut) - var(--border-width) * 0.5) 100%, 
+        0% calc(100% - var(--container-corner-cut) + var(--border-width) * 0.5), 
+        0% calc(var(--container-corner-cut) - var(--border-width) * 0.5)
     );
 }
 
-/* Make content appear above the pseudo-element */
+/* Bottom gradient overlay for content */
+.content-fade-bottom {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: calc(var(--container-corner-cut) / 2);
+    background: linear-gradient(to top, var(--bg-color), transparent);
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0.9;
+}
+
+/* Make content appear above the pseudo-element but below the gradients */
 .tab-content {
     position: relative;
-    z-index: 1;
+    z-index: 0;
     display: none;
 }
 
