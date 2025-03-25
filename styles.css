@@ -12,7 +12,7 @@
     --hover-bg: #f0f0f0;
     --active-bg: #f0f0f0;
     --sidebar-border: #dddddd;
-    --sidebar-width: 25%;
+    --sidebar-width: 27.5%;
     --sidebar-padding: 20px;
     --transition-speed: 0.3s;
     --border-width: 2px;
@@ -338,7 +338,7 @@ body {
     /* Gradient overlay, radiating from center */
     background: radial-gradient(
         circle at center,
-        transparent 80%,
+        transparent 60%,
         var(--bg-color) 120%
     );
 }
@@ -377,7 +377,7 @@ body {
 .content {
     flex: 1;
     position: relative;
-    padding: 20px;
+    padding: calc(var(--container-corner-cut)) calc(var(--container-corner-cut) * 2);
     margin: 20px;
     overflow-y: auto;
     border: none;
