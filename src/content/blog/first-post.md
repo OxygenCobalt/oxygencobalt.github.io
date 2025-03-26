@@ -4,6 +4,7 @@ title: "My First Blog Post"
 date: 2024-03-25
 permalink: "/blog/first-post/"
 tags: ["blog"]
+nextPost: "second-post"
 ---
 
 This is my first blog post on my new 11ty-powered blog! 

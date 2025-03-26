@@ -27,6 +27,15 @@ module.exports = function(eleventyConfig) {
         return new Date(date).toLocaleDateString('en-US', options);
     });
 
+    // Add filter to get post title by slug
+    eleventyConfig.addFilter("getPostTitleBySlug", function(slug, collections) {
+        const post = collections.blog.find(post => {
+            const postSlug = post.fileSlug;
+            return postSlug === slug;
+        });
+        return post ? post.data.title : "Post";
+    });
+
     // Add shortcode for checking active state
     eleventyConfig.addShortcode("isActive", function(currentPage, itemUrl) {
         return currentPage === itemUrl ? "active" : "";

@@ -12,19 +12,16 @@
 
 <div class="post-navigation">
   <div class="prev-next">
-    {% if collections.blog %}
-      {% set previousPost = collections.blog | getPreviousCollectionItem %}
-      {% set nextPost = collections.blog | getNextCollectionItem %}
-      
+    {% if previousPost or nextPost %}
       {% if previousPost %}
-        <a href="{{ previousPost.url }}" class="prev-post" hx-get="/partials{{ previousPost.url }}" hx-target="#tab-content" hx-push-url="{{ previousPost.url }}" hx-swap="innerHTML transition:true">
-          &larr; {{ previousPost.data.title }}
+        <a href="/blog/{{ previousPost }}/" class="prev-post" hx-get="/partials/blog/{{ previousPost }}/" hx-target="#tab-content" hx-push-url="/blog/{{ previousPost }}/" hx-swap="innerHTML transition:true">
+          &larr; Previous Post
         </a>
       {% endif %}
       
       {% if nextPost %}
-        <a href="{{ nextPost.url }}" class="next-post" hx-get="/partials{{ nextPost.url }}" hx-target="#tab-content" hx-push-url="{{ nextPost.url }}" hx-swap="innerHTML transition:true">
-          {{ nextPost.data.title }} &rarr;
+        <a href="/blog/{{ nextPost }}/" class="next-post" hx-get="/partials/blog/{{ nextPost }}/" hx-target="#tab-content" hx-push-url="/blog/{{ nextPost }}/" hx-swap="innerHTML transition:true">
+          Next Post &rarr;
         </a>
       {% endif %}
     {% endif %}

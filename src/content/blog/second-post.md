@@ -4,6 +4,7 @@ title: "My Second Blog Post"
 date: 2024-03-26
 permalink: "/blog/second-post/"
 tags: ["blog"]
+previousPost: "first-post"
 ---
 
 This is my second blog post! Let's add more content to demonstrate how the blog system works.
