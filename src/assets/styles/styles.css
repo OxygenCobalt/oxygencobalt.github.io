@@ -1652,31 +1652,8 @@ h2 {
     margin-bottom: 10px;
     display: flex;
     flex-direction: column;
-    gap: 12px;
     align-self: center;
     max-width: 325px; /* Match the name box width */
-}
-
-.now-playing-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 10px;
-}
-
-.now-playing-label {
-    font-weight: 600;
-    font-size: 1rem;
-    color: var(--text-color);
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.listenbrainz-icon {
-    width: 18px;
-    height: 18px;
-    fill: var(--text-color);
 }
 
 .now-playing-status {
@@ -1684,7 +1661,10 @@ h2 {
     height: 10px;
     border-radius: 50%;
     background-color: var(--border-color);
-    position: relative;
+    position: absolute;
+    top: calc(var(--container-corner-cut) + 5px);
+    right: calc(var(--container-corner-cut) + 5px);
+    z-index: 3;
     transition: background-color 0.3s ease;
 }
 
@@ -1709,7 +1689,7 @@ h2 {
     position: relative;
     display: flex;
     gap: 15px;
-    padding: 25px 15px; /* Increased top and bottom padding */
+    padding: 30px 15px; /* Increased top and bottom padding further */
     padding-left: calc(var(--container-corner-cut) + 5px);
     padding-right: calc(var(--container-corner-cut) + 5px);
     text-decoration: none;
@@ -1728,7 +1708,7 @@ h2 {
         0% calc(100% - var(--container-corner-cut)), 
         0% var(--container-corner-cut)
     );
-    min-height: 70px; /* Ensure minimum height */
+    min-height: 85px; /* Increased minimum height */
 }
 
 .now-playing-container.active {
@@ -1782,11 +1762,11 @@ h2 {
         0% calc(100% - var(--container-corner-cut)), 
         0% var(--container-corner-cut)
     );
-    /* Vertical gradient overlay like the name box - less intense */
+    /* Vertical gradient overlay - even less intense */
     background: linear-gradient(to bottom, 
         var(--bg-color) 5%, 
-        transparent 30%,
-        transparent 70%,
+        transparent 25%,
+        transparent 75%,
         var(--bg-color) 95%
     );
 }
@@ -1848,6 +1828,19 @@ h2 {
     flex: 1;
     min-width: 0; /* Ensure text truncation works */
     padding-right: 5px; /* Extra padding on the right to avoid text hitting the edge */
+    margin-top: 2px; /* Add a tiny bit of top margin */
+    margin-bottom: 2px; /* Add a tiny bit of bottom margin */
+}
+
+.now-playing-header {
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: var(--border-color);
+    margin-bottom: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: color var(--transition-speed);
 }
 
 .now-playing-title {
@@ -1858,6 +1851,7 @@ h2 {
     overflow: hidden;
     text-overflow: ellipsis;
     transition: color var(--transition-speed);
+    display: none; /* Hidden by default */
 }
 
 .now-playing-artist {
@@ -1867,8 +1861,15 @@ h2 {
     overflow: hidden;
     text-overflow: ellipsis;
     transition: color var(--transition-speed);
+    display: none; /* Hidden by default */
 }
 
+.now-playing-container.active .now-playing-title,
+.now-playing-container.active .now-playing-artist {
+    display: block; /* Show when active */
+}
+
+.now-playing-container:hover .now-playing-header,
 .now-playing-container:hover .now-playing-title {
     color: var(--hover-border-color);
 }
@@ -1890,10 +1891,14 @@ h2 {
     }
     
     .now-playing-container {
-        padding: 20px 12px; /* Increased top and bottom padding for mobile */
+        padding: 25px 12px; /* Increased top and bottom padding for mobile */
         padding-left: calc(var(--container-corner-cut) * 0.7 + 5px);
         padding-right: calc(var(--container-corner-cut) * 0.7 + 5px);
-        min-height: 60px; /* Slightly smaller on mobile */
+        min-height: 70px; /* Increased for mobile too */
+    }
+    
+    .now-playing-header {
+        font-size: 0.85rem;
     }
     
     .now-playing-title {
@@ -1902,5 +1907,12 @@ h2 {
     
     .now-playing-artist {
         font-size: 0.8rem;
+    }
+    
+    .now-playing-status {
+        top: calc(var(--container-corner-cut) * 0.7 + 5px);
+        right: calc(var(--container-corner-cut) * 0.7 + 5px);
+        width: 8px;
+        height: 8px;
     }
 }
