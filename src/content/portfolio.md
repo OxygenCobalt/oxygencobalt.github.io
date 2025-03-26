@@ -24,10 +24,10 @@ permalink: "/portfolio/"
     </div>
     <div class="portfolio-screenshots">
         <div class="screenshot-container">
-            <img src="https://github.com/OxygenCobalt/Auxio/raw/dev/fastlane/metadata/android/en-US/images/phoneScreenshots/shot1.png" alt="Now Playing UI Screenshot" />
+            <img src="https://github.com/OxygenCobalt/Auxio/raw/dev/fastlane/metadata/android/en-US/images/phoneScreenshots/shot0.png" alt="Now Playing UI Screenshot" />
         </div>
         <div class="screenshot-container">
-            <img src="https://github.com/OxygenCobalt/Auxio/raw/dev/fastlane/metadata/android/en-US/images/phoneScreenshots/shot4.png" alt="Album UI Screenshot" />
+            <img src="https://github.com/OxygenCobalt/Auxio/raw/dev/fastlane/metadata/android/en-US/images/phoneScreenshots/shot3.png" alt="Album UI Screenshot" />
         </div>
     </div>
 </div>
