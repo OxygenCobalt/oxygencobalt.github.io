@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 const track = listen.track_metadata;
                 
                 // Update track information
-                header.textContent = "Listening to...";
+                header.textContent = "I'm listening to...";
                 title.textContent = track.track_name || 'Unknown Track';
                 artist.textContent = track.artist_name || 'Unknown Artist';
                 
@@ -115,7 +115,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 container.setAttribute('href', `https://listenbrainz.org/user/${username}/`);
             } else {
                 // If nothing is playing (empty listens array)
-                header.textContent = "Not listening right now";
+                header.textContent = "Not listening to anything!";
                 title.textContent = "";
                 artist.textContent = "";
                 artwork.style.display = 'none';
@@ -127,7 +127,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         } catch (error) {
             console.error('Error fetching ListenBrainz data:', error);
-            header.textContent = "Not listening right now";
+            header.textContent = "I'm not listening to anything right now!";
             title.textContent = "";
             artist.textContent = "";
             artwork.style.display = 'none';
