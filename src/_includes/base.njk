@@ -42,7 +42,7 @@
             </div>
             <nav class="tabs">
                 {% for item in navigation.items %}
-                {% set isActive = page.url == item.url or (page.url == "/" and item.url == "/") %}
+                {% set isActive = page.url == item.url or (item.url == "/" and page.url.startsWith("/blog/")) or (page.url == "/" and item.url == "/") %}
                 <button class="tab-button {% if isActive %}active{% endif %}"
                         hx-get="{{ item.partial }}"
                         hx-target="#tab-content"
@@ -62,19 +62,5 @@
         </div>
     </div>
     <script src="/assets/scripts/script.js"></script>
-    <script>
-        // Update active state when HTMX navigation occurs
-        document.body.addEventListener('htmx:afterSettle', function(event) {
-            // Remove active class from all buttons
-            document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
-            
-            // Find the button that matches the current URL and make it active
-            const currentPath = window.location.pathname;
-            const activeButton = document.querySelector(`.tab-button[hx-push-url="${currentPath}"]`);
-            if (activeButton) {
-                activeButton.classList.add('active');
-            }
-        });
-    </script>
 </body>
 </html> 

@@ -14,6 +14,7 @@ module.exports = function(eleventyConfig) {
     // Add blog collection
     eleventyConfig.addCollection("blog", function(collectionApi) {
         return collectionApi.getFilteredByTag("blog")
+            .filter(post => !post.data.isPartial)
             .sort((a, b) => a.date - b.date);
     });
     
@@ -126,10 +127,10 @@ module.exports = function(eleventyConfig) {
             const partialFrontmatter = { ...data };
             if (partialFrontmatter.layout === "blog-post.njk") {
                 partialFrontmatter.layout = "blog-partial.njk"
-                console.log(partialFrontmatter.layout)
             } else {
                 delete partialFrontmatter.layout;
             }
+            partialFrontmatter.isPartial = true
             partialFrontmatter.permalink = partialUrl; // Set new permalink
             
             // Convert frontmatter to YAML string

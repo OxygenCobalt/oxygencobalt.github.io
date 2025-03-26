@@ -1,6 +1,7 @@
 ---
 layout: blog-post.njk
 title: "My Second Blog Post"
+subtitle: "Test"
 date: 2024-03-26
 permalink: "/blog/second-post/"
 tags: ["blog"]

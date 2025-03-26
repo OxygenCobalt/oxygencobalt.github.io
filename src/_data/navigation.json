@@ -1,6 +1,6 @@
 {
     "items": [
-        { "text": "Blog", "url": "/", "partial": "/partials/" },
+        { "text": "Home", "url": "/", "partial": "/partials/" },
         { "text": "About", "url": "/about/", "partial": "/partials/about/" },
         { "text": "Resume", "url": "/resume/", "partial": "/partials/resume/" },
         { "text": "Portfolio", "url": "/portfolio/", "partial": "/partials/portfolio/" },
