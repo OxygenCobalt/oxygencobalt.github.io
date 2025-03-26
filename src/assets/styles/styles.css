@@ -1620,7 +1620,13 @@ h2 {
 }
 
 .contact-link.x:hover {
-    background-color: #ffffff;
+    background-color: #000000;
+}
+
+@media (prefers-color-scheme: dark) {
+    .contact-link.x:hover {
+        background-color: #ffffff;
+    }
 }
 
 .contact-link.email:hover {
