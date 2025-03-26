@@ -8,7 +8,9 @@ permalink: "/resume/"
 
 <div class="experience-section">
     <div class="experience-header">
-        <img alt="Ombud" src="/assets/img/ombud.png" class="company-logo" />
+        <div class="logo-container">
+            <img alt="Ombud" src="/assets/img/ombud.png" class="company-logo" />
+        </div>
         <div class="experience-info">
             <p class="job-title">Full-Stack Software Engineer Intern</p>
             <p class="company-name">Ombud</p>
@@ -33,7 +35,9 @@ permalink: "/resume/"
 
 <div class="experience-section">
     <div class="experience-header">
-        <img alt="OreCart" src="/assets/img/orecart.png" class="company-logo" />
+        <div class="logo-container">
+            <img alt="OreCart" src="/assets/img/orecart.png" class="company-logo" />
+        </div>
         <div class="experience-info">
             <p class="job-title">Full-Stack Software Engineer</p>
             <p class="company-name">OreCart Transit Program</p>
@@ -58,7 +62,9 @@ permalink: "/resume/"
 
 <div class="experience-section">
     <div class="experience-header">
-        <img alt="Colorado School of Mines" src="/assets/img/mines.png" class="company-logo smaller" />
+        <div class="logo-container">
+            <img alt="Colorado School of Mines" src="/assets/img/mines.png" class="company-logo smaller" />
+        </div>
         <div class="experience-info">
             <p class="job-title">Teaching Assistant</p>
             <p class="company-name">Colorado School of Mines</p>
