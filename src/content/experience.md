@@ -1,7 +1,7 @@
 ---
 layout: base.njk
-title: Resume
-permalink: "/resume/"
+title: Experience
+permalink: "/experience/"
 ---
 
 # Experience.
