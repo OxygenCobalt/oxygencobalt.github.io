@@ -878,18 +878,61 @@ h2 {
     }
 }
 
-/* Resume Styles */
-.experience-section {
-    margin-bottom: 40px;
-}
-
-.experience-header {
+/* Shared Section Styles */
+.section-header {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
     gap: 40px;
     margin-bottom: 20px;
+}
+
+.section-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
+}
+
+.section-title {
+    margin-bottom: 0px !important;
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+
+.section-title::after {
+    display: none;
+}
+
+.section-subtitle {
+    font-size: 1.5rem;
+    font-style: italic;
+    margin-bottom: 0px;
+}
+
+.section-date {
+    font-size: 1.5rem;
+    color: #888888;
+    margin-bottom: 0px;
+}
+
+.section-description {
+    margin: 20px 0;
+    line-height: 1.6;
+}
+
+.section-accomplishments {
+    margin-top: 20px;
+    margin-bottom: 10px !important;
+}
+
+.section-accomplishments::after {
+    display: none;
+}
+
+/* Experience specific overrides */
+.experience-section {
+    margin-bottom: 40px;
 }
 
 .company-logo {
@@ -922,51 +965,44 @@ h2 {
     );
 }
 
-.experience-info {
+/* Portfolio specific overrides */
+.portfolio-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 50px;
+    gap: 30px;
+}
+
+.portfolio-info {
+    flex: 1;
+    min-width: 0;
     display: flex;
     flex-direction: column;
-    gap: 0px;
+    justify-content: flex-start;
 }
 
-.job-title {
-    margin-bottom: 0px !important;
-    font-size: 1.8rem;
-    font-weight: 600;
+.portfolio-icon {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    /* Add octagonal clip-path to match containers */
+    clip-path: polygon(
+        var(--container-corner-cut) 0%, 
+        calc(100% - var(--container-corner-cut)) 0%, 
+        100% var(--container-corner-cut), 
+        100% calc(100% - var(--container-corner-cut)), 
+        calc(100% - var(--container-corner-cut)) 100%, 
+        var(--container-corner-cut) 100%, 
+        0% calc(100% - var(--container-corner-cut)), 
+        0% var(--container-corner-cut)
+    );
 }
 
-.job-title::after {
-    display: none;
-}
-
-.company-name {
-    font-size: 1.5rem;
-    font-style: italic;
-    margin-bottom: 0px;
-}
-
-.job-date {
-    font-size: 1.5rem;
-    color: #888888;
-    margin-bottom: 0px;
-}
-
-.experience-description {
-    margin: 20px 0;
-    line-height: 1.6;
-}
-
-.accomplishments-heading {
-    margin-top: 20px;
-    margin-bottom: 10px !important;
-}
-
-.accomplishments-heading::after {
-    display: none;
-}
-
-/* Responsive adjustments for resume */
+/* Responsive adjustments for shared sections */
 @media (max-width: 768px) {
-    .experience-header {
+    .section-header {
         flex-direction: column;
         gap: 20px;
         text-align: center;
@@ -995,90 +1031,17 @@ h2 {
         );
     }
     
-    .job-title {
+    .section-title {
         font-size: 1.5rem;
     }
     
-    .company-name, 
-    .job-date {
+    .section-subtitle, 
+    .section-date {
         font-size: 1.3rem;
     }
 }
 
-@media (max-width: 768px) {
-    .prev-next {
-        flex-direction: column;
-    }
-}
-
-.profile-picture {
-    width: 200px;
-    height: 200px;
-    /* Add octagonal clip-path to match containers */
-    clip-path: polygon(
-        var(--container-corner-cut) 0%, 
-        calc(100% - var(--container-corner-cut)) 0%, 
-        100% var(--container-corner-cut), 
-        100% calc(100% - var(--container-corner-cut)), 
-        calc(100% - var(--container-corner-cut)) 100%, 
-        var(--container-corner-cut) 100%, 
-        0% calc(100% - var(--container-corner-cut)), 
-        0% var(--container-corner-cut)
-    );
-}
-
 /* Portfolio Styles */
-.portfolio-item {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 50px;
-    gap: 30px;
-}
-
-.portfolio-info {
-    flex: 1;
-    min-width: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-}
-
-/* Add spacing for hr in portfolio */
-.portfolio-item + hr {
-    margin: 30px 0;
-}
-
-hr + .portfolio-item {
-    margin-top: 30px;
-}
-
-.portfolio-header {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 20px;
-    margin-bottom: 20px;
-}
-
-.portfolio-icon {
-    width: 150px;
-    height: 150px;
-    object-fit: cover;
-    /* Add octagonal clip-path to match containers */
-    clip-path: polygon(
-        var(--container-corner-cut) 0%, 
-        calc(100% - var(--container-corner-cut)) 0%, 
-        100% var(--container-corner-cut), 
-        100% calc(100% - var(--container-corner-cut)), 
-        calc(100% - var(--container-corner-cut)) 100%, 
-        var(--container-corner-cut) 100%, 
-        0% calc(100% - var(--container-corner-cut)), 
-        0% var(--container-corner-cut)
-    );
-}
-
 .portfolio-title-group {
     display: flex;
     flex-direction: column;
@@ -1235,6 +1198,21 @@ hr + .portfolio-item {
     margin-bottom: 30px;
 }
 
+.profile-picture {
+    width: 250px;
+    height: 250px;
+    clip-path: polygon(
+        var(--container-corner-cut) 0%, 
+        calc(100% - var(--container-corner-cut)) 0%, 
+        100% var(--container-corner-cut), 
+        100% calc(100% - var(--container-corner-cut)), 
+        calc(100% - var(--container-corner-cut)) 100%, 
+        var(--container-corner-cut) 100%, 
+        0% calc(100% - var(--container-corner-cut)), 
+        0% var(--container-corner-cut)
+    );
+}
+
 .about-header .profile-picture {
     flex-shrink: 0;
 }
@@ -1335,6 +1313,22 @@ hr + .portfolio-item {
     .third-screenshot {
         display: none;
     }
+    
+    .profile-picture {
+        width: 250px;
+        height: 250px;
+        /* Reduce corner clipping for tablet view */
+        clip-path: polygon(
+            calc(var(--container-corner-cut) * 0.7) 0%, 
+            calc(100% - var(--container-corner-cut) * 0.7) 0%, 
+            100% calc(var(--container-corner-cut) * 0.7), 
+            100% calc(100% - var(--container-corner-cut) * 0.7), 
+            calc(100% - var(--container-corner-cut) * 0.7) 100%, 
+            calc(var(--container-corner-cut) * 0.7) 100%, 
+            0% calc(100% - var(--container-corner-cut) * 0.7), 
+            0% calc(var(--container-corner-cut) * 0.7)
+        );
+    }
 }
 
 @media (max-width: 768px) {
@@ -1357,6 +1351,11 @@ hr + .portfolio-item {
     .about-header .text-content h3::after {
         left: 50%;
         transform: translateX(-50%);
+    }
+    
+    .profile-picture {
+        width: 200px;
+        height: 200px;
     }
 }
 
@@ -1421,5 +1420,21 @@ hr + .portfolio-item {
     
     .screenshot-container img {
         height: 300px;
+    }
+    
+    .profile-picture {
+        width: 150px;
+        height: 150px;
+        /* Reduce corner clipping further for mobile view */
+        clip-path: polygon(
+            calc(var(--container-corner-cut) * 0.5) 0%, 
+            calc(100% - var(--container-corner-cut) * 0.5) 0%, 
+            100% calc(var(--container-corner-cut) * 0.5), 
+            100% calc(100% - var(--container-corner-cut) * 0.5), 
+            calc(100% - var(--container-corner-cut) * 0.5) 100%, 
+            calc(var(--container-corner-cut) * 0.5) 100%, 
+            0% calc(100% - var(--container-corner-cut) * 0.5), 
+            0% calc(var(--container-corner-cut) * 0.5)
+        );
     }
 }
