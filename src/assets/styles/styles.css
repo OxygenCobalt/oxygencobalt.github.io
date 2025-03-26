@@ -508,10 +508,12 @@ h6:hover::after { width: 45px; }
     clip-path: polygon(
         calc(var(--corner-cut) - var(--hover-border-width) * 0.5) 0%, 
         calc(100% - var(--corner-cut) + var(--hover-border-width) * 0.5) 0%, 
-        calc(100% - var(--hover-border-width) * 0.5) 50%, 
+        100% calc(var(--corner-cut) - var(--hover-border-width) * 0.5), 
+        100% calc(100% - var(--corner-cut) + var(--hover-border-width) * 0.5), 
         calc(100% - var(--corner-cut) + var(--hover-border-width) * 0.5) 100%, 
         calc(var(--corner-cut) - var(--hover-border-width) * 0.5) 100%, 
-        calc(var(--hover-border-width) * 0.5) 50%
+        0% calc(100% - var(--corner-cut) + var(--hover-border-width) * 0.5), 
+        0% calc(var(--corner-cut) - var(--hover-border-width) * 0.5)
     );
 }
 
@@ -1172,10 +1174,12 @@ h2 {
     clip-path: polygon(
         calc(var(--corner-cut) - var(--hover-border-width) * 0.5) 0%, 
         calc(100% - var(--corner-cut) + var(--hover-border-width) * 0.5) 0%, 
-        calc(100% - var(--hover-border-width) * 0.5) 50%, 
+        100% calc(var(--corner-cut) - var(--hover-border-width) * 0.5), 
+        100% calc(100% - var(--corner-cut) + var(--hover-border-width) * 0.5), 
         calc(100% - var(--corner-cut) + var(--hover-border-width) * 0.5) 100%, 
         calc(var(--corner-cut) - var(--hover-border-width) * 0.5) 100%, 
-        calc(var(--hover-border-width) * 0.5) 50%
+        0% calc(100% - var(--corner-cut) + var(--hover-border-width) * 0.5), 
+        0% calc(var(--corner-cut) - var(--hover-border-width) * 0.5)
     );
 }
 
@@ -1662,6 +1666,8 @@ h2 {
     justify-content: space-between;
     gap: 8px;
     padding: 0;
+    position: relative;
+    z-index: 3; /* Higher than content to ensure visibility */
 }
 
 .now-playing-status {
@@ -1669,8 +1675,8 @@ h2 {
     height: 10px;
     border-radius: 50%;
     background-color: var(--border-color);
-    position: relative; /* Changed from absolute to relative */
-    z-index: 3;
+    position: relative;
+    z-index: 3; /* Match header row */
     transition: background-color 0.3s ease;
 }
 
@@ -1745,45 +1751,34 @@ h2 {
     transition: all var(--transition-speed);
 }
 
-/* Add gradient overlay like the name box */
-.now-playing-container::after {
-    content: '';
+/* Top gradient for now playing widget (like content container) */
+.now-playing-fade-top {
     position: absolute;
+    left: 0;
+    right: 0;
     top: 0;
+    height: var(--container-corner-cut);
+    background: linear-gradient(to bottom, var(--bg-color) 10%, transparent 110%);
+    z-index: 1;
+    pointer-events: none;
+    transition: opacity var(--transition-speed);
+}
+
+/* Bottom gradient for now playing widget (like content-fade-bottom) */
+.now-playing-fade-bottom {
+    position: absolute;
     left: 0;
     right: 0;
     bottom: 0;
-    z-index: 2;
+    height: var(--container-corner-cut);
+    background: linear-gradient(to top, var(--bg-color) 10%, transparent 110%);
+    z-index: 1;
     pointer-events: none;
     transition: opacity var(--transition-speed);
-    opacity: 1;
-    /* Octagonal shape using clip-path */
-    clip-path: polygon(
-        var(--container-corner-cut) 0%, 
-        calc(100% - var(--container-corner-cut)) 0%, 
-        100% var(--container-corner-cut), 
-        100% calc(100% - var(--container-corner-cut)), 
-        calc(100% - var(--container-corner-cut)) 100%, 
-        var(--container-corner-cut) 100%, 
-        0% calc(100% - var(--container-corner-cut)), 
-        0% var(--container-corner-cut)
-    );
-    /* Vertical gradient overlay - even less intense */
-    background: linear-gradient(to bottom, 
-        var(--bg-color) 5%, 
-        transparent 25%,
-        transparent 75%,
-        var(--bg-color) 95%
-    );
 }
 
 .now-playing-container:hover {
     background-color: var(--hover-border-color);
-}
-
-/* Hide gradient on hover */
-.now-playing-container:hover::after {
-    opacity: 0;
 }
 
 .now-playing-container:hover::before {
@@ -1805,12 +1800,17 @@ h2 {
     );
 }
 
+.now-playing-container:hover .now-playing-fade-top,
+.now-playing-container:hover .now-playing-fade-bottom {
+    opacity: 0;
+}
+
 .now-playing-content {
     display: flex;
     flex-direction: column;
     gap: 12px;
     position: relative;
-    z-index: 1;
+    z-index: 2; /* Higher than the fade gradients */
     width: 100%;
 }
 
@@ -1859,11 +1859,6 @@ h2 {
     display: block; /* Show when active */
 }
 
-.now-playing-container:hover .now-playing-header,
-.now-playing-container:hover .now-playing-title {
-    color: var(--hover-border-color);
-}
-
 .now-playing-container:hover .now-playing-artist {
     color: var(--text-color);
 }
@@ -1889,7 +1884,7 @@ h2 {
     object-fit: cover;
     display: none;
     position: relative;
-    z-index: 1;
+    z-index: 3; /* Match header content */
     border-radius: 3px;
     background-color: rgba(0, 0, 0, 0.1);
     /* Add octagonal clip-path to match containers */
@@ -1910,7 +1905,7 @@ h2 {
     flex-direction: column;
     justify-content: center;
     position: relative;
-    z-index: 1;
+    z-index: 3; /* Match other content */
     flex: 1;
     min-width: 0; /* Ensure text truncation works */
 }
@@ -1933,6 +1928,11 @@ h2 {
         padding-left: calc(var(--container-corner-cut) * 0.7 + 10px);
         padding-right: calc(var(--container-corner-cut) * 0.7 + 10px);
         min-height: unset; 
+    }
+    
+    .now-playing-fade-top,
+    .now-playing-fade-bottom {
+        height: calc(var(--container-corner-cut) * 0.7);
     }
     
     .now-playing-content {

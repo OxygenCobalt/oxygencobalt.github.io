@@ -8,19 +8,18 @@ document.addEventListener('DOMContentLoaded', function() {
     const artwork = document.getElementById('now-playing-artwork');
     const playingStatus = document.getElementById('now-playing-status');
     
+    // Default artwork path
+    const defaultArtwork = '/assets/img/album.svg';
+    
+    // Set default artwork initially
+    artwork.src = defaultArtwork;
+    artwork.alt = 'Default album artwork';
+    
     // Add error handling for the artwork image
     artwork.addEventListener('error', function() {
-        // If the image fails to load, try a fallback
-        const artistName = artist.textContent || 'music';
-        // Only add error class if we're on the fallback URL already
-        if (this.src.includes('picsum.photos')) {
-            this.classList.add('error');
-            this.classList.add('load-failed');
-        } else {
-            // Try the picsum fallback
-            this.src = `https://picsum.photos/seed/${encodeURIComponent(artistName)}/250`;
-            this.alt = 'Album artwork unavailable';
-        }
+        // If the image fails to load, use default artwork
+        this.src = defaultArtwork;
+        this.alt = 'Default album artwork';
     });
     
     // Function to check if a URL exists/responds
@@ -48,29 +47,16 @@ document.addEventListener('DOMContentLoaded', function() {
             
             if (searchData.releases && searchData.releases.length > 0) {
                 const mbid = searchData.releases[0].id;
-                // Use Cover Art Archive to get the cover art
-                const artworkUrl = `https://coverartarchive.org/release/${mbid}/front-250`;
-                
-                // Verify the URL works before returning it
-                const exists = await checkUrlExists(artworkUrl);
-                if (exists) {
-                    return artworkUrl;
-                }
-                
-                // If not, try the full URL without size constraint
-                const fullArtworkUrl = `https://coverartarchive.org/release/${mbid}/front`;
-                const fullExists = await checkUrlExists(fullArtworkUrl);
-                if (fullExists) {
-                    return fullArtworkUrl;
-                }
+                // Use Cover Art Archive to get the front cover
+                // The URL should directly point to "front" which will redirect to the actual image
+                return `https://coverartarchive.org/release/${mbid}/front`;
             }
             
-            // If we don't have a valid Cover Art Archive URL, use a fallback
-            return `https://picsum.photos/seed/${encodeURIComponent(artistName)}/250`;
+            // Return null if we couldn't find a valid image
+            return null;
         } catch (error) {
             console.error('Error fetching album art:', error);
-            // Return a fallback generic image based on artist name
-            return `https://picsum.photos/seed/${encodeURIComponent(artistName)}/250`;
+            return null;
         }
     }
     
@@ -86,26 +72,34 @@ document.addEventListener('DOMContentLoaded', function() {
                 const listen = data.payload.listens[0];
                 const track = listen.track_metadata;
                 
-                // Update track information
+                // Start with the artwork in loading state - show default while loading
+                artwork.style.display = 'block';
+                artwork.src = defaultArtwork;
+                artwork.alt = 'Loading album artwork...';
+                
+                // Now update the UI with track information
                 header.textContent = "I'm listening to...";
                 title.textContent = track.track_name || 'Unknown Track';
                 artist.textContent = track.artist_name || 'Unknown Artist';
                 
-                // Reset any error classes
-                artwork.classList.remove('error');
-                artwork.classList.remove('load-failed');
-                
                 // Get album art if we have artist and album information
                 if (track.artist_name && track.release_name) {
-                    // Show loading state
-                    artwork.style.display = 'block';
-                    
                     // Fetch album art from Cover Art Archive
                     const artworkUrl = await fetchAlbumArt(track.artist_name, track.release_name);
-                    artwork.src = artworkUrl;
-                    artwork.alt = `${track.release_name} by ${track.artist_name}`;
+                    
+                    // Update artwork if we have it
+                    if (artworkUrl) {
+                        artwork.src = artworkUrl;
+                        artwork.alt = `${track.release_name} by ${track.artist_name}`;
+                    } else {
+                        // Keep default artwork if not found
+                        artwork.src = defaultArtwork;
+                        artwork.alt = 'Default album artwork';
+                    }
                 } else {
-                    artwork.style.display = 'none';
+                    // Keep default artwork if we don't have enough info
+                    artwork.src = defaultArtwork;
+                    artwork.alt = 'Default album artwork';
                 }
                 
                 // Show all elements when playing
@@ -115,7 +109,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 container.setAttribute('href', `https://listenbrainz.org/user/${username}/`);
             } else {
                 // If nothing is playing (empty listens array)
-                header.textContent = "Not listening to anything!";
+                header.textContent = "I'm not listening to anything!";
                 title.textContent = "";
                 artist.textContent = "";
                 artwork.style.display = 'none';
@@ -127,7 +121,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         } catch (error) {
             console.error('Error fetching ListenBrainz data:', error);
-            header.textContent = "I'm not listening to anything right now!";
+            header.textContent = "I'm not listening to anything!";
             title.textContent = "";
             artist.textContent = "";
             artwork.style.display = 'none';
