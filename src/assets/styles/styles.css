@@ -1695,7 +1695,7 @@ h2 {
     position: relative;
     display: flex;
     flex-direction: column;
-    padding: 20px 15px;
+    padding: 25px 15px;
     padding-left: calc(var(--container-corner-cut) + 10px);
     padding-right: calc(var(--container-corner-cut) + 10px);
     text-decoration: none;
@@ -1768,12 +1768,12 @@ h2 {
         0% calc(100% - var(--container-corner-cut)), 
         0% var(--container-corner-cut)
     );
-    /* Vertical gradient overlay - lighter and more compact */
+    /* Vertical gradient overlay - even less intense */
     background: linear-gradient(to bottom, 
-        var(--bg-color) 0%, 
-        transparent 15%,
-        transparent 85%,
-        var(--bg-color) 100%
+        var(--bg-color) 5%, 
+        transparent 25%,
+        transparent 75%,
+        var(--bg-color) 95%
     );
 }
 
@@ -1929,7 +1929,7 @@ h2 {
     }
     
     .now-playing-container {
-        padding: 15px 12px;
+        padding: 20px 12px;
         padding-left: calc(var(--container-corner-cut) * 0.7 + 10px);
         padding-right: calc(var(--container-corner-cut) * 0.7 + 10px);
         min-height: unset; 
