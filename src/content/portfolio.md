@@ -13,7 +13,7 @@ permalink: "/portfolio/"
             <div class="section-info">
                 <p class="section-title">Auxio</p>
                 <p class="section-date">August 2020 - Present</p>
-                <a href="https://github.com/OxygenCobalt/Auxio" class="portfolio-link">
+                <a href="https://github.com/OxygenCobalt/Auxio" class="portfolio-link github-link">
                     <span>GitHub</span>
                 </a>
             </div>
@@ -41,7 +41,7 @@ permalink: "/portfolio/"
             <div class="section-info">
                 <p class="section-title">Mines ACM Site</p>
                 <p class="section-date">June - August 2023</p>
-                <a href="https://github.com/ColoradoSchoolOfMines/acm-site" class="portfolio-link">
+                <a href="https://github.com/ColoradoSchoolOfMines/acm-site" class="portfolio-link github-link">
                     <span>GitHub</span>
                 </a>
             </div>

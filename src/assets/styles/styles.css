@@ -1112,6 +1112,11 @@ h2 {
     clip-path: polygon(var(--corner-cut) 0%, calc(100% - var(--corner-cut)) 0%, 100% 50%, calc(100% - var(--corner-cut)) 100%, var(--corner-cut) 100%, 0% 50%);
 }
 
+/* GitHub link special styling */
+.portfolio-link.github-link:hover {
+    background-color: #6d40c8;
+}
+
 /* Pseudo-element for border effect with rounded corners */
 .portfolio-link::before {
     content: '';
@@ -1582,6 +1587,12 @@ h2 {
     max-width: 24px;
     position: relative;
     z-index: 3;
+    transition: filter var(--transition-speed);
+}
+
+/* Special handling for LinkedIn icon which is a PNG */
+.contact-link.linkedin .contact-icon {
+    transition: filter var(--transition-speed);
 }
 
 /* Adjustment for rectangular icons (wider than tall) */
@@ -1867,6 +1878,17 @@ h2 {
     display: block;
 }
 
+/* Icon class for white SVG/PNG icons that need to be visible in light mode */
+.icon {
+    filter: invert(0.1) sepia(0.1) saturate(1) hue-rotate(170deg) brightness(0.2);
+}
+
+@media (prefers-color-scheme: dark) {
+    .icon {
+        filter: none;
+    }
+}
+
 .now-playing-artwork.error {
     /* Don't dim the artwork by default */
     /* opacity: 0.5; */
@@ -1886,7 +1908,6 @@ h2 {
     position: relative;
     z-index: 3; /* Match header content */
     border-radius: 3px;
-    background-color: rgba(0, 0, 0, 0.1);
     /* Add octagonal clip-path to match containers */
     clip-path: polygon(
         var(--small-corner-cut) 0%, 

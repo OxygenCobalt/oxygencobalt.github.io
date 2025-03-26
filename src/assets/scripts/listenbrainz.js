@@ -14,12 +14,16 @@ document.addEventListener('DOMContentLoaded', function() {
     // Set default artwork initially
     artwork.src = defaultArtwork;
     artwork.alt = 'Default album artwork';
+    // Apply icon class immediately to ensure it's visible in light mode
+    artwork.classList.add('icon');
     
     // Add error handling for the artwork image
     artwork.addEventListener('error', function() {
         // If the image fails to load, use default artwork
         this.src = defaultArtwork;
         this.alt = 'Default album artwork';
+        // Ensure icon class is applied for the default SVG
+        this.classList.add('icon');
     });
     
     // Function to check if a URL exists/responds
@@ -76,6 +80,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 artwork.style.display = 'block';
                 artwork.src = defaultArtwork;
                 artwork.alt = 'Loading album artwork...';
+                // Make sure icon class is applied for default artwork
+                artwork.classList.add('icon');
                 
                 // Now update the UI with track information
                 header.textContent = "I'm listening to...";
@@ -89,17 +95,37 @@ document.addEventListener('DOMContentLoaded', function() {
                     
                     // Update artwork if we have it
                     if (artworkUrl) {
-                        artwork.src = artworkUrl;
-                        artwork.alt = `${track.release_name} by ${track.artist_name}`;
+                        // Create a new image to test loading before switching
+                        const tempImage = new Image();
+                        tempImage.onload = function() {
+                            // Only after successful load, update the real image and remove icon class
+                            artwork.src = artworkUrl;
+                            artwork.alt = `${track.release_name} by ${track.artist_name}`;
+                            // Remove icon class for real album artwork only after load success
+                            artwork.classList.remove('icon');
+                        };
+                        tempImage.onerror = function() {
+                            // If loading fails, keep the default artwork
+                            artwork.src = defaultArtwork;
+                            artwork.alt = 'Default album artwork';
+                            // Make sure icon class is applied for default artwork
+                            artwork.classList.add('icon');
+                        };
+                        // Start loading the image
+                        tempImage.src = artworkUrl;
                     } else {
                         // Keep default artwork if not found
                         artwork.src = defaultArtwork;
                         artwork.alt = 'Default album artwork';
+                        // Make sure icon class is applied for default artwork
+                        artwork.classList.add('icon');
                     }
                 } else {
                     // Keep default artwork if we don't have enough info
                     artwork.src = defaultArtwork;
                     artwork.alt = 'Default album artwork';
+                    // Make sure icon class is applied for default artwork
+                    artwork.classList.add('icon');
                 }
                 
                 // Show all elements when playing
