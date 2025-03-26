@@ -681,7 +681,6 @@ h2 {
         transition: left var(--transition-speed) ease;
         box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
         overflow-y: auto;
-        padding-bottom: calc(var(--sidebar-padding) + 10px);
     }
     
     .sidebar-top {
@@ -1656,14 +1655,21 @@ h2 {
     max-width: 325px; /* Match the name box width */
 }
 
+.now-playing-header-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 0;
+}
+
 .now-playing-status {
     width: 10px;
     height: 10px;
     border-radius: 50%;
     background-color: var(--border-color);
-    position: absolute;
-    top: calc(var(--container-corner-cut) + 5px);
-    right: calc(var(--container-corner-cut) + 5px);
+    position: relative; /* Changed from absolute to relative */
     z-index: 3;
     transition: background-color 0.3s ease;
 }
@@ -1688,10 +1694,10 @@ h2 {
 .now-playing-container {
     position: relative;
     display: flex;
-    gap: 15px;
-    padding: 30px 15px; /* Increased top and bottom padding further */
-    padding-left: calc(var(--container-corner-cut) + 5px);
-    padding-right: calc(var(--container-corner-cut) + 5px);
+    flex-direction: column;
+    padding: 20px 15px;
+    padding-left: calc(var(--container-corner-cut) + 10px);
+    padding-right: calc(var(--container-corner-cut) + 10px);
     text-decoration: none;
     background-color: var(--border-color);
     transition: background-color var(--transition-speed), opacity var(--transition-speed);
@@ -1708,7 +1714,7 @@ h2 {
         0% calc(100% - var(--container-corner-cut)), 
         0% var(--container-corner-cut)
     );
-    min-height: 85px; /* Increased minimum height */
+    min-height: unset;
 }
 
 .now-playing-container.active {
@@ -1762,12 +1768,12 @@ h2 {
         0% calc(100% - var(--container-corner-cut)), 
         0% var(--container-corner-cut)
     );
-    /* Vertical gradient overlay - even less intense */
+    /* Vertical gradient overlay - lighter and more compact */
     background: linear-gradient(to bottom, 
-        var(--bg-color) 5%, 
-        transparent 25%,
-        transparent 75%,
-        var(--bg-color) 95%
+        var(--bg-color) 0%, 
+        transparent 15%,
+        transparent 85%,
+        var(--bg-color) 100%
     );
 }
 
@@ -1799,44 +1805,28 @@ h2 {
     );
 }
 
-.now-playing-artwork {
-    width: 60px;
-    height: 60px;
-    object-fit: cover;
-    display: none;
-    position: relative;
-    z-index: 1;
-    /* Add octagonal clip-path to match containers */
-    clip-path: polygon(
-        var(--small-corner-cut) 0%, 
-        calc(100% - var(--small-corner-cut)) 0%, 
-        100% var(--small-corner-cut), 
-        100% calc(100% - var(--small-corner-cut)), 
-        calc(100% - var(--small-corner-cut)) 100%, 
-        var(--small-corner-cut) 100%, 
-        0% calc(100% - var(--small-corner-cut)), 
-        0% var(--small-corner-cut)
-    );
-}
-
-.now-playing-info {
+.now-playing-content {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    gap: 12px;
     position: relative;
     z-index: 1;
-    flex: 1;
-    min-width: 0; /* Ensure text truncation works */
-    padding-right: 5px; /* Extra padding on the right to avoid text hitting the edge */
-    margin-top: 2px; /* Add a tiny bit of top margin */
-    margin-bottom: 2px; /* Add a tiny bit of bottom margin */
+    width: 100%;
+}
+
+.now-playing-details {
+    display: none; /* Hidden by default */
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    padding: 5px 0; /* Add some vertical padding */
 }
 
 .now-playing-header {
     font-weight: 500;
-    font-size: 0.9rem;
+    font-size: 1rem;
     color: var(--border-color);
-    margin-bottom: 2px;
+    margin-bottom: 0;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -1878,6 +1868,53 @@ h2 {
     color: var(--text-color);
 }
 
+.now-playing-container.active .now-playing-artwork {
+    display: block;
+}
+
+.now-playing-artwork.error {
+    /* Don't dim the artwork by default */
+    /* opacity: 0.5; */
+    border: 2px solid rgba(255, 0, 0, 0.3);
+}
+
+/* Only apply dimming if explicitly marked as failed */
+.now-playing-artwork.load-failed {
+    opacity: 0.5;
+}
+
+.now-playing-artwork {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    display: none;
+    position: relative;
+    z-index: 1;
+    border-radius: 3px;
+    background-color: rgba(0, 0, 0, 0.1);
+    /* Add octagonal clip-path to match containers */
+    clip-path: polygon(
+        var(--small-corner-cut) 0%, 
+        calc(100% - var(--small-corner-cut)) 0%, 
+        100% var(--small-corner-cut), 
+        100% calc(100% - var(--small-corner-cut)), 
+        calc(100% - var(--small-corner-cut)) 100%, 
+        var(--small-corner-cut) 100%, 
+        0% calc(100% - var(--small-corner-cut)), 
+        0% var(--small-corner-cut)
+    );
+}
+
+.now-playing-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+    flex: 1;
+    min-width: 0; /* Ensure text truncation works */
+}
+
 /* Mobile adjustments for now playing widget */
 @media (max-width: 768px) {
     .now-playing-widget {
@@ -1888,13 +1925,23 @@ h2 {
     .now-playing-artwork {
         width: 50px;
         height: 50px;
+        margin-right: 8px;
     }
     
     .now-playing-container {
-        padding: 25px 12px; /* Increased top and bottom padding for mobile */
-        padding-left: calc(var(--container-corner-cut) * 0.7 + 5px);
-        padding-right: calc(var(--container-corner-cut) * 0.7 + 5px);
-        min-height: 70px; /* Increased for mobile too */
+        padding: 15px 12px;
+        padding-left: calc(var(--container-corner-cut) * 0.7 + 10px);
+        padding-right: calc(var(--container-corner-cut) * 0.7 + 10px);
+        min-height: unset; 
+    }
+    
+    .now-playing-content {
+        gap: 8px;
+    }
+    
+    .now-playing-details {
+        gap: 8px;
+        padding: 3px 0; /* Smaller padding for mobile */
     }
     
     .now-playing-header {
@@ -1910,9 +1957,11 @@ h2 {
     }
     
     .now-playing-status {
-        top: calc(var(--container-corner-cut) * 0.7 + 5px);
-        right: calc(var(--container-corner-cut) * 0.7 + 5px);
         width: 8px;
         height: 8px;
     }
+}
+
+.now-playing-container.active .now-playing-details {
+    display: flex; /* Show when active */
 }
