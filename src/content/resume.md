@@ -4,6 +4,4 @@ title: Resume
 permalink: "/resume/"
 ---
 
-# Welcome
-
-Resume
+# Resume

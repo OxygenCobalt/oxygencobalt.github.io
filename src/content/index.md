@@ -6,11 +6,12 @@ permalink: "/"
 
 # Alexander Capehart
 
-I'm a software developer passionate about creating elegant solutions to complex problems.
+Christian. CS Student. Software Engineer. Music Nerd.
 
-This site is built with 11ty and uses HTMX for smooth page transitions while maintaining a lightweight footprint.
+<br />
 
-## Recent Posts
+{% if collections.blog.length > 0 %}
+## Blog
 
 <div class="blog-list">
 {% for post in collections.blog | reverse %}
@@ -30,3 +31,4 @@ This site is built with 11ty and uses HTMX for smooth page transitions while mai
   </article>
 {% endfor %}
 </div> 
+{% endif %}

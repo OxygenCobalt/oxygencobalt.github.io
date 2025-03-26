@@ -16,6 +16,7 @@
     --active-bg: rgb(238 237 244);
     --sidebar-border: rgb(227 226 233);
     --accent: rgb(74 92 146);
+    --visited-accent: rgb(88 94 113);
     --sidebar-padding: 20px;
     --transition-speed: 0.3s;
     --border-width: 2px;
@@ -38,6 +39,8 @@
         --hover-bg:  rgb(41 42 47);
         --active-bg:  rgb(30 31 37);
         --sidebar-border: rgb(69 70 79);
+        --accent: rgb(179 197 255);
+        --accent-visited: rgb(193 198 221);
         --hover-border-color: rgb(179 197 255);
         --accent: rgb(179 197 255);
     }
@@ -524,6 +527,14 @@ h1, h2, h3, h4, h5, h6 {
 
 .tab-content.active {
     display: block;
+}
+
+a {
+    color: var(--accent);
+}
+
+a:visited {
+    color: var(--visited-accent);
 }
 
 h2 {
