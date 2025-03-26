@@ -31,44 +31,63 @@
     
     <div class="container">
         <div class="sidebar">
-            <div class="name-box">
-                <div class="scroll-container">
-                    <div class="scroll-wrapper">
-                        <div class="text-item">OxygenCobalt.</div>
-                        <div class="text-item">Alexander Capehart.</div>
-                        <div class="text-item">OxygenCobalt.</div>
-                        <div class="text-item">Alexander Capehart.</div>
-                        <div class="text-item">OxygenCobalt.</div>
+            <div class="sidebar-top">
+                <div class="name-box">
+                    <div class="scroll-container">
+                        <div class="scroll-wrapper">
+                            <div class="text-item">OxygenCobalt.</div>
+                            <div class="text-item">Alexander Capehart.</div>
+                            <div class="text-item">OxygenCobalt.</div>
+                            <div class="text-item">Alexander Capehart.</div>
+                            <div class="text-item">OxygenCobalt.</div>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <nav class="tabs">
-                {% for item in navigation.items %}
-                {% set isActive = page.url == item.url or (item.url == "/" and page.url.startsWith("/blog/")) or (page.url == "/" and item.url == "/") %}
-                <button class="tab-button {% if isActive %}active{% endif %}"
-                        hx-get="{{ item.partial }}"
-                        hx-target="#tab-content"
-                        hx-push-url="{{ item.url }}"
-                        hx-swap="innerHTML transition:true"
-                        hx-trigger="click">
-                    {{ item.text }}
-                </button>
-                {% endfor %}
-            </nav>
+                <nav class="tabs">
+                    {% for item in navigation.items %}
+                    {% set isActive = page.url == item.url or (item.url == "/" and page.url.startsWith("/blog/")) or (page.url == "/" and item.url == "/") %}
+                    <button class="tab-button {% if isActive %}active{% endif %}"
+                            hx-get="{{ item.partial }}"
+                            hx-target="#tab-content"
+                            hx-push-url="{{ item.url }}"
+                            hx-swap="innerHTML transition:true"
+                            hx-trigger="click">
+                        {{ item.text }}
+                    </button>
+                    {% endfor %}
+                </nav>
+                
+                <div class="contact-links">
+                    <a href="https://github.com/OxygenCobalt" class="contact-link github" aria-label="GitHub">
+                        <img src="/assets/img/github.svg" alt="GitHub" class="contact-icon">
+                    </a>
+                    <a href="https://linkedin.com/in/alexcpht" class="contact-link linkedin" aria-label="LinkedIn">
+                        <img src="/assets/img/linkedin.png" alt="LinkedIn" class="contact-icon">
+                    </a>
+                    <a href="https://x.com/oxycblt" class="contact-link x" aria-label="X (Twitter)">
+                        <img src="/assets/img/xitter.svg" alt="X (Twitter)" class="contact-icon">
+                    </a>
+                    <a href="mailto:alex@oxycblt.org" class="contact-link email" aria-label="Email">
+                        <img src="/assets/img/email.svg" alt="Email" class="contact-icon">
+                    </a>
+                </div>
+            </div>
             
-            <div class="contact-links">
-                <a href="https://github.com/OxygenCobalt" class="contact-link github" aria-label="GitHub">
-                    <img src="/assets/img/github.svg" alt="GitHub" class="contact-icon">
-                </a>
-                <a href="https://linkedin.com/in/alexcpht" class="contact-link linkedin" aria-label="LinkedIn">
-                    <img src="/assets/img/linkedin.png" alt="LinkedIn" class="contact-icon">
-                </a>
-                <a href="https://x.com/oxycblt" class="contact-link x" aria-label="X (Twitter)">
-                    <img src="/assets/img/xitter.svg" alt="X (Twitter)" class="contact-icon">
-                </a>
-                <a href="mailto:alex@oxycblt.org" class="contact-link email" aria-label="Email">
-                    <img src="/assets/img/email.svg" alt="Email" class="contact-icon">
+            <div class="now-playing-widget">
+                <div class="now-playing-header">
+                    <div class="now-playing-label">
+                        <img src="/assets/img/listenbrainz.svg" alt="ListenBrainz" class="listenbrainz-icon">
+                        Now Playing
+                    </div>
+                    <div id="now-playing-status" class="now-playing-status"></div>
+                </div>
+                <a id="now-playing-container" class="now-playing-container" href="https://listenbrainz.org/user/oxycblt/" target="_blank">
+                    <img id="now-playing-artwork" class="now-playing-artwork" src="" alt="Album Artwork">
+                    <div class="now-playing-info">
+                        <div id="now-playing-title" class="now-playing-title">Not Playing</div>
+                        <div id="now-playing-artist" class="now-playing-artist"></div>
+                    </div>
                 </a>
             </div>
         </div>
@@ -80,5 +99,6 @@
         </div>
     </div>
     <script src="/assets/scripts/script.js"></script>
+    <script src="/assets/scripts/listenbrainz.js"></script>
 </body>
 </html> 

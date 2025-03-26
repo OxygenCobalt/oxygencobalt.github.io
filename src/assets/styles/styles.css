@@ -297,12 +297,28 @@ h6:hover::after { width: 45px; }
     width: fit-content;
     min-width: 200px;
     padding: var(--sidebar-padding);
+    padding-bottom: 10px;
     border-right: var(--border-width) solid var(--sidebar-border);
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     gap: 20px;
     background-color: var(--bg-color);
-    align-items: center; /* Center the name box */
+    height: 100%;
+    overflow-y: auto;
+    scrollbar-width: none; /* Hide scrollbar for Firefox */
+    -ms-overflow-style: none; /* Hide scrollbar for IE and Edge */
+}
+
+.sidebar::-webkit-scrollbar {
+    display: none; /* Hide scrollbar for Chrome, Safari, and Opera */
+}
+
+.sidebar-top {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
 }
 
 .name-box {
@@ -665,6 +681,11 @@ h2 {
         transition: left var(--transition-speed) ease;
         box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
         overflow-y: auto;
+        padding-bottom: calc(var(--sidebar-padding) + 10px);
+    }
+    
+    .sidebar-top {
+        margin-bottom: 20px;
     }
     
     .sidebar.active {
@@ -1621,5 +1642,265 @@ h2 {
     .contact-link.email .contact-icon {
         max-width: 30px;
         height: 24px;
+    }
+}
+
+/* Now Playing Widget */
+.now-playing-widget {
+    width: 100%;
+    margin-top: auto;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-self: center;
+    max-width: 325px; /* Match the name box width */
+}
+
+.now-playing-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+}
+
+.now-playing-label {
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.listenbrainz-icon {
+    width: 18px;
+    height: 18px;
+    fill: var(--text-color);
+}
+
+.now-playing-status {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: var(--border-color);
+    position: relative;
+    transition: background-color 0.3s ease;
+}
+
+.now-playing-status.active {
+    background-color: #1DB954; /* Spotify green color */
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(29, 185, 84, 0.7);
+    }
+    70% {
+        box-shadow: 0 0 0 6px rgba(29, 185, 84, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(29, 185, 84, 0);
+    }
+}
+
+.now-playing-container {
+    position: relative;
+    display: flex;
+    gap: 15px;
+    padding: 25px 15px; /* Increased top and bottom padding */
+    padding-left: calc(var(--container-corner-cut) + 5px);
+    padding-right: calc(var(--container-corner-cut) + 5px);
+    text-decoration: none;
+    background-color: var(--border-color);
+    transition: background-color var(--transition-speed), opacity var(--transition-speed);
+    opacity: 0.7;
+    
+    /* Octagonal shape using clip-path */
+    clip-path: polygon(
+        var(--container-corner-cut) 0%, 
+        calc(100% - var(--container-corner-cut)) 0%, 
+        100% var(--container-corner-cut), 
+        100% calc(100% - var(--container-corner-cut)), 
+        calc(100% - var(--container-corner-cut)) 100%, 
+        var(--container-corner-cut) 100%, 
+        0% calc(100% - var(--container-corner-cut)), 
+        0% var(--container-corner-cut)
+    );
+    min-height: 70px; /* Ensure minimum height */
+}
+
+.now-playing-container.active {
+    opacity: 1;
+}
+
+/* Pseudo-element for border effect */
+.now-playing-container::before {
+    content: '';
+    position: absolute;
+    top: var(--border-width);
+    left: var(--border-width);
+    right: var(--border-width);
+    bottom: var(--border-width);
+    background-color: var(--bg-color);
+    z-index: 0;
+    /* Calculate inset octagonal shape */
+    clip-path: polygon(
+        calc(var(--container-corner-cut) - var(--border-width) * 0.5) 0%, 
+        calc(100% - var(--container-corner-cut) + var(--border-width) * 0.5) 0%, 
+        100% calc(var(--container-corner-cut) - var(--border-width) * 0.5), 
+        100% calc(100% - var(--container-corner-cut) + var(--border-width) * 0.5), 
+        calc(100% - var(--container-corner-cut) + var(--border-width) * 0.5) 100%, 
+        calc(var(--container-corner-cut) - var(--border-width) * 0.5) 100%, 
+        0% calc(100% - var(--container-corner-cut) + var(--border-width) * 0.5), 
+        0% calc(var(--container-corner-cut) - var(--border-width) * 0.5)
+    );
+    transition: all var(--transition-speed);
+}
+
+/* Add gradient overlay like the name box */
+.now-playing-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2;
+    pointer-events: none;
+    transition: opacity var(--transition-speed);
+    opacity: 1;
+    /* Octagonal shape using clip-path */
+    clip-path: polygon(
+        var(--container-corner-cut) 0%, 
+        calc(100% - var(--container-corner-cut)) 0%, 
+        100% var(--container-corner-cut), 
+        100% calc(100% - var(--container-corner-cut)), 
+        calc(100% - var(--container-corner-cut)) 100%, 
+        var(--container-corner-cut) 100%, 
+        0% calc(100% - var(--container-corner-cut)), 
+        0% var(--container-corner-cut)
+    );
+    /* Vertical gradient overlay like the name box - less intense */
+    background: linear-gradient(to bottom, 
+        var(--bg-color) 5%, 
+        transparent 30%,
+        transparent 70%,
+        var(--bg-color) 95%
+    );
+}
+
+.now-playing-container:hover {
+    background-color: var(--hover-border-color);
+}
+
+/* Hide gradient on hover */
+.now-playing-container:hover::after {
+    opacity: 0;
+}
+
+.now-playing-container:hover::before {
+    background-color: var(--hover-bg);
+    top: var(--hover-border-width);
+    left: var(--hover-border-width);
+    right: var(--hover-border-width);
+    bottom: var(--hover-border-width);
+    /* Recalculate inset octagonal shape for thicker border */
+    clip-path: polygon(
+        calc(var(--container-corner-cut) - var(--hover-border-width) * 0.5) 0%, 
+        calc(100% - var(--container-corner-cut) + var(--hover-border-width) * 0.5) 0%, 
+        100% calc(var(--container-corner-cut) - var(--hover-border-width) * 0.5), 
+        100% calc(100% - var(--container-corner-cut) + var(--hover-border-width) * 0.5), 
+        calc(100% - var(--container-corner-cut) + var(--hover-border-width) * 0.5) 100%, 
+        calc(var(--container-corner-cut) - var(--hover-border-width) * 0.5) 100%, 
+        0% calc(100% - var(--container-corner-cut) + var(--hover-border-width) * 0.5), 
+        0% calc(var(--container-corner-cut) - var(--hover-border-width) * 0.5)
+    );
+}
+
+.now-playing-artwork {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    display: none;
+    position: relative;
+    z-index: 1;
+    /* Add octagonal clip-path to match containers */
+    clip-path: polygon(
+        var(--small-corner-cut) 0%, 
+        calc(100% - var(--small-corner-cut)) 0%, 
+        100% var(--small-corner-cut), 
+        100% calc(100% - var(--small-corner-cut)), 
+        calc(100% - var(--small-corner-cut)) 100%, 
+        var(--small-corner-cut) 100%, 
+        0% calc(100% - var(--small-corner-cut)), 
+        0% var(--small-corner-cut)
+    );
+}
+
+.now-playing-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+    flex: 1;
+    min-width: 0; /* Ensure text truncation works */
+    padding-right: 5px; /* Extra padding on the right to avoid text hitting the edge */
+}
+
+.now-playing-title {
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--text-color);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: color var(--transition-speed);
+}
+
+.now-playing-artist {
+    font-size: 0.9rem;
+    color: var(--border-color);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: color var(--transition-speed);
+}
+
+.now-playing-container:hover .now-playing-title {
+    color: var(--hover-border-color);
+}
+
+.now-playing-container:hover .now-playing-artist {
+    color: var(--text-color);
+}
+
+/* Mobile adjustments for now playing widget */
+@media (max-width: 768px) {
+    .now-playing-widget {
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
+    
+    .now-playing-artwork {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .now-playing-container {
+        padding: 20px 12px; /* Increased top and bottom padding for mobile */
+        padding-left: calc(var(--container-corner-cut) * 0.7 + 5px);
+        padding-right: calc(var(--container-corner-cut) * 0.7 + 5px);
+        min-height: 60px; /* Slightly smaller on mobile */
+    }
+    
+    .now-playing-title {
+        font-size: 0.9rem;
+    }
+    
+    .now-playing-artist {
+        font-size: 0.8rem;
     }
 }
