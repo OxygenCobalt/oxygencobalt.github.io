@@ -1455,8 +1455,6 @@ h2 {
     align-items: center;
     justify-content: center;
     position: relative;
-    /* Hexagonal shape using clip-path to match portfolio buttons */
-
     /* Add octagonal clip-path to match containers */
     clip-path: polygon(
         var(--small-corner-cut) 0%, 
@@ -1468,11 +1466,90 @@ h2 {
         0% calc(100% - var(--small-corner-cut)), 
         0% var(--small-corner-cut)
     );
-    transition: transform var(--transition-speed);
+    transition: background-color var(--transition-speed);
+    z-index: 1;
+    background-color: var(--border-color);
+}
+
+/* Pseudo-element for border effect */
+.contact-link::before {
+    content: '';
+    position: absolute;
+    top: var(--border-width);
+    left: var(--border-width);
+    right: var(--border-width);
+    bottom: var(--border-width);
+    background-color: var(--bg-color);
+    z-index: -1;
+    /* Calculate inset octagonal shape */
+    clip-path: polygon(
+        calc(var(--small-corner-cut) - var(--border-width) * 0.5) 0%, 
+        calc(100% - var(--small-corner-cut) + var(--border-width) * 0.5) 0%, 
+        100% calc(var(--small-corner-cut) - var(--border-width) * 0.5), 
+        100% calc(100% - var(--small-corner-cut) + var(--border-width) * 0.5), 
+        calc(100% - var(--small-corner-cut) + var(--border-width) * 0.5) 100%, 
+        calc(var(--small-corner-cut) - var(--border-width) * 0.5) 100%, 
+        0% calc(100% - var(--small-corner-cut) + var(--border-width) * 0.5), 
+        0% calc(var(--small-corner-cut) - var(--border-width) * 0.5)
+    );
+    transition: all var(--transition-speed);
+}
+
+/* Button gradient overlays */
+.contact-link::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2;
+    pointer-events: none;
+    transition: opacity var(--transition-speed);
+    opacity: 1;
+    clip-path: polygon(
+        var(--small-corner-cut) 0%, 
+        calc(100% - var(--small-corner-cut)) 0%, 
+        100% var(--small-corner-cut), 
+        100% calc(100% - var(--small-corner-cut)), 
+        calc(100% - var(--small-corner-cut)) 100%, 
+        var(--small-corner-cut) 100%, 
+        0% calc(100% - var(--small-corner-cut)), 
+        0% var(--small-corner-cut)
+    );
+    /* Gradient overlay, radiating from center */
+    background: radial-gradient(
+        circle at center,
+        transparent 60%,
+        var(--bg-color) 120%
+    );
 }
 
 .contact-link:hover {
-    transform: scale(1.1);
+    background-color: var(--hover-border-color);
+}
+
+.contact-link:hover::after {
+    opacity: 0;
+}
+
+.contact-link:hover::before {
+    background-color: var(--hover-bg);
+    top: var(--hover-border-width);
+    left: var(--hover-border-width);
+    right: var(--hover-border-width);
+    bottom: var(--hover-border-width);
+    /* Recalculate inset octagonal shape for thicker border */
+    clip-path: polygon(
+        calc(var(--small-corner-cut) - var(--hover-border-width) * 0.5) 0%, 
+        calc(100% - var(--small-corner-cut) + var(--hover-border-width) * 0.5) 0%, 
+        100% calc(var(--small-corner-cut) - var(--hover-border-width) * 0.5), 
+        100% calc(100% - var(--small-corner-cut) + var(--hover-border-width) * 0.5), 
+        calc(100% - var(--small-corner-cut) + var(--hover-border-width) * 0.5) 100%, 
+        calc(var(--small-corner-cut) - var(--hover-border-width) * 0.5) 100%, 
+        0% calc(100% - var(--small-corner-cut) + var(--hover-border-width) * 0.5), 
+        0% calc(var(--small-corner-cut) - var(--hover-border-width) * 0.5)
+    );
 }
 
 .contact-icon {
@@ -1480,7 +1557,7 @@ h2 {
     height: 24px;
     max-width: 24px;
     position: relative;
-    z-index: 2;
+    z-index: 3;
 }
 
 /* Adjustment for rectangular icons (wider than tall) */
@@ -1499,20 +1576,20 @@ h2 {
 }
 
 /* Individual link colors */
-.contact-link.github {
+.contact-link.github:hover {
     background-color: #6d40c8;
 }
 
-.contact-link.linkedin {
+.contact-link.linkedin:hover {
     background-color: #0964bf;
 }
 
-.contact-link.x {
-    background-color: #000000;
+.contact-link.x:hover {
+    background-color: #ffffff;
 }
 
-.contact-link.email {
-    background-color: gray;
+.contact-link.email:hover {
+    background-color: green;
 }
 
 /* Mobile view adjustments */
