@@ -1,34 +1,11 @@
 ---
 layout: base.njk
-title: Blog
+title: Redirecting...
 permalink: "/"
 ---
 
-# Alexander Capehart
+<script>
+  window.location.href = '/about/';
+</script>
 
-Christian. CS Student. Software Engineer. Music Nerd.
-
-<br />
-
-{% if collections.blog.length > 0 %}
-## Blog
-
-<div class="blog-list">
-{% for post in collections.blog | reverse %}
-  <article class="blog-post-preview">
-    <h3>
-      <a href="{{ post.url }}" hx-get="/partials{{ post.url }}" hx-target="#tab-content" hx-push-url="{{ post.url }}" hx-swap="innerHTML transition:true">
-        {{ post.data.title }}
-      </a>
-    </h3>
-    <div class="post-meta">
-      <span class="post-date">{{ post.date | date: "%m/%d/%Y" }}</span>
-    </div>
-    <div class="post-summary">{{ post.data.subtitle }}</div>
-    <a href="{{ post.url }}" class="read-more" hx-get="/partials{{ post.url }}" hx-target="#tab-content" hx-push-url="{{ post.url }}" hx-swap="innerHTML transition:true">
-      Read more →
-    </a>
-  </article>
-{% endfor %}
-</div> 
-{% endif %}
+<p>If you are not redirected automatically, <a href="/about/">click here</a>.</p>
