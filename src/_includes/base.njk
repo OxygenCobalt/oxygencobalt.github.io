@@ -42,6 +42,7 @@
                     </div>
                 </div>
             </div>
+
             <nav class="tabs">
                 {% for item in navigation.items %}
                 {% set isActive = page.url == item.url or (item.url == "/" and page.url.startsWith("/blog/")) or (page.url == "/" and item.url == "/") %}
@@ -55,6 +56,21 @@
                 </button>
                 {% endfor %}
             </nav>
+            
+            <div class="contact-links">
+                <a href="https://github.com/OxygenCobalt" class="contact-link github" aria-label="GitHub">
+                    <img src="/assets/img/github.svg" alt="GitHub" class="contact-icon">
+                </a>
+                <a href="https://linkedin.com/in/alexcpht" class="contact-link linkedin" aria-label="LinkedIn">
+                    <img src="/assets/img/linkedin.png" alt="LinkedIn" class="contact-icon">
+                </a>
+                <a href="https://x.com/oxycblt" class="contact-link x" aria-label="X (Twitter)">
+                    <img src="/assets/img/xitter.svg" alt="X (Twitter)" class="contact-icon">
+                </a>
+                <a href="mailto:alex@oxycblt.org" class="contact-link email" aria-label="Email">
+                    <img src="/assets/img/email.svg" alt="Email" class="contact-icon">
+                </a>
+            </div>
         </div>
         <div class="content">
             <div id="tab-content" class="tab-content active">

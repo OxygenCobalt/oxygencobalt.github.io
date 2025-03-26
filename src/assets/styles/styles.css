@@ -24,6 +24,7 @@
     --hover-border-color: rgb(74 92 146);
     --corner-cut: 20px;
     --container-corner-cut: 20px;
+    --small-corner-cut: 10px;
     --menu-bar-corner-cut: 1.5px; /* New variable for menu bar corner cuts */
     --scroll-height: 80px; /* Height of all scrolling items combined */
     --item-height: 35px; /* Height of each text item */
@@ -299,7 +300,7 @@ h6:hover::after { width: 45px; }
     border-right: var(--border-width) solid var(--sidebar-border);
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 20px;
     background-color: var(--bg-color);
     align-items: center; /* Center the name box */
 }
@@ -1436,5 +1437,112 @@ h2 {
             0% calc(100% - var(--container-corner-cut) * 0.5), 
             0% calc(var(--container-corner-cut) * 0.5)
         );
+    }
+}
+
+/* Contact links styles */
+.contact-links {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.contact-link {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    /* Hexagonal shape using clip-path to match portfolio buttons */
+
+    /* Add octagonal clip-path to match containers */
+    clip-path: polygon(
+        var(--small-corner-cut) 0%, 
+        calc(100% - var(--small-corner-cut)) 0%, 
+        100% var(--small-corner-cut), 
+        100% calc(100% - var(--small-corner-cut)), 
+        calc(100% - var(--small-corner-cut)) 100%, 
+        var(--small-corner-cut) 100%, 
+        0% calc(100% - var(--small-corner-cut)), 
+        0% var(--small-corner-cut)
+    );
+    transition: transform var(--transition-speed);
+}
+
+.contact-link:hover {
+    transform: scale(1.1);
+}
+
+.contact-icon {
+    width: auto;
+    height: 24px;
+    max-width: 24px;
+    position: relative;
+    z-index: 2;
+}
+
+/* Adjustment for rectangular icons (wider than tall) */
+.contact-link.linkedin .contact-icon,
+.contact-link.email .contact-icon,
+.contact-link .contact-icon.rectangular {
+    max-width: 30px;
+    height: 20px;
+    object-fit: contain;
+}
+
+/* Email icon specific adjustment */
+.contact-link.email .contact-icon {
+    max-width: 28px;
+    height: 24px;
+}
+
+/* Individual link colors */
+.contact-link.github {
+    background-color: #6d40c8;
+}
+
+.contact-link.linkedin {
+    background-color: #0964bf;
+}
+
+.contact-link.x {
+    background-color: #000000;
+}
+
+.contact-link.email {
+    background-color: gray;
+}
+
+/* Mobile view adjustments */
+@media (max-width: 768px) {
+    .contact-links {
+        gap: 12px;
+    }
+    
+    .contact-link {
+        width: 44px;
+        height: 44px;
+    }
+    
+    .contact-icon {
+        width: auto;
+        height: 22px;
+        max-width: 22px;
+    }
+
+    /* Mobile adjustment for rectangular icons */
+    .contact-link.linkedin .contact-icon,
+    .contact-link.email .contact-icon,
+    .contact-link .contact-icon.rectangular {
+        max-width: 28px;
+        height: 20px;
+    }
+    
+    /* Mobile specific adjustment for email icon */
+    .contact-link.email .contact-icon {
+        max-width: 30px;
+        height: 24px;
     }
 }
