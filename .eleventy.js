@@ -7,7 +7,7 @@ module.exports = function(eleventyConfig) {
     eleventyConfig.setUseGitIgnore(false);
     eleventyConfig.setWatchJavaScriptDependencies(false);
     eleventyConfig.addWatchTarget("src/content/**/*.md");
-    eleventyConfig.addWatchTarget("!src/content/partials/**");
+    eleventyConfig.addWatchTarget("!src/partials/**");
     eleventyConfig.addWatchTarget("src/assets/styles/");
     eleventyConfig.addWatchTarget("src/assets/scripts/");
     
@@ -50,7 +50,7 @@ module.exports = function(eleventyConfig) {
     // Function to generate partials from content files
     function generatePartials() {
         const contentDir = path.join(__dirname, 'src/content');
-        const partialsDir = path.join(__dirname, 'src/content/partials');
+        const partialsDir = path.join(__dirname, 'src/partials');
         
         // Create partials directory if it doesn't exist
         if (!fs.existsSync(partialsDir)) {
@@ -66,10 +66,8 @@ module.exports = function(eleventyConfig) {
                 const fullPath = path.join(dir, file.name);
                 
                 if (file.isDirectory()) {
-                    // Skip the partials directory
-                    if (file.name !== 'partials') {
-                        results = results.concat(readDirRecursively(fullPath));
-                    }
+                    // Skip the partials directory (no longer needed as partials are outside content)
+                    results = results.concat(readDirRecursively(fullPath));
                 } else if (file.name.endsWith('.md')) {
                     results.push(fullPath);
                 }
@@ -82,9 +80,6 @@ module.exports = function(eleventyConfig) {
         
         // Process each content file
         for (const filePath of contentFiles) {
-            // Skip if the file is in the partials directory
-            if (filePath.includes('partials')) continue;
-            
             const fileContent = fs.readFileSync(filePath, 'utf8');
             
             // Parse frontmatter
