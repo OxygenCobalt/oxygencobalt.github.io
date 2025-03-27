@@ -4,6 +4,86 @@ title: About
 permalink: "/about/"
 ---
 
+<style>
+/* About page styles */
+.about-header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.profile-picture {
+    width: 250px;
+    height: 250px;
+    clip-path: polygon(
+        var(--container-corner-cut) 0%, 
+        calc(100% - var(--container-corner-cut)) 0%, 
+        100% var(--container-corner-cut), 
+        100% calc(100% - var(--container-corner-cut)), 
+        calc(100% - var(--container-corner-cut)) 100%, 
+        var(--container-corner-cut) 100%, 
+        0% calc(100% - var(--container-corner-cut)), 
+        0% var(--container-corner-cut)
+    );
+}
+
+.about-header .profile-picture {
+    flex-shrink: 0;
+}
+
+.about-header .text-content {
+    flex: 1;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .about-header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 20px;
+    }
+    
+    .about-header .text-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .about-header .text-content h1::after,
+    .about-header .text-content h2::after,
+    .about-header .text-content h3::after {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    
+    .profile-picture {
+        width: 200px;
+        height: 200px;
+    }
+}
+
+@media (max-width: 576px) {
+    .profile-picture {
+        width: 150px;
+        height: 150px;
+        /* Reduce corner clipping further for mobile view */
+        clip-path: polygon(
+            calc(var(--container-corner-cut) * 0.5) 0%, 
+            calc(100% - var(--container-corner-cut) * 0.5) 0%, 
+            100% calc(var(--container-corner-cut) * 0.5), 
+            100% calc(100% - var(--container-corner-cut) * 0.5), 
+            calc(100% - var(--container-corner-cut) * 0.5) 100%, 
+            calc(var(--container-corner-cut) * 0.5) 100%, 
+            0% calc(100% - var(--container-corner-cut) * 0.5), 
+            0% calc(var(--container-corner-cut) * 0.5)
+        );
+    }
+}
+</style>
+
 <div class="about-header">
     <img class="profile-picture" src="/res/me.jpg" alt="Portrait" width="200" height="200" />
     <div class="text-content">

@@ -4,6 +4,69 @@ title: Experience
 permalink: "/experience/"
 ---
 
+<style>
+/* Experience specific styles */
+.experience-section {
+    margin-bottom: 40px;
+}
+
+.company-logo {
+    max-width: 500px;
+    width: auto;
+    height: auto;
+}
+
+.company-logo.smaller {
+    max-width: 350px;
+}
+
+.logo-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(250 248 255);
+    padding: 30px;
+    /* Octagonal shape using clip-path */
+    clip-path: polygon(
+        var(--container-corner-cut) 0%, 
+        calc(100% - var(--container-corner-cut)) 0%, 
+        100% var(--container-corner-cut), 
+        100% calc(100% - var(--container-corner-cut)), 
+        calc(100% - var(--container-corner-cut)) 100%, 
+        var(--container-corner-cut) 100%, 
+        0% calc(100% - var(--container-corner-cut)), 
+        0% var(--container-corner-cut)
+    );
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .company-logo {
+        max-width: 300px;
+    }
+    
+    .company-logo.smaller {
+        max-width: 250px;
+    }
+    
+    .logo-container {
+        padding: 10px;
+        /* Reduce corner clipping for mobile view */
+        clip-path: polygon(
+            calc(var(--container-corner-cut) * 0.7) 0%, 
+            calc(100% - var(--container-corner-cut) * 0.7) 0%, 
+            100% calc(var(--container-corner-cut) * 0.7), 
+            100% calc(100% - var(--container-corner-cut) * 0.7), 
+            calc(100% - var(--container-corner-cut) * 0.7) 100%, 
+            calc(var(--container-corner-cut) * 0.7) 100%, 
+            0% calc(100% - var(--container-corner-cut) * 0.7), 
+            0% calc(var(--container-corner-cut) * 0.7)
+        );
+    }
+}
+</style>
+
 # Experience.
 
 

@@ -4,6 +4,11 @@ title: Currently
 permalink: "/currently/"
 ---
 
+<style>
+/* Currently page styles */
+/* This page uses mostly the base styles */
+</style>
+
 <h1>Currently.</h1>
 
 - I'll be working at Salesforce this summer as a SWE intern.

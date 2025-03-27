@@ -4,6 +4,10 @@ title: Redirecting...
 permalink: "/"
 ---
 
+<style>
+/* Index page styles - just for redirect */
+</style>
+
 <script>
   window.location.href = '/about/';
 </script>
