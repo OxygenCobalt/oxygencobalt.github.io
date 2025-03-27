@@ -28,16 +28,7 @@ permalink: "/experience/"
     background-color: rgb(250 248 255);
     padding: 30px;
     /* Octagonal shape using clip-path */
-    clip-path: polygon(
-        var(--container-corner-cut) 0%, 
-        calc(100% - var(--container-corner-cut)) 0%, 
-        100% var(--container-corner-cut), 
-        100% calc(100% - var(--container-corner-cut)), 
-        calc(100% - var(--container-corner-cut)) 100%, 
-        var(--container-corner-cut) 100%, 
-        0% calc(100% - var(--container-corner-cut)), 
-        0% var(--container-corner-cut)
-    );
+    clip-path: var(--large-oct-clip);
 }
 
 /* Responsive adjustments */
@@ -53,16 +44,7 @@ permalink: "/experience/"
     .logo-container {
         padding: 10px;
         /* Reduce corner clipping for mobile view */
-        clip-path: polygon(
-            calc(var(--container-corner-cut) * 0.7) 0%, 
-            calc(100% - var(--container-corner-cut) * 0.7) 0%, 
-            100% calc(var(--container-corner-cut) * 0.7), 
-            100% calc(100% - var(--container-corner-cut) * 0.7), 
-            calc(100% - var(--container-corner-cut) * 0.7) 100%, 
-            calc(var(--container-corner-cut) * 0.7) 100%, 
-            0% calc(100% - var(--container-corner-cut) * 0.7), 
-            0% calc(var(--container-corner-cut) * 0.7)
-        );
+        clip-path: var(--small-oct-clip);
     }
 }
 </style>

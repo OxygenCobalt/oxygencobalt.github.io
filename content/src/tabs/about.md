@@ -17,16 +17,7 @@ permalink: "/about/"
 .profile-picture {
     width: 250px;
     height: 250px;
-    clip-path: polygon(
-        var(--container-corner-cut) 0%, 
-        calc(100% - var(--container-corner-cut)) 0%, 
-        100% var(--container-corner-cut), 
-        100% calc(100% - var(--container-corner-cut)), 
-        calc(100% - var(--container-corner-cut)) 100%, 
-        var(--container-corner-cut) 100%, 
-        0% calc(100% - var(--container-corner-cut)), 
-        0% var(--container-corner-cut)
-    );
+    clip-path: var(--large-oct-clip);
 }
 
 .about-header .profile-picture {
@@ -69,17 +60,6 @@ permalink: "/about/"
     .profile-picture {
         width: 150px;
         height: 150px;
-        /* Reduce corner clipping further for mobile view */
-        clip-path: polygon(
-            calc(var(--container-corner-cut) * 0.5) 0%, 
-            calc(100% - var(--container-corner-cut) * 0.5) 0%, 
-            100% calc(var(--container-corner-cut) * 0.5), 
-            100% calc(100% - var(--container-corner-cut) * 0.5), 
-            calc(100% - var(--container-corner-cut) * 0.5) 100%, 
-            calc(var(--container-corner-cut) * 0.5) 100%, 
-            0% calc(100% - var(--container-corner-cut) * 0.5), 
-            0% calc(var(--container-corner-cut) * 0.5)
-        );
     }
 }
 </style>

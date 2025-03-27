@@ -4,12 +4,7 @@ title: Currently
 permalink: "/currently/"
 ---
 
-<style>
-/* Currently page styles */
-/* This page uses mostly the base styles */
-</style>
-
-<h1>Currently.</h1>
+# Currently.
 
 - I'll be working at Salesforce this summer as a SWE intern.
 - I'm working on a LLM forecasting bot for [Metaculus's AI Benchmark Tournament](https://www.metaculus.com/aib/).

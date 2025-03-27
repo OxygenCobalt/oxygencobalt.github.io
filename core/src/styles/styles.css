@@ -22,14 +22,104 @@
     --border-width: 2px;
     --hover-border-width: 4px;
     --hover-border-color: rgb(74 92 146);
-    --corner-cut: 20px;
-    --container-corner-cut: 20px;
+    --large-corner-cut: 20px;
+    --large-corner-cut: 20px;
     --small-corner-cut: 10px;
-    --menu-bar-corner-cut: 1.5px; /* New variable for menu bar corner cuts */
+    --tiny-corner-cut: 1.5px; /* New variable for menu bar corner cuts */
     --scroll-height: 80px; /* Height of all scrolling items combined */
     --item-height: 35px; /* Height of each text item */
     --name-box-height: 70px; /* Increased height for name box */
     --mobile-item-height: 20px; /* Height for mobile text items */
+
+
+    --small-oct-clip: polygon(
+        var(--small-corner-cut) 0%, 
+        calc(100% - var(--small-corner-cut)) 0%, 
+        100% var(--small-corner-cut), 
+        100% calc(100% - var(--small-corner-cut)), 
+        calc(100% - var(--small-corner-cut)) 100%, 
+        var(--small-corner-cut) 100%, 
+        0% calc(100% - var(--small-corner-cut)), 
+        0% var(--small-corner-cut)
+    );
+
+    --small-inset-oct-clip: polygon(
+        calc(var(--small-corner-cut) - var(--border-width) * 0.5) 0%, 
+        calc(100% - var(--small-corner-cut) + var(--border-width) * 0.5) 0%, 
+        100% calc(var(--small-corner-cut) - var(--border-width) * 0.5), 
+        100% calc(100% - var(--small-corner-cut) + var(--border-width) * 0.5), 
+        calc(100% - var(--small-corner-cut) + var(--border-width) * 0.5) 100%, 
+        calc(var(--small-corner-cut) - var(--border-width) * 0.5) 100%, 
+        0% calc(100% - var(--small-corner-cut) + var(--border-width) * 0.5), 
+        0% calc(var(--small-corner-cut) - var(--border-width) * 0.5)
+    );
+
+    --small-hover-inset-oct-clip: polygon(
+        calc(var(--small-corner-cut) - var(--hover-border-width) * 0.5) 0%, 
+        calc(100% - var(--small-corner-cut) + var(--hover-border-width) * 0.5) 0%, 
+        100% calc(var(--small-corner-cut) - var(--hover-border-width) * 0.5), 
+        100% calc(100% - var(--small-corner-cut) + var(--hover-border-width) * 0.5), 
+        calc(100% - var(--small-corner-cut) + var(--hover-border-width) * 0.5) 100%, 
+        calc(var(--small-corner-cut) - var(--hover-border-width) * 0.5) 100%, 
+        0% calc(100% - var(--small-corner-cut) + var(--hover-border-width) * 0.5), 
+        0% calc(var(--small-corner-cut) - var(--hover-border-width) * 0.5)
+    );
+
+    --large-oct-clip: polygon(
+        var(--large-corner-cut) 0%, 
+        calc(100% - var(--large-corner-cut)) 0%, 
+        100% var(--large-corner-cut), 
+        100% calc(100% - var(--large-corner-cut)), 
+        calc(100% - var(--large-corner-cut)) 100%, 
+        var(--large-corner-cut) 100%, 
+        0% calc(100% - var(--large-corner-cut)), 
+        0% var(--large-corner-cut)
+    );
+    
+    --large-inset-oct-clip: polygon(
+        calc(var(--large-corner-cut) - var(--border-width) * 0.5) 0%, 
+        calc(100% - var(--large-corner-cut) + var(--border-width) * 0.5) 0%, 
+        100% calc(var(--large-corner-cut) - var(--border-width) * 0.5), 
+        100% calc(100% - var(--large-corner-cut) + var(--border-width) * 0.5), 
+        calc(100% - var(--large-corner-cut) + var(--border-width) * 0.5) 100%, 
+        calc(var(--large-corner-cut) - var(--border-width) * 0.5) 100%, 
+        0% calc(100% - var(--large-corner-cut) + var(--border-width) * 0.5), 
+        0% calc(var(--large-corner-cut) - var(--border-width) * 0.5)
+    );
+
+    --large-hover-inset-oct-clip: polygon(
+        calc(var(--large-corner-cut) - var(--hover-border-width) * 0.5) 0%, 
+        calc(100% - var(--large-corner-cut) + var(--hover-border-width) * 0.5) 0%, 
+        100% calc(var(--large-corner-cut) - var(--hover-border-width) * 0.5), 
+        100% calc(100% - var(--large-corner-cut) + var(--hover-border-width) * 0.5),
+        calc(100% - var(--large-corner-cut) + var(--hover-border-width) * 0.5) 100%,
+        calc(var(--large-corner-cut) - var(--hover-border-width) * 0.5) 100%,
+        0% calc(100% - var(--large-corner-cut) + var(--hover-border-width) * 0.5),
+        0% calc(var(--large-corner-cut) - var(--hover-border-width) * 0.5)
+    );
+
+    --small-hex-clip: polygon(var(--tiny-corner-cut) 0%, calc(100% - var(--tiny-corner-cut)) 0%, 100% 50%, calc(100% - var(--tiny-corner-cut)) 100%, var(--tiny-corner-cut) 100%, 0% 50%);
+    
+
+    --large-hex-clip: polygon(var(--large-corner-cut) 0%, calc(100% - var(--large-corner-cut)) 0%, 100% 50%, calc(100% - var(--large-corner-cut)) 100%, var(--large-corner-cut) 100%, 0% 50%);
+
+    --large-inset-hex-clip: polygon(
+        calc(var(--large-corner-cut) - var(--border-width) * 0.5) 0%, 
+        calc(100% - var(--large-corner-cut) + var(--border-width) * 0.5) 0%, 
+        calc(100% - var(--border-width) * 0.5) 50%, 
+        calc(100% - var(--large-corner-cut) + var(--border-width) * 0.5) 100%, 
+        calc(var(--large-corner-cut) - var(--border-width) * 0.5) 100%, 
+        calc(var(--border-width) * 0.5) 50%
+    );
+
+    --large-hover-inset-hex-clip: polygon(
+        calc(var(--large-corner-cut) - var(--hover-border-width) * 0.5) 0%, 
+        calc(100% - var(--large-corner-cut) + var(--hover-border-width) * 0.5) 0%, 
+        calc(100% - var(--hover-border-width) * 0.5) 50%, 
+        calc(100% - var(--large-corner-cut) + var(--hover-border-width) * 0.5) 100%, 
+        calc(var(--large-corner-cut) - var(--hover-border-width) * 0.5) 100%, 
+        calc(var(--hover-border-width) * 0.5) 50%
+    );
 }
 
 @media (prefers-color-scheme: dark) {
@@ -269,13 +359,13 @@ h6:hover::after { width: 45px; }
     background-color: var(--text-color);
     transition: var(--transition-speed);
     /* Hexagonal shape using clip-path with smaller corner cuts */
-    clip-path: polygon(var(--menu-bar-corner-cut) 0%, calc(100% - var(--menu-bar-corner-cut)) 0%, 100% 50%, calc(100% - var(--menu-bar-corner-cut)) 100%, var(--menu-bar-corner-cut) 100%, 0% 50%);
+    clip-path: var(--small-hex-clip);
 }
 
 /* Adjust the rotation animation to work with hexagonal bars */
 .menu-toggle.active .bar:nth-child(1) {
     transform: translateY(11px) rotate(45deg);
-    clip-path: polygon(var(--menu-bar-corner-cut) 0%, calc(100% - var(--menu-bar-corner-cut)) 0%, 100% 50%, calc(100% - var(--menu-bar-corner-cut)) 100%, var(--menu-bar-corner-cut) 100%, 0% 50%);
+    clip-path: var(--small-hex-clip);
 }
 
 .menu-toggle.active .bar:nth-child(2) {
@@ -284,7 +374,7 @@ h6:hover::after { width: 45px; }
 
 .menu-toggle.active .bar:nth-child(3) {
     transform: translateY(-11px) rotate(-45deg);
-    clip-path: polygon(var(--menu-bar-corner-cut) 0%, calc(100% - var(--menu-bar-corner-cut)) 0%, 100% 50%, calc(100% - var(--menu-bar-corner-cut)) 100%, var(--menu-bar-corner-cut) 100%, 0% 50%);
+    clip-path: var(--small-hex-clip);
 }
 
 .container {
@@ -327,17 +417,7 @@ h6:hover::after { width: 45px; }
     padding: 0;
     text-align: center;
     background-color: var(--border-color);
-    /* Octagonal shape using clip-path */
-    clip-path: polygon(
-        var(--container-corner-cut) 0%, 
-        calc(100% - var(--container-corner-cut)) 0%, 
-        100% var(--container-corner-cut), 
-        100% calc(100% - var(--container-corner-cut)), 
-        calc(100% - var(--container-corner-cut)) 100%, 
-        var(--container-corner-cut) 100%, 
-        0% calc(100% - var(--container-corner-cut)), 
-        0% var(--container-corner-cut)
-    );
+    clip-path: var(--large-oct-clip);
     height: var(--name-box-height);
     overflow: hidden;
     width: fit-content;
@@ -357,16 +437,7 @@ h6:hover::after { width: 45px; }
     background-color: var(--bg-color);
     z-index: -1;
     /* Calculate inset octagonal shape */
-    clip-path: polygon(
-        calc(var(--container-corner-cut) - var(--border-width) * 0.5) 0%, 
-        calc(100% - var(--container-corner-cut) + var(--border-width) * 0.5) 0%, 
-        100% calc(var(--container-corner-cut) - var(--border-width) * 0.5), 
-        100% calc(100% - var(--container-corner-cut) + var(--border-width) * 0.5), 
-        calc(100% - var(--container-corner-cut) + var(--border-width) * 0.5) 100%, 
-        calc(var(--container-corner-cut) - var(--border-width) * 0.5) 100%, 
-        0% calc(100% - var(--container-corner-cut) + var(--border-width) * 0.5), 
-        0% calc(var(--container-corner-cut) - var(--border-width) * 0.5)
-    );
+    clip-path: var(--large-inset-oct-clip);
 }
 
 /* Scrolling text container */
@@ -386,7 +457,7 @@ h6:hover::after { width: 45px; }
     position: absolute;
     left: 0;
     right: 0;
-    height: var(--container-corner-cut);
+    height: var(--large-corner-cut);
     z-index: 2;
     pointer-events: none;
 }
@@ -429,7 +500,7 @@ h6:hover::after { width: 45px; }
     color: var(--text-color);
     text-align: center;
     /* Hexagonal shape using clip-path */
-    clip-path: polygon(var(--corner-cut) 0%, calc(100% - var(--corner-cut)) 0%, 100% 50%, calc(100% - var(--corner-cut)) 100%, var(--corner-cut) 100%, 0% 50%);
+    clip-path: var(--large-hex-clip);
     border: none;
     z-index: 1;
     /* Add consistent height to ensure proper alignment */
@@ -452,14 +523,7 @@ h6:hover::after { width: 45px; }
     background-color: var(--bg-color);
     z-index: -1;
     /* Calculate inset hexagonal shape */
-    clip-path: polygon(
-        calc(var(--corner-cut) - var(--border-width) * 0.5) 0%, 
-        calc(100% - var(--corner-cut) + var(--border-width) * 0.5) 0%, 
-        calc(100% - var(--border-width) * 0.5) 50%, 
-        calc(100% - var(--corner-cut) + var(--border-width) * 0.5) 100%, 
-        calc(var(--corner-cut) - var(--border-width) * 0.5) 100%, 
-        calc(var(--border-width) * 0.5) 50%
-    );
+    clip-path: var(--large-inset-hex-clip);
     transition: all var(--transition-speed);
 }
 
@@ -476,7 +540,7 @@ h6:hover::after { width: 45px; }
     transition: opacity var(--transition-speed);
     opacity: 1;
     /* Hexagonal shape using clip-path */
-    clip-path: polygon(var(--corner-cut) 0%, calc(100% - var(--corner-cut)) 0%, 100% 50%, calc(100% - var(--corner-cut)) 100%, var(--corner-cut) 100%, 0% 50%);
+    clip-path: var(--large-hex-clip);
     /* Gradient overlay, radiating from center */
     background: radial-gradient(
         circle at center,
@@ -505,16 +569,7 @@ h6:hover::after { width: 45px; }
     right: var(--hover-border-width);
     bottom: var(--hover-border-width);
     /* Recalculate inset hexagonal shape for thicker border */
-    clip-path: polygon(
-        calc(var(--corner-cut) - var(--hover-border-width) * 0.5) 0%, 
-        calc(100% - var(--corner-cut) + var(--hover-border-width) * 0.5) 0%, 
-        100% calc(var(--corner-cut) - var(--hover-border-width) * 0.5), 
-        100% calc(100% - var(--corner-cut) + var(--hover-border-width) * 0.5), 
-        calc(100% - var(--corner-cut) + var(--hover-border-width) * 0.5) 100%, 
-        calc(var(--corner-cut) - var(--hover-border-width) * 0.5) 100%, 
-        0% calc(100% - var(--corner-cut) + var(--hover-border-width) * 0.5), 
-        0% calc(var(--corner-cut) - var(--hover-border-width) * 0.5)
-    );
+    clip-path: var(--large-hover-inset-hex-clip);
 }
 
 /* Content area */
@@ -525,16 +580,7 @@ h6:hover::after { width: 45px; }
     border: none;
     background-color: var(--border-color);
     /* Octagonal shape using clip-path */
-    clip-path: polygon(
-        var(--container-corner-cut) 0%, 
-        calc(100% - var(--container-corner-cut)) 0%, 
-        100% var(--container-corner-cut), 
-        100% calc(100% - var(--container-corner-cut)), 
-        calc(100% - var(--container-corner-cut)) 100%, 
-        var(--container-corner-cut) 100%, 
-        0% calc(100% - var(--container-corner-cut)), 
-        0% var(--container-corner-cut)
-    );
+    clip-path: var(--large-oct-clip);
     min-width: 0; /* Prevent flex item from overflowing */
 }
 
@@ -545,7 +591,7 @@ h6:hover::after { width: 45px; }
     left: 0;
     right: 0;
     top: 0;
-    height: var(--container-corner-cut);
+    height: var(--large-corner-cut);
     background: linear-gradient(to bottom, var(--bg-color) 10%, transparent 110%);
     z-index: 1;
     pointer-events: none;
@@ -567,16 +613,7 @@ hr {
     background-color: var(--bg-color);
     z-index: -1;
     /* Calculate inset octagonal shape */
-    clip-path: polygon(
-        calc(var(--container-corner-cut) - var(--border-width) * 0.5) 0%, 
-        calc(100% - var(--container-corner-cut) + var(--border-width) * 0.5) 0%, 
-        100% calc(var(--container-corner-cut) - var(--border-width) * 0.5), 
-        100% calc(100% - var(--container-corner-cut) + var(--border-width) * 0.5), 
-        calc(100% - var(--container-corner-cut) + var(--border-width) * 0.5) 100%, 
-        calc(var(--container-corner-cut) - var(--border-width) * 0.5) 100%, 
-        0% calc(100% - var(--container-corner-cut) + var(--border-width) * 0.5), 
-        0% calc(var(--container-corner-cut) - var(--border-width) * 0.5)
-    );
+    clip-path: var(--large-inset-oct-clip);
 }
 
 /* Bottom gradient overlay for content */
@@ -585,7 +622,7 @@ hr {
     left: 0;
     right: 0;
     bottom: 0;
-    height: calc(var(--container-corner-cut));
+    height: calc(var(--large-corner-cut));
     background: linear-gradient(to top, var(--bg-color) 10%, transparent 110%);
     z-index: 1;
     pointer-events: none;
@@ -596,9 +633,9 @@ hr {
     position: relative;
     z-index: 0;
     display: none;
-    padding: calc(var(--container-corner-cut)) calc(var(--container-corner-cut) * 2);
+    padding: calc(var(--large-corner-cut)) calc(var(--large-corner-cut) * 2);
     /* Add height and overflow for scrolling */
-    height: calc(100% + var(--container-corner-cut));
+    height: calc(100% + var(--large-corner-cut));
     overflow-y: auto;
     /* Eliminate scrollbar */
     scrollbar-width: none;
@@ -875,16 +912,7 @@ h2 {
     justify-content: center;
     position: relative;
     /* Add octagonal clip-path to match containers */
-    clip-path: polygon(
-        var(--small-corner-cut) 0%, 
-        calc(100% - var(--small-corner-cut)) 0%, 
-        100% var(--small-corner-cut), 
-        100% calc(100% - var(--small-corner-cut)), 
-        calc(100% - var(--small-corner-cut)) 100%, 
-        var(--small-corner-cut) 100%, 
-        0% calc(100% - var(--small-corner-cut)), 
-        0% var(--small-corner-cut)
-    );
+    clip-path: var(--small-oct-clip);
     transition: background-color var(--transition-speed);
     z-index: 1;
     background-color: var(--border-color);
@@ -901,16 +929,7 @@ h2 {
     background-color: var(--bg-color);
     z-index: -1;
     /* Calculate inset octagonal shape */
-    clip-path: polygon(
-        calc(var(--small-corner-cut) - var(--border-width) * 0.5) 0%, 
-        calc(100% - var(--small-corner-cut) + var(--border-width) * 0.5) 0%, 
-        100% calc(var(--small-corner-cut) - var(--border-width) * 0.5), 
-        100% calc(100% - var(--small-corner-cut) + var(--border-width) * 0.5), 
-        calc(100% - var(--small-corner-cut) + var(--border-width) * 0.5) 100%, 
-        calc(var(--small-corner-cut) - var(--border-width) * 0.5) 100%, 
-        0% calc(100% - var(--small-corner-cut) + var(--border-width) * 0.5), 
-        0% calc(var(--small-corner-cut) - var(--border-width) * 0.5)
-    );
+    clip-path: var(--small-inset-oct-clip);
     transition: all var(--transition-speed);
 }
 
@@ -926,16 +945,7 @@ h2 {
     pointer-events: none;
     transition: opacity var(--transition-speed);
     opacity: 1;
-    clip-path: polygon(
-        var(--small-corner-cut) 0%, 
-        calc(100% - var(--small-corner-cut)) 0%, 
-        100% var(--small-corner-cut), 
-        100% calc(100% - var(--small-corner-cut)), 
-        calc(100% - var(--small-corner-cut)) 100%, 
-        var(--small-corner-cut) 100%, 
-        0% calc(100% - var(--small-corner-cut)), 
-        0% var(--small-corner-cut)
-    );
+    clip-path: var(--small-oct-clip);
     /* Gradient overlay, radiating from center */
     background: radial-gradient(
         circle at center,
@@ -959,16 +969,7 @@ h2 {
     right: var(--hover-border-width);
     bottom: var(--hover-border-width);
     /* Recalculate inset octagonal shape for thicker border */
-    clip-path: polygon(
-        calc(var(--small-corner-cut) - var(--hover-border-width) * 0.5) 0%, 
-        calc(100% - var(--small-corner-cut) + var(--hover-border-width) * 0.5) 0%, 
-        100% calc(var(--small-corner-cut) - var(--hover-border-width) * 0.5), 
-        100% calc(100% - var(--small-corner-cut) + var(--hover-border-width) * 0.5), 
-        calc(100% - var(--small-corner-cut) + var(--hover-border-width) * 0.5) 100%, 
-        calc(var(--small-corner-cut) - var(--hover-border-width) * 0.5) 100%, 
-        0% calc(100% - var(--small-corner-cut) + var(--hover-border-width) * 0.5), 
-        0% calc(var(--small-corner-cut) - var(--hover-border-width) * 0.5)
-    );
+    clip-path: var(--small-hover-inset-oct-clip);
 }
 
 .contact-icon {
@@ -1109,24 +1110,15 @@ h2 {
     display: flex;
     flex-direction: column;
     padding: 25px 15px;
-    padding-left: calc(var(--container-corner-cut) + 10px);
-    padding-right: calc(var(--container-corner-cut) + 10px);
+    padding-left: calc(var(--large-corner-cut) + 10px);
+    padding-right: calc(var(--large-corner-cut) + 10px);
     text-decoration: none;
     background-color: var(--border-color);
     transition: background-color var(--transition-speed), opacity var(--transition-speed);
     opacity: 0.7;
     
     /* Octagonal shape using clip-path */
-    clip-path: polygon(
-        var(--container-corner-cut) 0%, 
-        calc(100% - var(--container-corner-cut)) 0%, 
-        100% var(--container-corner-cut), 
-        100% calc(100% - var(--container-corner-cut)), 
-        calc(100% - var(--container-corner-cut)) 100%, 
-        var(--container-corner-cut) 100%, 
-        0% calc(100% - var(--container-corner-cut)), 
-        0% var(--container-corner-cut)
-    );
+    clip-path: var(--large-oct-clip);
     min-height: unset;
 }
 
@@ -1145,16 +1137,7 @@ h2 {
     background-color: var(--bg-color);
     z-index: 0;
     /* Calculate inset octagonal shape */
-    clip-path: polygon(
-        calc(var(--container-corner-cut) - var(--border-width) * 0.5) 0%, 
-        calc(100% - var(--container-corner-cut) + var(--border-width) * 0.5) 0%, 
-        100% calc(var(--container-corner-cut) - var(--border-width) * 0.5), 
-        100% calc(100% - var(--container-corner-cut) + var(--border-width) * 0.5), 
-        calc(100% - var(--container-corner-cut) + var(--border-width) * 0.5) 100%, 
-        calc(var(--container-corner-cut) - var(--border-width) * 0.5) 100%, 
-        0% calc(100% - var(--container-corner-cut) + var(--border-width) * 0.5), 
-        0% calc(var(--container-corner-cut) - var(--border-width) * 0.5)
-    );
+    clip-path: var(--large-inset-oct-clip);
     transition: all var(--transition-speed);
 }
 
@@ -1164,7 +1147,7 @@ h2 {
     left: 0;
     right: 0;
     top: 0;
-    height: var(--container-corner-cut);
+    height: var(--large-corner-cut);
     background: linear-gradient(to bottom, var(--bg-color) 10%, transparent 110%);
     z-index: 1;
     pointer-events: none;
@@ -1177,7 +1160,7 @@ h2 {
     left: 0;
     right: 0;
     bottom: 0;
-    height: var(--container-corner-cut);
+    height: var(--large-corner-cut);
     background: linear-gradient(to top, var(--bg-color) 10%, transparent 110%);
     z-index: 1;
     pointer-events: none;
@@ -1195,16 +1178,7 @@ h2 {
     right: var(--hover-border-width);
     bottom: var(--hover-border-width);
     /* Recalculate inset octagonal shape for thicker border */
-    clip-path: polygon(
-        calc(var(--container-corner-cut) - var(--hover-border-width) * 0.5) 0%, 
-        calc(100% - var(--container-corner-cut) + var(--hover-border-width) * 0.5) 0%, 
-        100% calc(var(--container-corner-cut) - var(--hover-border-width) * 0.5), 
-        100% calc(100% - var(--container-corner-cut) + var(--hover-border-width) * 0.5), 
-        calc(100% - var(--container-corner-cut) + var(--hover-border-width) * 0.5) 100%, 
-        calc(var(--container-corner-cut) - var(--hover-border-width) * 0.5) 100%, 
-        0% calc(100% - var(--container-corner-cut) + var(--hover-border-width) * 0.5), 
-        0% calc(var(--container-corner-cut) - var(--hover-border-width) * 0.5)
-    );
+    clip-path: var(--large-hover-inset-oct-clip);
 }
 
 .now-playing-container:hover .now-playing-fade-top,
@@ -1305,16 +1279,7 @@ h2 {
     z-index: 3; /* Match header content */
     border-radius: 3px;
     /* Add octagonal clip-path to match containers */
-    clip-path: polygon(
-        var(--small-corner-cut) 0%, 
-        calc(100% - var(--small-corner-cut)) 0%, 
-        100% var(--small-corner-cut), 
-        100% calc(100% - var(--small-corner-cut)), 
-        calc(100% - var(--small-corner-cut)) 100%, 
-        var(--small-corner-cut) 100%, 
-        0% calc(100% - var(--small-corner-cut)), 
-        0% var(--small-corner-cut)
-    );
+    clip-path: var(--small-hex-clip);
 }
 
 .now-playing-info {
@@ -1342,14 +1307,14 @@ h2 {
     
     .now-playing-container {
         padding: 20px 12px;
-        padding-left: calc(var(--container-corner-cut) * 0.7 + 10px);
-        padding-right: calc(var(--container-corner-cut) * 0.7 + 10px);
+        padding-left: calc(var(--large-corner-cut) * 0.7 + 10px);
+        padding-right: calc(var(--large-corner-cut) * 0.7 + 10px);
         min-height: unset; 
     }
     
     .now-playing-fade-top,
     .now-playing-fade-bottom {
-        height: calc(var(--container-corner-cut) * 0.7);
+        height: calc(var(--large-corner-cut) * 0.7);
     }
     
     .now-playing-content {

@@ -28,16 +28,7 @@ permalink: "/portfolio/"
     height: 150px;
     object-fit: cover;
     /* Add octagonal clip-path to match containers */
-    clip-path: polygon(
-        var(--container-corner-cut) 0%, 
-        calc(100% - var(--container-corner-cut)) 0%, 
-        100% var(--container-corner-cut), 
-        100% calc(100% - var(--container-corner-cut)), 
-        calc(100% - var(--container-corner-cut)) 100%, 
-        var(--container-corner-cut) 100%, 
-        0% calc(100% - var(--container-corner-cut)), 
-        0% var(--container-corner-cut)
-    );
+    clip-path: var(--large-oct-clip)
 }
 
 .portfolio-title-group {
@@ -84,7 +75,7 @@ permalink: "/portfolio/"
     border: none;
     z-index: 1;
     /* Hexagonal shape using clip-path */
-    clip-path: polygon(var(--corner-cut) 0%, calc(100% - var(--corner-cut)) 0%, 100% 50%, calc(100% - var(--corner-cut)) 100%, var(--corner-cut) 100%, 0% 50%);
+    clip-path: var(--large-hex-clip)
 }
 
 /* GitHub link special styling */
@@ -103,14 +94,7 @@ permalink: "/portfolio/"
     background-color: var(--bg-color);
     z-index: -1;
     /* Calculate inset hexagonal shape */
-    clip-path: polygon(
-        calc(var(--corner-cut) - var(--border-width) * 0.5) 0%, 
-        calc(100% - var(--corner-cut) + var(--border-width) * 0.5) 0%, 
-        calc(100% - var(--border-width) * 0.5) 50%, 
-        calc(100% - var(--corner-cut) + var(--border-width) * 0.5) 100%, 
-        calc(var(--corner-cut) - var(--border-width) * 0.5) 100%, 
-        calc(var(--border-width) * 0.5) 50%
-    );
+    clip-path: var(--large-inset-hex-clip);
     transition: all var(--transition-speed);
 }
 
@@ -127,7 +111,7 @@ permalink: "/portfolio/"
     transition: opacity var(--transition-speed);
     opacity: 1;
     /* Hexagonal shape using clip-path */
-    clip-path: polygon(var(--corner-cut) 0%, calc(100% - var(--corner-cut)) 0%, 100% 50%, calc(100% - var(--corner-cut)) 100%, var(--corner-cut) 100%, 0% 50%);
+    clip-path: var(--large-hex-clip);
     /* Gradient overlay, radiating from center */
     background: radial-gradient(
         circle at center,
@@ -151,16 +135,7 @@ permalink: "/portfolio/"
     right: var(--hover-border-width);
     bottom: var(--hover-border-width);
     /* Recalculate inset hexagonal shape for thicker border */
-    clip-path: polygon(
-        calc(var(--corner-cut) - var(--hover-border-width) * 0.5) 0%, 
-        calc(100% - var(--corner-cut) + var(--hover-border-width) * 0.5) 0%, 
-        100% calc(var(--corner-cut) - var(--hover-border-width) * 0.5), 
-        100% calc(100% - var(--corner-cut) + var(--hover-border-width) * 0.5), 
-        calc(100% - var(--corner-cut) + var(--hover-border-width) * 0.5) 100%, 
-        calc(var(--corner-cut) - var(--hover-border-width) * 0.5) 100%, 
-        0% calc(100% - var(--corner-cut) + var(--hover-border-width) * 0.5), 
-        0% calc(var(--corner-cut) - var(--hover-border-width) * 0.5)
-    );
+    clip-path: var(--large-hover-inset-hex-clip)
 }
 
 .portfolio-link span {
@@ -199,22 +174,8 @@ permalink: "/portfolio/"
     position: relative;
     display: inline-block;
     overflow: hidden;
-    clip-path: polygon(
-        var(--container-corner-cut) 0%, 
-        calc(100% - var(--container-corner-cut)) 0%, 
-        100% var(--container-corner-cut), 
-        100% calc(100% - var(--container-corner-cut)), 
-        calc(100% - var(--container-corner-cut)) 100%, 
-        var(--container-corner-cut) 100%, 
-        0% calc(100% - var(--container-corner-cut)), 
-        0% var(--container-corner-cut)
-    );
+    clip-path: var(--large-oct-clip);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.screenshot-container:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
 }
 
 .screenshot-container img {
@@ -244,16 +205,7 @@ permalink: "/portfolio/"
         width: 100px;
         height: 100px;
         /* Reduce corner clipping for tablet view */
-        clip-path: polygon(
-            calc(var(--container-corner-cut) * 0.7) 0%, 
-            calc(100% - var(--container-corner-cut) * 0.7) 0%, 
-            100% calc(var(--container-corner-cut) * 0.7), 
-            100% calc(100% - var(--container-corner-cut) * 0.7), 
-            calc(100% - var(--container-corner-cut) * 0.7) 100%, 
-            calc(var(--container-corner-cut) * 0.7) 100%, 
-            0% calc(100% - var(--container-corner-cut) * 0.7), 
-            0% calc(var(--container-corner-cut) * 0.7)
-        );
+        clip-path: var(--small-oct-clip);
     }
     
     .portfolio-title-group {
@@ -263,20 +215,6 @@ permalink: "/portfolio/"
     
     .portfolio-description {
         text-align: center;
-    }
-    
-    .screenshot-container {
-        /* Reduce corner clipping for tablet view */
-        clip-path: polygon(
-            calc(var(--container-corner-cut) * 0.7) 0%, 
-            calc(100% - var(--container-corner-cut) * 0.7) 0%, 
-            100% calc(var(--container-corner-cut) * 0.7), 
-            100% calc(100% - var(--container-corner-cut) * 0.7), 
-            calc(100% - var(--container-corner-cut) * 0.7) 100%, 
-            calc(var(--container-corner-cut) * 0.7) 100%, 
-            0% calc(100% - var(--container-corner-cut) * 0.7), 
-            0% calc(var(--container-corner-cut) * 0.7)
-        );
     }
     
     .screenshot-container img {
@@ -296,31 +234,13 @@ permalink: "/portfolio/"
     .portfolio-icon {
         width: 80px;
         height: 80px;
-        /* Reduce corner clipping further for mobile view */
-        clip-path: polygon(
-            calc(var(--container-corner-cut) * 0.5) 0%, 
-            calc(100% - var(--container-corner-cut) * 0.5) 0%, 
-            100% calc(var(--container-corner-cut) * 0.5), 
-            100% calc(100% - var(--container-corner-cut) * 0.5), 
-            calc(100% - var(--container-corner-cut) * 0.5) 100%, 
-            calc(var(--container-corner-cut) * 0.5) 100%, 
-            0% calc(100% - var(--container-corner-cut) * 0.5), 
-            0% calc(var(--container-corner-cut) * 0.5)
-        );
+        /* Reduce corner clipping for tablet view */
+        clip-path: var(--small-oct-clip);
     }
     
     .screenshot-container {
-        /* Reduce corner clipping further for mobile view */
-        clip-path: polygon(
-            calc(var(--container-corner-cut) * 0.5) 0%, 
-            calc(100% - var(--container-corner-cut) * 0.5) 0%, 
-            100% calc(var(--container-corner-cut) * 0.5), 
-            100% calc(100% - var(--container-corner-cut) * 0.5), 
-            calc(100% - var(--container-corner-cut) * 0.5) 100%, 
-            calc(var(--container-corner-cut) * 0.5) 100%, 
-            0% calc(100% - var(--container-corner-cut) * 0.5), 
-            0% calc(var(--container-corner-cut) * 0.5)
-        );
+        /* Reduce corner clipping for tablet view */
+        clip-path: var(--small-oct-clip);
     }
     
     .portfolio-title {
