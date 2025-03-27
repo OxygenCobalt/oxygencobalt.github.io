@@ -1,5 +1,5 @@
 ---
-layout: core.njk
+layout: tab.njk
 title: Portfolio
 permalink: "/portfolio/"
 ---
@@ -37,7 +37,7 @@ permalink: "/portfolio/"
 <div class="portfolio-item">
     <div class="portfolio-info">
         <div class="section-header">
-            <img class="portfolio-icon" src="/assets/img/mines-acm.png" alt="Mines ACM Logo" />
+            <img class="portfolio-icon" src="/res/mines-acm.png" alt="Mines ACM Logo" />
             <div class="section-info">
                 <p class="section-title">Mines ACM Site</p>
                 <p class="section-date">June - August 2023</p>
@@ -52,7 +52,7 @@ permalink: "/portfolio/"
     </div>
     <div class="portfolio-screenshots">
         <div class="screenshot-container" style="width: 100%;">
-            <img style="width: 100%; height: auto;" src="/assets/img/mines-acm-homepage.png" alt="Mines ACM Site Homepage" />
+            <img style="width: 100%; height: auto;" src="/res/mines-acm-homepage.png" alt="Mines ACM Site Homepage" />
         </div>
     </div>
 </div>

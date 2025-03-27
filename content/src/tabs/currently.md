@@ -1,5 +1,5 @@
 ---
-layout: core.njk
+layout: tab.njk
 title: Currently
 permalink: "/currently/"
 ---

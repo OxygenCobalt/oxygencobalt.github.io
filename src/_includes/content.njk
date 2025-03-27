@@ -1,8 +1,0 @@
-{% if request.headers['HX-Request'] %}
-{{ content | safe }}
-{% else %}
-{% extends "base.njk" %}
-{% block content %}
-{{ content | safe }}
-{% endblock %}
-{% endif %} 

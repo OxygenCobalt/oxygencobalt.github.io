@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const playingStatus = document.getElementById('now-playing-status');
     
     // Default artwork path
-    const defaultArtwork = '/assets/img/album.svg';
+    const defaultArtwork = '/res/album.svg';
     
     // Set default artwork initially
     artwork.src = defaultArtwork;

@@ -1,5 +1,5 @@
 ---
-layout: core.njk
+layout: tab.njk
 title: Experience
 permalink: "/experience/"
 ---
@@ -10,7 +10,7 @@ permalink: "/experience/"
 <div class="experience-section">
     <div class="section-header">
         <div class="logo-container">
-            <img alt="Ombud" src="/assets/img/ombud.png" class="company-logo" />
+            <img alt="Ombud" src="/res/ombud.png" class="company-logo" />
         </div>
         <div class="section-info">
             <p class="section-title">Full-Stack Software Engineer Intern</p>
@@ -37,7 +37,7 @@ permalink: "/experience/"
 <div class="experience-section">
     <div class="section-header">
         <div class="logo-container">
-            <img alt="OreCart" src="/assets/img/orecart.png" class="company-logo" />
+            <img alt="OreCart" src="/res/orecart.png" class="company-logo" />
         </div>
         <div class="section-info">
             <p class="section-title">Full-Stack Software Engineer</p>
@@ -64,7 +64,7 @@ permalink: "/experience/"
 <div class="experience-section">
     <div class="section-header">
         <div class="logo-container">
-            <img alt="Colorado School of Mines" src="/assets/img/mines.png" class="company-logo smaller" />
+            <img alt="Colorado School of Mines" src="/res/mines.png" class="company-logo smaller" />
         </div>
         <div class="section-info">
             <p class="section-title">Teaching Assistant</p>

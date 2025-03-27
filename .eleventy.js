@@ -1,16 +1,19 @@
 module.exports = function(eleventyConfig) {
     // Copy assets directly to output
-    eleventyConfig.addPassthroughCopy("src/assets");
-    
-    
+    eleventyConfig.addPassthroughCopy({"core/res": "res"});
+    eleventyConfig.addPassthroughCopy({"core/src/styles": "styles"});
+    eleventyConfig.addPassthroughCopy({"core/src/scripts": "scripts"});
+    eleventyConfig.addPassthroughCopy({"content/res": "res"});
+    eleventyConfig.addPassthroughCopy({"content/src/styles": "styles"});
+    eleventyConfig.addPassthroughCopy({"content/src/scripts": "scripts"});
+
     // Watch CSS files for changes during serve
     eleventyConfig.setUseGitIgnore(false);
     eleventyConfig.setWatchJavaScriptDependencies(false);
-    eleventyConfig.addWatchTarget("src/content/**/*.md");
-    eleventyConfig.addWatchTarget("!src/partials/**");
-    eleventyConfig.addWatchTarget("src/assets/styles/");
-    eleventyConfig.addWatchTarget("src/assets/scripts/");
-    
+    eleventyConfig.addWatchTarget("content/**/*");
+    eleventyConfig.addWatchTarget("core/**/*");
+    eleventyConfig.addWatchTarget("!content/build/**/*");
+
     // Add blog collection
     eleventyConfig.addCollection("blog", function(collectionApi) {
         return collectionApi.getFilteredByTag("blog")
@@ -49,8 +52,8 @@ module.exports = function(eleventyConfig) {
 
     // Function to generate partials from content files
     function generatePartials() {
-        const contentDir = path.join(__dirname, 'src/content');
-        const partialsDir = path.join(__dirname, 'src/partials');
+        const contentDir = path.join(__dirname, 'content');
+        const partialsDir = path.join(__dirname, 'content/build/partials');
         
         // Create partials directory if it doesn't exist
         if (!fs.existsSync(partialsDir)) {
@@ -148,11 +151,11 @@ ${content}`;
 
     return {
         dir: {
-            input: "src",
-            output: "_site",
-            includes: "_includes",
-            data: "_data",
-            layouts: "_includes"
+            input: "content",
+            output: "site",
+            data: "data",
+            layouts: "../core/src/layouts",
+            includes: "../core/src/includes"
         }
     };
 };
