@@ -64,21 +64,6 @@ document.addEventListener('DOMContentLoaded', function() {
             toggleMobileMenu(false);
         }
     });
-    
-    // Theme detection based on system preference
-    const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
-    
-    function setTheme(isDark) {
-        document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
-    }
-    
-    // Set initial theme based on system preference
-    setTheme(prefersDarkScheme.matches);
-    
-    // Listen for system theme changes
-    prefersDarkScheme.addEventListener('change', e => {
-        setTheme(e.matches);
-    });
 
     // Remove no-transition class after a brief delay
     setTimeout(() => {

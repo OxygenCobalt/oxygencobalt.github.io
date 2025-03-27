@@ -1834,7 +1834,7 @@ h2 {
 .now-playing-details {
     display: none; /* Hidden by default */
     flex-direction: row;
-    gap: 10px;
+    gap: 15px;
     align-items: center;
     padding: 5px 0; /* Add some vertical padding */
 }
