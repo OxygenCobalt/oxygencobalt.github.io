@@ -1,5 +1,5 @@
 ---
-layout: base.njk
+layout: core.njk
 title: About
 permalink: "/about/"
 ---
