@@ -34,7 +34,7 @@ permalink: "/experience/"
 /* Responsive adjustments */
 @media (max-width: 768px) {
     .company-logo {
-        max-width: 300px;
+        max-width: 200px;
     }
     
     .company-logo.smaller {
