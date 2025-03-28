@@ -1,0 +1,177 @@
+/* Blog Posts Grid */
+.blog-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.blog-post-widget {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 25px 15px;
+    padding-left: calc(var(--large-corner-cut) + 10px);
+    padding-right: calc(var(--large-corner-cut) + 10px);
+    text-decoration: none;
+    background-color: var(--border-color);
+    transition: background-color var(--transition-speed), opacity var(--transition-speed);
+    
+    /* Octagonal shape using clip-path */
+    clip-path: var(--large-oct-clip);
+    min-height: 180px;
+}
+
+/* Pseudo-element for border effect */
+.blog-post-widget::before {
+    content: '';
+    position: absolute;
+    top: var(--border-width);
+    left: var(--border-width);
+    right: var(--border-width);
+    bottom: var(--border-width);
+    background-color: var(--bg-color);
+    z-index: 0;
+    /* Calculate inset octagonal shape */
+    clip-path: var(--large-inset-oct-clip);
+    transition: all var(--transition-speed);
+}
+
+.blog-post-widget:hover {
+    background-color: var(--hover-border-color);
+}
+
+.blog-post-widget:hover::before {
+    background-color: var(--hover-bg);
+    top: var(--hover-border-width);
+    left: var(--hover-border-width);
+    right: var(--hover-border-width);
+    bottom: var(--hover-border-width);
+    /* Recalculate inset octagonal shape for thicker border */
+    clip-path: var(--large-hover-inset-oct-clip);
+}
+
+.blog-post-content {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+}
+
+.blog-post-title {
+    font-weight: 600;
+    font-size: 1.2rem;
+    color: var(--text-color);
+    margin: 0;
+    transition: color var(--transition-speed);
+    position: relative;
+    padding-bottom: 7.5px;
+}
+
+.blog-post-title a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.post-meta {
+    font-size: 0.9rem;
+    color: var(--border-color);
+    margin-bottom: 10px;
+    transition: color var(--transition-speed);
+}
+
+.blog-post-widget:hover .post-meta {
+    color: var(--text-color);
+}
+
+.post-summary {
+    font-size: 0.95rem;
+    color: var(--text-color);
+    margin-bottom: 15px;
+    flex-grow: 1;
+}
+
+.read-more {
+    align-self: flex-end;
+    margin-top: auto;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--border-color);
+    text-decoration: none;
+    transition: color var(--transition-speed);
+}
+
+.blog-post-widget:hover .read-more {
+    color: var(--text-color);
+}
+
+.blog-post-widget:hover .blog-post-title {
+    color: var(--accent);
+}
+
+.blog-post-widget:hover .blog-post-title::after {
+    width: 120px;
+    background-color: var(--accent);
+}
+
+/* Fade gradients like the now-playing widget */
+.blog-post-fade-top {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: var(--large-corner-cut);
+    background: linear-gradient(to bottom, var(--bg-color) 10%, transparent 110%);
+    z-index: 1;
+    pointer-events: none;
+    transition: opacity var(--transition-speed);
+}
+
+.blog-post-fade-bottom {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: var(--large-corner-cut);
+    background: linear-gradient(to top, var(--bg-color) 10%, transparent 110%);
+    z-index: 1;
+    pointer-events: none;
+    transition: opacity var(--transition-speed);
+}
+
+.blog-post-widget:hover .blog-post-fade-top,
+.blog-post-widget:hover .blog-post-fade-bottom {
+    opacity: 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .blog-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .blog-post-widget {
+        padding: 20px 12px;
+        padding-left: calc(var(--large-corner-cut) * 0.7 + 10px);
+        padding-right: calc(var(--large-corner-cut) * 0.7 + 10px);
+        min-height: 150px;
+    }
+    
+    .blog-post-fade-top,
+    .blog-post-fade-bottom {
+        height: calc(var(--large-corner-cut) * 0.7);
+    }
+    
+    .blog-post-title {
+        font-size: 1.1rem;
+    }
+    
+    .post-summary {
+        font-size: 0.9rem;
+    }
+}

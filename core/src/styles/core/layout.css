@@ -213,6 +213,27 @@
         display: flex;
     }
     
+    .sidebar {
+        position: fixed;
+        top: 60px;
+        left: -100%;
+        width: 80%;
+        max-width: 300px;
+        height: calc(100vh - 60px);
+        z-index: 90;
+        transition: left var(--transition-speed) ease;
+        box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+        overflow-y: auto;
+    }
+    
+    .sidebar-top {
+        margin-bottom: 20px;
+    }
+    
+    .sidebar.active {
+        left: 0;
+    }
+
     /* Overlay when menu is open */
     .overlay {
         display: none;
@@ -228,4 +249,5 @@
     .overlay.active {
         display: block;
     }
+
 }

@@ -80,3 +80,9 @@
         transform: translateY(calc(var(--mobile-item-height) * -3)); /* Scroll through both names */
     }
 }
+
+@media (max-width: 768px) {
+    .name-box {
+        display: none; /* Hide desktop name box on mobile */
+    }
+}

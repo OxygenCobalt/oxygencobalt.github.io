@@ -1,5 +1,6 @@
 {
     "items": [
+        { "text": "Home", "url": "/", "partial": "/partials/" },
         { "text": "About", "url": "/about/", "partial": "/partials/about/" },
         { "text": "Experience", "url": "/experience/", "partial": "/partials/experience/" },
         { "text": "Portfolio", "url": "/portfolio/", "partial": "/partials/portfolio/" },

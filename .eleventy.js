@@ -10,9 +10,9 @@ module.exports = function (eleventyConfig) {
     // Watch CSS files for changes during serve
     eleventyConfig.setUseGitIgnore(false);
     eleventyConfig.setWatchJavaScriptDependencies(false);
-    eleventyConfig.addWatchTarget("content/**/*");
     eleventyConfig.addWatchTarget("core/**/*");
-    eleventyConfig.addWatchTarget("!content/build/**/*");
+    eleventyConfig.addWatchTarget("content/**/*");
+    eleventyConfig.addWatchTarget("!*/**/partial.*");
 
     // Add blog collection
     eleventyConfig.addCollection("blog", function (collectionApi) {

@@ -6,7 +6,7 @@
   "scripts": {
     "start": "eleventy --serve",
     "build": "eleventy",
-    "clean": "rm -rf site && rm -rf content/build"
+    "clean": "rm -rf site && rm -rf */**/partial.*.md && */**/partial.*.njk"
   },
   "repository": {
     "type": "git",

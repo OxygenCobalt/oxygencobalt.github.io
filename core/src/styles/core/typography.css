@@ -20,65 +20,110 @@ h1, h2, h3, h4, h5, h6 {
     font-style: normal;
     position: relative;
     transition: color 0.3s ease;
+    margin-top: 0;
 }
 
 h1 {
-    margin-bottom: 40px;
+    padding-bottom: 7.5px;
+    margin-top: 0;
+    margin-bottom: calc(20px + var(--underline-h1));
     font-size: 2.5rem;
 }
 
 h2 {
-    margin-bottom: 30px;
+    padding-bottom: 5px;
+    margin-top: 0;
+    margin-bottom: calc(17.5px + var(--underline-h2));
     font-size: 2.1rem;
 }
 
 h3 {
-    margin-bottom: 25px;
+    padding-bottom: 2.5px;
+    margin-top: 0;
+    margin-bottom: calc(15px + var(--underline-h3));
     font-size: 1.8rem;
 }
 
 h4 {
-    margin-bottom: 20px;
+    margin-top: 0;
+    margin-bottom: 7.5px;
     font-size: 1.5rem;
 }
 
 h5 {
-    margin-bottom: 15px;
+    margin-top: 0;
+    margin-bottom: 5px;
     font-size: 1.3rem;
 }
 
 h6 {
-    margin-bottom: 10px;
+    margin-top: 0;
+    margin-bottom: 2.5px;
     font-size: 1.1rem;
 }
 
-h1::after, h2::after, h3::after, h4::after, h5::after, h6::after {
+h1::after, h2::after, h3::after {
     content: '';
     position: absolute;
-    bottom: -10px;
+    bottom: 0;
     left: 0;
-    height: 4px;
-    background-color: var(--accent);
     transition: width 0.3s ease;
 }
 
-h1::after { width: 120px; }
-h2::after { width: 100px; }
-h3::after { width: 80px; }
-h4::after { width: 60px; }
-h5::after { width: 40px; }
-h6::after { width: 30px; }
+h1::after { 
+    width: 120px; 
+    height: var(--underline-h1);
+    background-color: var(--accent);
+    clip-path: var(--small-hex-clip);
+}
+
+h2::after { 
+    width: 100px; 
+    height: var(--underline-h2);
+    background-color: var(--accent-h2);
+    clip-path: var(--small-hex-clip);
+}
+
+h3::after { 
+    width: 80px; 
+    height: var(--underline-h3);
+    background-color: var(--accent-h3);
+    clip-path: var(--small-hex-clip);
+}
 
 h1:hover, h2:hover, h3:hover, h4:hover, h5:hover, h6:hover {
     color: var(--accent);
 }
 
-h1:hover::after { width: 180px; }
-h2:hover::after { width: 150px; }
-h3:hover::after { width: 120px; }
-h4:hover::after { width: 90px; }
-h5:hover::after { width: 60px; }
-h6:hover::after { width: 45px; }
+h1:hover::after { 
+    width: 180px; 
+    background-color: var(--accent);
+}
+
+h2:hover::after { 
+    width: 150px; 
+    background-color: var(--accent);
+}
+
+h3:hover::after { 
+    width: 120px; 
+    background-color: var(--accent);
+}
+
+h4:hover::after { 
+    width: 90px; 
+    background-color: var(--accent);
+}
+
+h5:hover::after { 
+    width: 60px; 
+    background-color: var(--accent);
+}
+
+h6:hover::after { 
+    width: 45px; 
+    background-color: var(--accent);
+}
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
@@ -96,26 +141,38 @@ h6:hover::after { width: 45px; }
     
     h1 {
         font-size: 2rem;
+        padding-bottom: 15px;
+        margin-bottom: 20px;
     }
     
     h2 {
         font-size: 1.8rem;
+        padding-bottom: 15px;
+        margin-bottom: 10px;
     }
     
     h3 {
         font-size: 1.6rem;
+        padding-bottom: 15px;
+        margin-bottom: 5px;
     }
     
     h4 {
         font-size: 1.4rem;
+        padding-bottom: 15px;
+        margin-bottom: 0;
     }
     
     h5 {
         font-size: 1.2rem;
+        padding-bottom: 15px;
+        margin-bottom: 0;
     }
     
     h6 {
         font-size: 1rem;
+        padding-bottom: 15px;
+        margin-bottom: 0;
     }
     
     h1::after, h2::after, h3::after, h4::after, h5::after, h6::after {
@@ -123,67 +180,8 @@ h6:hover::after { width: 45px; }
         transform: translateX(-50%);
     }
     
-    .container {
-        flex-direction: column;
-    }
-    
-    .sidebar {
-        position: fixed;
-        top: 60px;
-        left: -100%;
-        width: 80%;
-        max-width: 300px;
-        height: calc(100vh - 60px);
-        z-index: 90;
-        transition: left var(--transition-speed) ease;
-        box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-        overflow-y: auto;
-    }
-    
-    .sidebar-top {
-        margin-bottom: 20px;
-    }
-    
-    .sidebar.active {
-        left: 0;
-    }
-    
     .name-box {
         display: none; /* Hide desktop name box on mobile */
-    }
-    
-    .content {
-        margin: 10px;
-        background-color: var(--border-color); /* Ensure border is visible in mobile */
-    }
-    
-    /* Overlay when menu is open */
-    .overlay {
-        display: none;
-        position: fixed;
-        top: 60px;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-color: rgba(0, 0, 0, 0.5);
-        z-index: 80;
-    }
-    
-    .overlay.active {
-        display: block;
-    }
-    
-    /* Animated hamburger to X */
-    .menu-toggle.active .bar:nth-child(1) {
-        transform: translateY(11px) rotate(45deg);
-    }
-    
-    .menu-toggle.active .bar:nth-child(2) {
-        opacity: 0;
-    }
-    
-    .menu-toggle.active .bar:nth-child(3) {
-        transform: translateY(-11px) rotate(-45deg);
     }
 }
 
