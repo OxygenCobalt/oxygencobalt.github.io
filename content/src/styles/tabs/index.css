@@ -67,9 +67,7 @@
     font-size: 1.2rem;
     color: var(--text-color);
     margin: 0;
-    transition: color var(--transition-speed);
     position: relative;
-    padding-bottom: 7.5px;
 }
 
 .blog-post-title a {
@@ -111,11 +109,6 @@
 
 .blog-post-widget:hover .blog-post-title {
     color: var(--accent);
-}
-
-.blog-post-widget:hover .blog-post-title::after {
-    width: 120px;
-    background-color: var(--accent);
 }
 
 /* Fade gradients like the now-playing widget */

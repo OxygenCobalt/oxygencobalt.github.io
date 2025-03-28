@@ -11,8 +11,8 @@ permalink: "/about/"
 <div class="about-header">
     <img class="profile-picture" src="/res/me.jpg" alt="Portrait" width="200" height="200" />
     <div class="text-content">
-        <h1>About Me.</h1>
-        <p>Statistically, I've been interested in computing for most of my life. I work across the stack, solving complex large-scale problems and working with team members/stakeholders to deliver effective results. In my free time, I like listening to music, usually a lot of electronic and experimental rock.
+        <h1 class="should-center">About Me.</h1>
+        <p class="should-center">Statistically, I've been interested in computing for most of my life. I work across the stack, solving complex large-scale problems and working with team members/stakeholders to deliver effective results. In my free time, I like listening to music, usually a lot of electronic and experimental rock.
     </div>
 </div>
 

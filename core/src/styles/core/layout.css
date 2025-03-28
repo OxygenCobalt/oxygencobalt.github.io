@@ -182,7 +182,7 @@
     position: relative;
     z-index: 0;
     display: none;
-    padding: calc(var(--large-corner-cut)) calc(var(--large-corner-cut) * 2);
+    padding: var(--large-corner-cut) calc(var(--large-corner-cut) * 2);
     /* Add height and overflow for scrolling */
     height: calc(100% + var(--large-corner-cut));
     overflow-y: auto;

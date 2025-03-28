@@ -8,6 +8,8 @@ permalink: "/experience/"
 <span></span>
 <link rel="stylesheet" href="/styles/tabs/experience.css" />
 
+<div class="experience-container">
+
 # Experience.
 
 
@@ -82,4 +84,5 @@ permalink: "/experience/"
         <br /><br />
         I serve three office hour sessions per week, in which I assist with course material, the 3-4 programming projects assigned each month, and the semester-long final project.
     </div>
+</div>
 </div>

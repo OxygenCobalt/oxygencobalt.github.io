@@ -264,3 +264,83 @@
         height: 300px;
     }
 }
+/* Shared Section Styles */
+.portfolio-section-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    margin-bottom: 20px;
+}
+
+.portfolio-section-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
+}
+
+.portfolio-section-title {
+    margin-bottom: 0px !important;
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+
+.portfolio-section-title::after {
+    display: none;
+}
+
+.portfolio-section-subtitle {
+    font-size: 1.5rem;
+    font-style: italic;
+    margin-bottom: 0px;
+}
+
+.portfolio-section-date {
+    font-size: 1.5rem;
+    color: #888888;
+    margin-bottom: 0px;
+}
+
+.portfolio-section-description {
+    margin: 20px 0;
+    line-height: 1.6;
+}
+
+.portfolio-section-accomplishments {
+    margin-top: 20px;
+    margin-bottom: 10px !important;
+}
+
+.portfolio-section-accomplishments::after {
+    display: none;
+}
+
+
+/* Tablet adjustments */
+@media (max-width: 1576px) {
+    .portfolio-section-header {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
+}
+
+/* Responsive adjustments for shared sections */
+@media (max-width: 768px) {
+    .portfolio-section-header {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
+    
+    .portfolio-section-title {
+        font-size: 1.5rem;
+    }
+    
+    .portfolio-section-subtitle, 
+    .portfolio-section-date {
+        font-size: 1.3rem;
+    }
+}
+

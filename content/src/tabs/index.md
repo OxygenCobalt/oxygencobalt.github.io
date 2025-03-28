@@ -12,7 +12,7 @@ permalink: "/"
     <div class="blog-post-fade-top"></div>
     <div class="blog-post-fade-bottom"></div>
     <div class="blog-post-content">
-      <h3 class="blog-post-title">{{ post.data.title }}</h3>
+      <p class="blog-post-title never-center">{{ post.data.title }}</p>
       <div class="post-meta">
         <span class="post-date">{{ post.date | date: "%m/%d/%Y" }}</span>
       </div>

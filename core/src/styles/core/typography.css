@@ -139,49 +139,75 @@ h6:hover::after {
         text-align: center;
     }
     
-    h1 {
-        font-size: 2rem;
-        padding-bottom: 15px;
-        margin-bottom: 20px;
-    }
-    
-    h2 {
-        font-size: 1.8rem;
-        padding-bottom: 15px;
-        margin-bottom: 10px;
-    }
-    
-    h3 {
-        font-size: 1.6rem;
-        padding-bottom: 15px;
-        margin-bottom: 5px;
-    }
-    
-    h4 {
-        font-size: 1.4rem;
-        padding-bottom: 15px;
-        margin-bottom: 0;
-    }
-    
-    h5 {
-        font-size: 1.2rem;
-        padding-bottom: 15px;
-        margin-bottom: 0;
-    }
-    
-    h6 {
-        font-size: 1rem;
-        padding-bottom: 15px;
-        margin-bottom: 0;
-    }
-    
-    h1::after, h2::after, h3::after, h4::after, h5::after, h6::after {
+    h1::after, h2::after, h3::after {
         left: 50%;
         transform: translateX(-50%);
     }
     
-    .name-box {
-        display: none; /* Hide desktop name box on mobile */
+    h1.never-center, h2.never-center, h3.never-center, h4.never-center, h5.never-center, h6.never-center {
+        text-align: left;
+    }
+
+    h1.never-center::after, h2.never-center::after, h3.never-center::after {
+        left: 0;
+        transform: translateX(0);
+    }
+    
+    h1 {
+        font-size: 2rem;
+        padding-bottom: 5px;
+        margin-bottom: calc(15px + var(--underline-h1));
+    }
+    
+    h2 {
+        font-size: 1.75rem;
+        padding-bottom: 3.5px;
+        margin-bottom: calc(12.5px + var(--underline-h2));
+    }
+    
+    h3 {
+        font-size: 1.5rem;
+        padding-bottom: 2px;
+        margin-bottom: calc(10px + var(--underline-h3));
+    }
+    
+    h4 {
+        font-size: 1.3rem;
+        margin-bottom: 5px;
+    }
+    
+    h5 {
+        font-size: 1.15rem;
+        margin-bottom: 3.5px;
+    }
+    
+    h6 {
+        font-size: 1rem;
+        margin-bottom: 2px;
+    }
+    
+    h1::after { 
+        width: 100px; 
+    }
+    
+    h2::after { 
+        width: 80px; 
+    }
+    
+    h3::after { 
+        width: 60px; 
+    }
+    
+    h1:hover::after { 
+        width: 150px; 
+    }
+    
+    h2:hover::after { 
+        width: 120px; 
+    }
+    
+    h3:hover::after { 
+        width: 90px; 
     }
 }
 
