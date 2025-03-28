@@ -45,20 +45,49 @@ module.exports = function (eleventyConfig) {
         return currentPage === itemUrl ? "active" : "";
     });
 
-    // Generate partials from content files
+    // Generate partial layouts and partials from content files
     const fs = require('fs');
     const path = require('path');
     const matter = require('gray-matter');
 
-    // Function to generate partials from content files
-    function generatePartials() {
-        const contentDir = path.join(__dirname, 'content/src');
-        const partialsDir = path.join(__dirname, 'content/build/partials');
-
-        // Create partials directory if it doesn't exist
-        if (!fs.existsSync(partialsDir)) {
-            fs.mkdirSync(partialsDir, { recursive: true });
+    // Function to generate partial layout files
+    function generatePartialLayouts() {
+        const layoutsDir = path.join(__dirname, 'core/src/layouts');
+        
+        // Read all layout files
+        const layoutFiles = fs.readdirSync(layoutsDir).filter(file => {
+            // Exclude partial layouts and scaffold
+            return file.endsWith('.njk') && 
+                   !file.includes('partial') && 
+                   file !== 'scaffold.njk';
+        });
+        
+        // Process each layout file
+        for (const layoutFile of layoutFiles) {
+            const layoutPath = path.join(layoutsDir, layoutFile);
+            const layoutContent = fs.readFileSync(layoutPath, 'utf8');
+            
+            // Parse frontmatter
+            const { data, content } = matter(layoutContent);
+            
+            // Remove 'layout' from frontmatter
+            delete data.layout;
+            
+            // Create the partial layout name
+            const partialLayoutName = `partial.${layoutFile}`;
+            const partialLayoutPath = path.join(layoutsDir, partialLayoutName);
+            
+            // Create the partial layout content without scaffold inheritance
+            const partialLayoutContent = matter.stringify(content, data);
+            
+            // Write the partial layout file
+            fs.writeFileSync(partialLayoutPath, partialLayoutContent);
         }
+    }
+
+    // Function to generate partials from content files
+    function generateContentPartials() {
+        const contentDir = path.join(__dirname, 'content/src');
 
         // Read all files in content directory recursively
         function readDirRecursively(dir) {
@@ -69,9 +98,8 @@ module.exports = function (eleventyConfig) {
                 const fullPath = path.join(dir, file.name);
 
                 if (file.isDirectory()) {
-                    // Skip the partials directory (no longer needed as partials are outside content)aa
                     results = results.concat(readDirRecursively(fullPath));
-                } else if (file.name.endsWith('.md')) {
+                } else if (file.name.endsWith('.md') && !file.name.startsWith('partial.')) {
                     results.push(fullPath);
                 }
             }
@@ -87,14 +115,15 @@ module.exports = function (eleventyConfig) {
 
             // Parse frontmatter
             const { data, content } = matter(fileContent);
-
-            // Get the relative path from content directory
-            const relativePath = path.relative(contentDir, filePath);
-            const relativeDir = path.dirname(relativePath);
-
-            // Get the base name without extension
-            const baseName = path.basename(filePath, '.md');
-
+            
+            // Get the directory and filename
+            const fileDir = path.dirname(filePath);
+            const fileName = path.basename(filePath);
+            
+            // Create the partial filename with partial. prefix
+            const partialFileName = `partial.${fileName}`;
+            const partialPath = path.join(fileDir, partialFileName);
+            
             // Determine the partial URL
             let partialUrl;
             if (data.permalink) {
@@ -108,27 +137,25 @@ module.exports = function (eleventyConfig) {
 
                 partialUrl = `/partials${permalinkPath}/`;
             } else {
+                // Get the relative path from content directory for URL construction
+                const relativePath = path.relative(contentDir, filePath);
+                const relativeDir = path.dirname(relativePath);
+                const baseName = path.basename(filePath, '.md');
+                
                 const dirPart = relativeDir !== '.' ? `/${relativeDir}` : '';
                 partialUrl = `/partials${dirPart}/${baseName}/`;
             }
 
-            // Create corresponding partial directory if it doesn't exist
-            const partialDir = path.join(partialsDir, relativeDir);
-            if (!fs.existsSync(partialDir)) {
-                fs.mkdirSync(partialDir, { recursive: true });
-            }
-
-            // Create corresponding partial
-            const partialPath = path.join(partialDir, path.basename(filePath));
-
-            // Create new frontmatter with all original properties except 'layout'
+            // Create new frontmatter with all original properties
             const partialFrontmatter = { ...data };
-            if (partialFrontmatter.layout === "blog-post.njk") {
-                partialFrontmatter.layout = "blog-partial.njk"
-            } else {
-                delete partialFrontmatter.layout;
+            
+            // If layout is defined, update to use the partial layout
+            if (partialFrontmatter.layout) {
+                // Replace layout with partial version
+                partialFrontmatter.layout = `partial.${partialFrontmatter.layout}`;
             }
-            partialFrontmatter.isPartial = true
+            
+            partialFrontmatter.isPartial = true;
             partialFrontmatter.permalink = partialUrl; // Set new permalink
 
             // Convert frontmatter to YAML string
@@ -141,6 +168,14 @@ ${content}`;
             // Write the partial file
             fs.writeFileSync(partialPath, partialContent);
         }
+    }
+
+    // Function to run all generation steps
+    function generatePartials() {
+        // First generate partial layouts
+        generatePartialLayouts();
+        // Then generate content partials
+        generateContentPartials();
     }
 
     // Run before the build starts
