@@ -57,7 +57,6 @@
     text-decoration: none;
     background-color: var(--border-color);
     transition: background-color var(--transition-speed), opacity var(--transition-speed);
-    opacity: 0.7;
     
     /* Octagonal shape using clip-path */
     clip-path: var(--large-oct-clip);

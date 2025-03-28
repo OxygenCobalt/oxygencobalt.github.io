@@ -21,7 +21,7 @@
 /* Sidebar styles */
 .sidebar {
     width: fit-content;
-    min-width: 200px;
+    min-width: 300px;
     padding: var(--sidebar-padding);
     padding-bottom: 10px;
     border-right: var(--border-width) solid var(--sidebar-border);
