@@ -18,7 +18,8 @@ module.exports = function (eleventyConfig) {
     eleventyConfig.addCollection("blog", function (collectionApi) {
         return collectionApi.getFilteredByTag("blog")
             .filter(post => !post.data.isPartial)
-            .sort((a, b) => a.date - b.date);
+            .sort((a, b) => a.date - b.date)
+            .reverse();
     });
 
     // Add date filter for formatting dates

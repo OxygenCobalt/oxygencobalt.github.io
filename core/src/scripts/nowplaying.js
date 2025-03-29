@@ -89,7 +89,6 @@ document.addEventListener('DOMContentLoaded', function() {
             // Update connection status to "connected" (dim green)
             playingStatus.classList.remove('no-connection');
             playingStatus.classList.add('connected');
-            playingStatus.classList.remove('active');
             
             // Check if we have actual track metadata
             if (data.payload.count > 0 && data.payload.listens && data.payload.listens.length > 0) {
@@ -97,6 +96,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 // Check if the current listen data is the same as the previous one
                 if (isListenEqual(currentListen, previousListenData)) {
+                    // Maintain active state but return early
+                    playingStatus.classList.add('active');
                     return; // Skip updating if data hasn't changed
                 }
                 
@@ -137,7 +138,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
                 
                 // Now update all UI elements at once
-                header.textContent = "I'm listening to...";
+                header.textContent = "Listening to...";
                 title.textContent = track.track_name || 'Unknown Track';
                 artist.textContent = track.artist_name || 'Unknown Artist';
                 
@@ -162,7 +163,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Only update if we were previously playing something
                 if (previousListenData !== null) {
                     previousListenData = null;
-                    header.textContent = "I'm not listening to anything!";
+                    header.textContent = "Not listening to anything!";
                     title.textContent = "";
                     artist.textContent = "";
                     artwork.style.display = 'none';
@@ -184,7 +185,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Only update if we were previously playing something
             if (previousListenData !== null) {
                 previousListenData = null;
-                header.textContent = "I'm not listening to anything!";
+                header.textContent = "Not listening to anything!";
                 title.textContent = "";
                 artist.textContent = "";
                 artwork.style.display = 'none';

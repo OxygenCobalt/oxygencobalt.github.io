@@ -13,11 +13,11 @@ permalink: "/"
     <div class="blog-post-fade-bottom"></div>
     <div class="blog-post-content">
       <p class="blog-post-title never-center">{{ post.data.title }}</p>
-      <div class="post-meta">
+      <p class="post-summary">{{ post.data.subtitle }}</p>
+      <div class="post-footer">
         <span class="post-date">{{ post.date | date: "%m/%d/%Y" }}</span>
+        <span class="read-more">Read more →</span>
       </div>
-      <div class="post-summary">{{ post.data.subtitle }}</div>
-      <span class="read-more">Read more →</span>
     </div>
   </a>
 {% endfor %}

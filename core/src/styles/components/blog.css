@@ -1,9 +1,19 @@
 /* Blog Post Page */
 .post-metadata {
+    display: flex;
+    gap: 5px;
+    flex-direction: column;
     margin-bottom: 2rem;
     padding-bottom: 1rem;
     border-bottom: 1px solid var(--sidebar-border);
-    font-size: 0.9rem;
+}
+
+.post-subtitle {
+    font-size: 1.2rem;
+}
+
+.post-date {
+    font-size: 1.0rem;
     color: var(--border-color);
 }
 
@@ -95,6 +105,12 @@
 
 .blog-buttons a {
     width: auto;
+}
+
+.blog-buttons a.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
 }
 
 @media (max-width: 768px) {
