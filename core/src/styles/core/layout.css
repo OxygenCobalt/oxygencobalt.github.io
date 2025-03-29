@@ -184,7 +184,7 @@
     display: none;
     padding: var(--large-corner-cut) calc(var(--large-corner-cut) * 2);
     /* Add height and overflow for scrolling */
-    height: calc(100% + var(--large-corner-cut));
+    height: calc(100%);
     overflow-y: auto;
     /* Eliminate scrollbar */
     scrollbar-width: none;

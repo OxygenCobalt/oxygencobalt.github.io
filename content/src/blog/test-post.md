@@ -1,33 +1,43 @@
 ---
 layout: blog.njk
-title: "My First Blog Post"
+title: "Hello World!"
 subtitle: "Test"
 date: 2024-03-25
-permalink: "/blog/first-post/"
+permalink: "/blog/hello-world/"
 tags: ["blog"]
-nextPost: "second-post"
 ---
 
-# h1
+Hello World!
 
-section
+## Heading Level 2
 
-## h2
+This is a paragraph with **bold text** and *italic text*. You can also use ***bold and italic*** together.
 
-section
+### Heading Level 3
 
-### h3
+Here's a list of items:
 
-section
+- Item 1
+- Item 2
+- Item 3
+  - Nested item 1
+  - Nested item 2
 
-#### h4
+#### Heading Level 4
 
-section
+1. Ordered item 1
+2. Ordered item 2
+3. Ordered item 3
 
-##### h5
+##### Blockquote Example
 
-section
+> This is a blockquote.
+> It can span multiple lines.
+> 
+> And even have multiple paragraphs.
 
-###### h6
+###### Code Examples
 
-section
+Inline code: `const greeting = "Hello World!";`
+
+Code block:
