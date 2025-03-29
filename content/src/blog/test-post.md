@@ -5,6 +5,8 @@ subtitle: "Test"
 date: 2024-03-25
 permalink: "/blog/hello-world/"
 tags: ["blog"]
+nextPost: "one"
+previousPost: "two"
 ---
 
 Hello World!

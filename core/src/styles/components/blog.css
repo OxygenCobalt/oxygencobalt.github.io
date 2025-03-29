@@ -18,12 +18,6 @@
     margin-bottom: 1.5rem;
 }
 
-/* Add styling for lists and nested lists */
-.post-content ul,
-.post-content ol {
-    padding-left: 2rem;
-}
-
 .post-content ul ul,
 .post-content ul ol,
 .post-content ol ul,
@@ -92,18 +86,15 @@
     gap: 1rem;
 }
 
-.prev-post,
-.next-post,
-.back-to-blog {
-    color: var(--accent);
-    text-decoration: none;
-    transition: opacity 0.2s ease;
+.blog-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
 }
 
-.prev-post:hover,
-.next-post:hover,
-.back-to-blog:hover {
-    opacity: 0.8;
+.blog-buttons a {
+    width: auto;
 }
 
 @media (max-width: 768px) {
