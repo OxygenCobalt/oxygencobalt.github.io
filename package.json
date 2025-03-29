@@ -5,7 +5,7 @@
   "main": "script.js",
   "scripts": {
     "start": "eleventy --serve",
-    "build": "eleventy",
+    "build": "eleventy && node minify-site.js",
     "clean": "rm -rf site && rm -rf */**/partial.*.md && */**/partial.*.njk"
   },
   "repository": {
@@ -21,6 +21,12 @@
   },
   "homepage": "https://github.com/OxygenCobalt/oxygencobalt.github.io#readme",
   "devDependencies": {
-    "@11ty/eleventy": "^3.0.0"
+    "@11ty/eleventy": "^3.0.0",
+    "cssnano": "^7.0.6",
+    "glob": "^11.0.1",
+    "html-minifier-terser": "^7.2.0",
+    "postcss": "^8.5.3",
+    "postcss-cli": "^11.0.1",
+    "terser": "^5.39.0"
   }
 }
