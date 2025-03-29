@@ -11,6 +11,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // Default artwork path
     const defaultArtwork = '/res/album.svg';
     
+    // Variable to store the previous listen data for comparison
+    let previousListenData = null;
+    
     // Set default artwork initially
     artwork.src = defaultArtwork;
     artwork.alt = 'Default album artwork';
@@ -64,6 +67,18 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
+    // Function to compare two listen objects to check if they're the same
+    function isListenEqual(listen1, listen2) {
+        if (!listen1 || !listen2) return false;
+        
+        const track1 = listen1.track_metadata;
+        const track2 = listen2.track_metadata;
+        
+        return track1.track_name === track2.track_name &&
+               track1.artist_name === track2.artist_name &&
+               track1.release_name === track2.release_name;
+    }
+    
     // Function to fetch now playing data from ListenBrainz
     async function fetchNowPlaying() {
         try {
@@ -71,91 +86,113 @@ document.addEventListener('DOMContentLoaded', function() {
             const response = await fetch(`https://api.listenbrainz.org/1/user/${username}/playing-now`);
             const data = await response.json();
             
+            // Update connection status to "connected" (dim green)
+            playingStatus.classList.remove('no-connection');
+            playingStatus.classList.add('connected');
+            playingStatus.classList.remove('active');
+            
             // Check if we have actual track metadata
             if (data.payload.count > 0 && data.payload.listens && data.payload.listens.length > 0) {
-                const listen = data.payload.listens[0];
-                const track = listen.track_metadata;
+                const currentListen = data.payload.listens[0];
                 
-                // Start with the artwork in loading state - show default while loading
-                artwork.style.display = 'block';
-                artwork.src = defaultArtwork;
-                artwork.alt = 'Loading album artwork...';
-                // Make sure icon class is applied for default artwork
-                artwork.classList.add('icon');
+                // Check if the current listen data is the same as the previous one
+                if (isListenEqual(currentListen, previousListenData)) {
+                    return; // Skip updating if data hasn't changed
+                }
                 
-                // Now update the UI with track information
-                header.textContent = "I'm listening to...";
-                title.textContent = track.track_name || 'Unknown Track';
-                artist.textContent = track.artist_name || 'Unknown Artist';
+                // Save the current listen as previous for next comparison
+                previousListenData = currentListen;
+                
+                const track = currentListen.track_metadata;
+                
+                // Keep existing elements hidden until we're ready to update
+                let artworkUrl = defaultArtwork;
+                let artworkAlt = 'Default album artwork';
+                let shouldUseIcon = true;
                 
                 // Get album art if we have artist and album information
                 if (track.artist_name && track.release_name) {
                     // Fetch album art from Cover Art Archive
-                    const artworkUrl = await fetchAlbumArt(track.artist_name, track.release_name);
+                    const fetchedArtworkUrl = await fetchAlbumArt(track.artist_name, track.release_name);
                     
-                    // Update artwork if we have it
-                    if (artworkUrl) {
-                        // Create a new image to test loading before switching
-                        const tempImage = new Image();
-                        tempImage.onload = function() {
-                            // Only after successful load, update the real image and remove icon class
-                            artwork.src = artworkUrl;
-                            artwork.alt = `${track.release_name} by ${track.artist_name}`;
-                            // Remove icon class for real album artwork only after load success
-                            artwork.classList.remove('icon');
-                        };
-                        tempImage.onerror = function() {
-                            // If loading fails, keep the default artwork
-                            artwork.src = defaultArtwork;
-                            artwork.alt = 'Default album artwork';
-                            // Make sure icon class is applied for default artwork
-                            artwork.classList.add('icon');
-                        };
-                        // Start loading the image
-                        tempImage.src = artworkUrl;
-                    } else {
-                        // Keep default artwork if not found
-                        artwork.src = defaultArtwork;
-                        artwork.alt = 'Default album artwork';
-                        // Make sure icon class is applied for default artwork
-                        artwork.classList.add('icon');
+                    if (fetchedArtworkUrl) {
+                        // Test if the image can be loaded
+                        try {
+                            await new Promise((resolve, reject) => {
+                                const tempImage = new Image();
+                                tempImage.onload = resolve;
+                                tempImage.onerror = reject;
+                                tempImage.src = fetchedArtworkUrl;
+                            });
+                            
+                            // Image loaded successfully
+                            artworkUrl = fetchedArtworkUrl;
+                            artworkAlt = `${track.release_name} by ${track.artist_name}`;
+                            shouldUseIcon = false;
+                        } catch (error) {
+                            // Image failed to load, keep defaults
+                            console.error('Failed to load artwork:', error);
+                        }
                     }
-                } else {
-                    // Keep default artwork if we don't have enough info
-                    artwork.src = defaultArtwork;
-                    artwork.alt = 'Default album artwork';
-                    // Make sure icon class is applied for default artwork
+                }
+                
+                // Now update all UI elements at once
+                header.textContent = "I'm listening to...";
+                title.textContent = track.track_name || 'Unknown Track';
+                artist.textContent = track.artist_name || 'Unknown Artist';
+                
+                // Update artwork
+                artwork.style.display = 'block';
+                artwork.src = artworkUrl;
+                artwork.alt = artworkAlt;
+                
+                if (shouldUseIcon) {
                     artwork.classList.add('icon');
+                } else {
+                    artwork.classList.remove('icon');
                 }
                 
                 // Show all elements when playing
                 container.classList.add('active');
-                playingStatus.classList.add('active');
+                playingStatus.classList.add('active'); // Show as active (bright green)
                 document.querySelector('.now-playing-details').style.display = 'flex';
                 container.setAttribute('href', `https://listenbrainz.org/user/${username}/`);
             } else {
                 // If nothing is playing (empty listens array)
+                // Only update if we were previously playing something
+                if (previousListenData !== null) {
+                    previousListenData = null;
+                    header.textContent = "I'm not listening to anything!";
+                    title.textContent = "";
+                    artist.textContent = "";
+                    artwork.style.display = 'none';
+                    artwork.src = ""; // Clear the src to prevent phantom images
+                    container.classList.remove('active');
+                    // Connected but not playing - stays dim green
+                    playingStatus.classList.remove('active');
+                    document.querySelector('.now-playing-details').style.display = 'none';
+                    container.setAttribute('href', `https://listenbrainz.org/user/${username}/`);
+                }
+            }
+        } catch (error) {
+            console.error('Error fetching ListenBrainz data:', error);
+            // Set connection status to "no connection" (gray)
+            playingStatus.classList.add('no-connection');
+            playingStatus.classList.remove('connected');
+            playingStatus.classList.remove('active');
+            
+            // Only update if we were previously playing something
+            if (previousListenData !== null) {
+                previousListenData = null;
                 header.textContent = "I'm not listening to anything!";
                 title.textContent = "";
                 artist.textContent = "";
                 artwork.style.display = 'none';
                 artwork.src = ""; // Clear the src to prevent phantom images
                 container.classList.remove('active');
-                playingStatus.classList.remove('active');
                 document.querySelector('.now-playing-details').style.display = 'none';
                 container.setAttribute('href', `https://listenbrainz.org/user/${username}/`);
             }
-        } catch (error) {
-            console.error('Error fetching ListenBrainz data:', error);
-            header.textContent = "I'm not listening to anything!";
-            title.textContent = "";
-            artist.textContent = "";
-            artwork.style.display = 'none';
-            artwork.src = ""; // Clear the src to prevent phantom images
-            container.classList.remove('active');
-            playingStatus.classList.remove('active');
-            document.querySelector('.now-playing-details').style.display = 'none';
-            container.setAttribute('href', `https://listenbrainz.org/user/${username}/`);
         }
     }
     

@@ -128,9 +128,7 @@
         --accent: rgb(179 197 255);
         --accent-h2: rgba(179, 197, 255, 0.9);
         --accent-h3: rgba(179, 197, 255, 0.8);
-        --accent-h4: rgba(179, 197, 255, 0.7);
-        --accent-h5: rgba(179, 197, 255, 0.6);
-        --accent-h6: rgba(179, 197, 255, 0.5);
+        --accent-dim: rgba(179, 197, 255, 0.5);
         --accent-visited: rgb(193 198 221);
         --hover-border-color: rgb(179 197 255);
     }

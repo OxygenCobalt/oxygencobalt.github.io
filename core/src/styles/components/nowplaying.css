@@ -24,27 +24,25 @@
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    background-color: var(--border-color);
+    background-color: var(--border-color); /* Default gray for no connection */
     position: relative;
     z-index: 3; /* Match header row */
     transition: background-color 0.3s ease;
 }
 
-.now-playing-status.active {
-    background-color: #1DB954; /* Spotify green color */
-    animation: pulse 2s infinite;
+/* No connection - gray */
+.now-playing-status.no-connection {
+    background-color: var(--border-color);
 }
 
-@keyframes pulse {
-    0% {
-        box-shadow: 0 0 0 0 rgba(29, 185, 84, 0.7);
-    }
-    70% {
-        box-shadow: 0 0 0 6px rgba(29, 185, 84, 0);
-    }
-    100% {
-        box-shadow: 0 0 0 0 rgba(29, 185, 84, 0);
-    }
+/* Connected but not playing - dim green */
+.now-playing-status.connected {
+    background-color: var(--accent-dim)
+}
+
+/* Playing - bright green */
+.now-playing-status.active {
+    background-color: var(--accent);
 }
 
 .now-playing-container {
