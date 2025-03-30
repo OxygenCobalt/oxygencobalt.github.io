@@ -237,7 +237,7 @@
 
 
 /* Tablet adjustments */
-@media (max-width: 1576px) {
+@media (max-width: 1279px) {
     .portfolio-section-header {
         flex-direction: column;
         gap: 20px;

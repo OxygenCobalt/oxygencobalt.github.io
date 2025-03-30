@@ -23,7 +23,7 @@
 }
 
 /* Mobile adjustments */
-@media (max-width: 1576px) {
+@media (max-width: 1279px) {
     .about-header {
         flex-direction: column;
         align-items: center;
