@@ -1,7 +1,7 @@
 ---
 layout: blog.njk
 title: "Hello World!"
-subtitle: "A brand new website"
+subtitle: "A brand new website."
 date: 2025-03-27
 permalink: "/blog/hello-world/"
 tags: ["blog"]
