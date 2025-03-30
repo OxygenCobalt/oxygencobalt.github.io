@@ -1,30 +1,5 @@
-const fs = require('fs');
-const path = require('path');
-const matter = require('gray-matter');
-const htmlmin = require('html-minifier-terser');
-
 module.exports = function (eleventyConfig) {
-    // Add HTML minification transform
-    eleventyConfig.addTransform("htmlmin", async function(content, outputPath) {
-        if(outputPath && outputPath.endsWith(".html")) {
-            try {
-                const minified = await htmlmin.minify(content, {
-                    useShortDoctype: true,
-                    removeComments: true,
-                    collapseWhitespace: true,
-                    conservativeCollapse: true,
-                    removeAttributeQuotes: false
-                });
-                return minified;
-            } catch (error) {
-                console.error("HTML minification error:", error);
-                return content;
-            }
-        }
-        return content;
-    });
-
-    // Copy assets directly to output with normal passthrough
+    // Copy assets directly to output
     eleventyConfig.addPassthroughCopy({ "core/res": "res" });
     eleventyConfig.addPassthroughCopy({ "core/src/styles": "styles" });
     eleventyConfig.addPassthroughCopy({ "core/src/scripts": "scripts" });
@@ -72,6 +47,8 @@ module.exports = function (eleventyConfig) {
     });
 
     // Generate partial layouts and partials from content files
+    const fs = require('fs');
+    const path = require('path');
     const matter = require('gray-matter');
 
     // Function to generate partial layout files
