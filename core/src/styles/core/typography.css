@@ -155,19 +155,19 @@ h6:hover::after {
     
     h1 {
         font-size: 2rem;
-        padding-bottom: 5px;
+        padding-bottom: 10px;
         margin-bottom: calc(15px + var(--underline-h1));
     }
     
     h2 {
         font-size: 1.75rem;
-        padding-bottom: 3.5px;
+        padding-bottom: 7.5px;
         margin-bottom: calc(12.5px + var(--underline-h2));
     }
     
     h3 {
         font-size: 1.5rem;
-        padding-bottom: 2px;
+        padding-bottom: 5px;
         margin-bottom: calc(10px + var(--underline-h3));
     }
     

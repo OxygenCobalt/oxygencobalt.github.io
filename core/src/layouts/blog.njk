@@ -6,7 +6,7 @@ layout: scaffold.njk
 <span></span>
 <link rel="stylesheet" href="/styles/components/blog.css" />
 
-<h1>{{ title }}</h1>
+<h1 class="post-title">{{ title }}</h1>
 
 <div class="post-metadata">
   <span class="post-subtitle">{{ subtitle }}</span>
@@ -19,30 +19,32 @@ layout: scaffold.njk
 
 <div class="post-navigation">
   <div class="blog-buttons">
-    <a href="{% if previousPost %}/blog/{{ previousPost }}/{% else %}#{% endif %}" 
-       class="hex-button prev-post {% if not previousPost %}disabled{% endif %}"
-       {% if previousPost %}
-       hx-get="/partials/blog/{{ previousPost }}/" 
-       hx-target="#tab-content" 
-       hx-push-url="/blog/{{ previousPost }}/" 
-       hx-swap="innerHTML transition:true"
-       {% endif %}>
-      &larr; Previous Post
-    </a>
+    <div class="nav-row">
+      <a href="{% if previousPost %}/blog/{{ previousPost }}/{% else %}#{% endif %}" 
+         class="hex-button prev-post {% if not previousPost %}disabled{% endif %}"
+         {% if previousPost %}
+         hx-get="/partials/blog/{{ previousPost }}/" 
+         hx-target="#tab-content" 
+         hx-push-url="/blog/{{ previousPost }}/" 
+         hx-swap="innerHTML transition:true"
+         {% endif %}>
+        <span class="full-text">&larr; Previous Post</span><span class="short-text">&larr; Previous</span>
+      </a>
+
+      <a href="{% if nextPost %}/blog/{{ nextPost }}/{% else %}#{% endif %}" 
+         class="hex-button next-post {% if not nextPost %}disabled{% endif %}"
+         {% if nextPost %}
+         hx-get="/partials/blog/{{ nextPost }}/" 
+         hx-target="#tab-content" 
+         hx-push-url="/blog/{{ nextPost }}/" 
+         hx-swap="innerHTML transition:true"
+         {% endif %}>
+        <span class="full-text">Next Post &rarr;</span><span class="short-text">Next &rarr;</span>
+      </a>
+    </div>
   
     <a href="/" class="hex-button back-to-blog" hx-get="/partials/" hx-target="#tab-content" hx-push-url="/" hx-swap="innerHTML transition:true">
       Back to Home
-    </a>
-
-    <a href="{% if nextPost %}/blog/{{ nextPost }}/{% else %}#{% endif %}" 
-       class="hex-button next-post {% if not nextPost %}disabled{% endif %}"
-       {% if nextPost %}
-       hx-get="/partials/blog/{{ nextPost }}/" 
-       hx-target="#tab-content" 
-       hx-push-url="/blog/{{ nextPost }}/" 
-       hx-swap="innerHTML transition:true"
-       {% endif %}>
-      Next Post &rarr;
     </a>
   </div>
 </div>
