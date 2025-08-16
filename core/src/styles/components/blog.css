@@ -34,7 +34,7 @@
 .post-content p,
 .post-content ul,
 .post-content ol {
-    margin-bottom: 1.5rem;
+    margin-bottom: 0.5rem;
 }
 
 .post-content ul ul,
@@ -64,24 +64,38 @@
 .post-content img {
     max-width: 100%;
     height: auto;
-    border-radius: 4px;
-    margin: 1.5rem 0;
+    clip-path: var(--large-oct-clip);
+    margin: 0 auto;
+    display: block;
+    margin: 0.75rem auto;
+}
+
+/* For image with figure/captions, we also want to center those */
+.post-content figure {
+    text-align: center;
+    margin: 1.5rem auto;
+}
+
+.post-content figcaption {
+    font-size: 0.9rem;
+    color: var(--border-color);
+    margin-top: 0rem;
+    font-style: italic;
+    line-height: 1.4;
 }
 
 .post-content pre {
     background-color: var(--hover-bg);
     padding: 1rem;
-    border-radius: 4px;
     overflow-x: auto;
     margin: 1.5rem 0;
+    clip-path: var(--large-oct-clip);
+    padding: var(--large-corner-cut);
 }
 
 .post-content code {
     font-family: monospace;
-    font-size: 0.9em;
-    background-color: var(--hover-bg);
-    padding: 0.2rem 0.4rem;
-    border-radius: 3px;
+    font-size: 0.9rem;
 }
 
 .post-content pre code {
