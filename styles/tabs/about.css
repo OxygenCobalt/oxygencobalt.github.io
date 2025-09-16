@@ -1,0 +1,50 @@
+/* About page styles */
+.about-header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: row;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.profile-picture {
+    width: 250px;
+    height: 250px;
+    clip-path: var(--large-oct-clip);
+}
+
+.about-header .profile-picture {
+    flex-shrink: 0;
+}
+
+.about-header .text-content {
+    flex: 1;
+}
+
+/* Mobile adjustments */
+@media (max-width: 1279px) {
+    .about-header {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+    
+    .about-header .text-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .profile-picture {
+        width: 200px;
+        height: 200px;
+    }
+}
+
+@media (max-width: 576px) {
+    .profile-picture {
+        width: 150px;
+        height: 150px;
+    }
+}

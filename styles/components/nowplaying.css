@@ -1,0 +1,288 @@
+/* Now Playing Widget */
+.now-playing-widget {
+    width: 100%;
+    margin-top: auto;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    max-width: 325px; /* Match the name box width */
+}
+
+.now-playing-header-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 0;
+    position: relative;
+    z-index: 3; /* Higher than content to ensure visibility */
+}
+
+.now-playing-status {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: var(--border-color); /* Default gray for no connection */
+    position: relative;
+    z-index: 3; /* Match header row */
+    transition: background-color 0.3s ease;
+}
+
+/* No connection - gray */
+.now-playing-status.no-connection {
+    background-color: var(--border-color);
+}
+
+/* Connected but not playing - dim green */
+.now-playing-status.connected {
+    background-color: var(--accent-dim)
+}
+
+/* Playing - bright green */
+.now-playing-status.active {
+    background-color: var(--accent);
+}
+
+.now-playing-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 25px 15px;
+    padding-left: calc(var(--large-corner-cut) + 10px);
+    padding-right: calc(var(--large-corner-cut) + 10px);
+    text-decoration: none;
+    background-color: var(--border-color);
+    transition: background-color var(--transition-speed), opacity var(--transition-speed);
+    
+    /* Octagonal shape using clip-path */
+    clip-path: var(--large-oct-clip);
+    min-height: unset;
+}
+
+.now-playing-container.active {
+    opacity: 1;
+}
+
+/* Pseudo-element for border effect */
+.now-playing-container::before {
+    content: '';
+    position: absolute;
+    top: var(--border-width);
+    left: var(--border-width);
+    right: var(--border-width);
+    bottom: var(--border-width);
+    background-color: var(--bg-color);
+    z-index: 0;
+    /* Calculate inset octagonal shape */
+    clip-path: var(--large-inset-oct-clip);
+    transition: all var(--transition-speed);
+}
+
+/* Top gradient for now playing widget (like content container) */
+.now-playing-fade-top {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: var(--large-corner-cut);
+    background: linear-gradient(to bottom, var(--bg-color) 10%, transparent 110%);
+    z-index: 1;
+    pointer-events: none;
+    transition: opacity var(--transition-speed);
+}
+
+/* Bottom gradient for now playing widget (like content-fade-bottom) */
+.now-playing-fade-bottom {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: var(--large-corner-cut);
+    background: linear-gradient(to top, var(--bg-color) 10%, transparent 110%);
+    z-index: 1;
+    pointer-events: none;
+    transition: opacity var(--transition-speed);
+}
+
+.now-playing-container:hover {
+    background-color: var(--hover-border-color);
+}
+
+.now-playing-container:hover::before {
+    background-color: var(--hover-bg);
+    top: var(--hover-border-width);
+    left: var(--hover-border-width);
+    right: var(--hover-border-width);
+    bottom: var(--hover-border-width);
+    /* Recalculate inset octagonal shape for thicker border */
+    clip-path: var(--large-hover-inset-oct-clip);
+}
+
+.now-playing-container:hover .now-playing-fade-top,
+.now-playing-container:hover .now-playing-fade-bottom {
+    opacity: 0;
+}
+
+.now-playing-content {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    position: relative;
+    z-index: 2; /* Higher than the fade gradients */
+    width: 100%;
+}
+
+.now-playing-details {
+    display: none; /* Hidden by default */
+    flex-direction: row;
+    gap: 15px;
+    align-items: center;
+    padding: 5px 0; /* Add some vertical padding */
+}
+
+.now-playing-header {
+    font-weight: 500;
+    font-size: 1rem;
+    color: var(--border-color);
+    margin-bottom: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: color var(--transition-speed);
+}
+
+.now-playing-title {
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--text-color);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: color var(--transition-speed);
+    display: none; /* Hidden by default */
+}
+
+.now-playing-artist {
+    font-size: 0.9rem;
+    color: var(--border-color);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: color var(--transition-speed);
+    display: none; /* Hidden by default */
+}
+
+.now-playing-container.active .now-playing-title,
+.now-playing-container.active .now-playing-artist {
+    display: block; /* Show when active */
+}
+
+.now-playing-container:hover .now-playing-artist {
+    color: var(--text-color);
+}
+
+.now-playing-container.active .now-playing-artwork {
+    display: block;
+}
+
+/* Icon class for white SVG/PNG icons that need to be visible in light mode */
+.icon {
+    filter: invert(0.1) sepia(0.1) saturate(1) hue-rotate(170deg) brightness(0.2);
+}
+
+@media (prefers-color-scheme: dark) {
+    .icon {
+        filter: none;
+    }
+}
+
+.now-playing-artwork.error {
+    /* Don't dim the artwork by default */
+    /* opacity: 0.5; */
+    border: 2px solid rgba(255, 0, 0, 0.3);
+}
+
+/* Only apply dimming if explicitly marked as failed */
+.now-playing-artwork.load-failed {
+    opacity: 0.5;
+}
+
+.now-playing-artwork {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    display: none;
+    position: relative;
+    z-index: 3; /* Match header content */
+    border-radius: 3px;
+    /* Add octagonal clip-path to match containers */
+    clip-path: var(--small-oct-clip);
+}
+
+.now-playing-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    z-index: 3; /* Match other content */
+    flex: 1;
+    min-width: 0; /* Ensure text truncation works */
+}
+
+/* Mobile adjustments for now playing widget */
+@media (max-width: 768px) {
+    .now-playing-widget {
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
+    
+    .now-playing-artwork {
+        width: 50px;
+        height: 50px;
+        margin-right: 8px;
+    }
+    
+    .now-playing-container {
+        padding: 20px 12px;
+        padding-left: calc(var(--large-corner-cut) * 0.7 + 10px);
+        padding-right: calc(var(--large-corner-cut) * 0.7 + 10px);
+        min-height: unset; 
+    }
+    
+    .now-playing-fade-top,
+    .now-playing-fade-bottom {
+        height: calc(var(--large-corner-cut) * 0.7);
+    }
+    
+    .now-playing-content {
+        gap: 8px;
+    }
+    
+    .now-playing-details {
+        gap: 8px;
+        padding: 3px 0; /* Smaller padding for mobile */
+    }
+    
+    .now-playing-header {
+        font-size: 0.85rem;
+    }
+    
+    .now-playing-title {
+        font-size: 0.9rem;
+    }
+    
+    .now-playing-artist {
+        font-size: 0.8rem;
+    }
+    
+    .now-playing-status {
+        width: 8px;
+        height: 8px;
+    }
+}
+
+.now-playing-container.active .now-playing-details {
+    display: flex; /* Show when active */
+}
