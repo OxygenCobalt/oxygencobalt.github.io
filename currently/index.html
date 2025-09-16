@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alexander Capehart | Currently</title>
+    <link rel="stylesheet" href="/styles/core/reset.css">
+    <link rel="stylesheet" href="/styles/core/vars.css">
+    <link rel="stylesheet" href="/styles/core/typography.css">
+    <link rel="stylesheet" href="/styles/core/layout.css">
+    <link rel="stylesheet" href="/styles/components/menu.css">
+    <link rel="stylesheet" href="/styles/components/namebox.css">
+    <link rel="stylesheet" href="/styles/components/tabs.css">
+    <link rel="stylesheet" href="/styles/components/button.css">
+    <link rel="stylesheet" href="/styles/components/contact.css">
+    <link rel="stylesheet" href="/styles/components/nowplaying.css">
+    <link rel="stylesheet" href="/styles/tabs/index.css">
+    <link rel="icon" href="/res/favicon.ico">
+    <script src="https://unpkg.com/htmx.org@1.9.12"></script>
+    <script src="/scripts/tabs.js"></script>
+    <script src="/scripts/menu.js"></script>
+    <script src="/scripts/nowplaying.js"></script>
+</head>
+<body>
+    <div class="mobile-header">
+        <div class="name-box-mobile">
+            <div class="scroll-container-mobile">
+                <div class="scroll-wrapper-mobile">
+                    <div class="text-item-mobile">OxygenCobalt.</div>
+                    <div class="text-item-mobile">Alexander Capehart.</div>
+                    <div class="text-item-mobile">OxygenCobalt.</div>
+                    <div class="text-item-mobile">Alexander Capehart.</div>
+                    <div class="text-item-mobile">OxygenCobalt.</div>
+                </div>
+            </div>
+        </div>
+        <button class="menu-toggle" aria-label="Toggle Menu">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </button>
+    </div>
+    <div class="container">
+        <div class="sidebar">
+            <div class="sidebar-top">
+                <div class="name-box">
+                    <div class="scroll-container">
+                        <div class="scroll-wrapper">
+                            <div class="text-item">OxygenCobalt.</div>
+                            <div class="text-item">Alexander Capehart.</div>
+                            <div class="text-item">OxygenCobalt.</div>
+                            <div class="text-item">Alexander Capehart.</div>
+                            <div class="text-item">OxygenCobalt.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <nav class="tabs">
+                            
+                            
+                    <button class="tab-button "
+                                    hx-get="/partials/"
+                                    hx-target="#tab-content"
+                                    hx-push-url="/"
+                                    hx-swap="innerHTML transition:true"
+                                    hx-trigger="click">
+                                About
+                    </button>
+                            
+                            
+                    <button class="tab-button "
+                                    hx-get="/partials/experience/"
+                                    hx-target="#tab-content"
+                                    hx-push-url="/experience/"
+                                    hx-swap="innerHTML transition:true"
+                                    hx-trigger="click">
+                                Experience
+                    </button>
+                            
+                            
+                    <button class="tab-button "
+                                    hx-get="/partials/portfolio/"
+                                    hx-target="#tab-content"
+                                    hx-push-url="/portfolio/"
+                                    hx-swap="innerHTML transition:true"
+                                    hx-trigger="click">
+                                Portfolio
+                    </button>
+                            
+                            
+                    <button class="tab-button active"
+                                    hx-get="/partials/currently/"
+                                    hx-target="#tab-content"
+                                    hx-push-url="/currently/"
+                                    hx-swap="innerHTML transition:true"
+                                    hx-trigger="click">
+                                Currently
+                    </button>
+                            
+                </nav>
+                        
+                <div class="contact-links">
+                    <a href="https://github.com/OxygenCobalt" class="contact-link github" aria-label="GitHub">
+                        <img src="/res/github.svg" alt="GitHub" class="contact-icon icon">
+                    </a>
+                    <a href="https://linkedin.com/in/alexcpht" class="contact-link linkedin" aria-label="LinkedIn">
+                        <img src="/res/linkedin.png" alt="LinkedIn" class="contact-icon icon">
+                    </a>
+                    <a href="https://x.com/oxycblt" class="contact-link x" aria-label="X (Twitter)">
+                        <img src="/res/xitter.svg" alt="X (Twitter)" class="contact-icon icon">
+                    </a>
+                </div>
+            </div>
+                    
+            <div class="now-playing-widget">
+                <a id="now-playing-container" class="now-playing-container" href="https://listenbrainz.org/user/oxycblt/" target="_blank">
+                    <div class="now-playing-content">
+                        <div class="now-playing-header-row">
+                            <div id="now-playing-header" class="now-playing-header">Not listening to anything!</div>
+                            <div id="now-playing-status" class="now-playing-status"></div>
+                        </div>
+                        <div class="now-playing-details">
+                            <img id="now-playing-artwork" class="now-playing-artwork icon" src="" alt="Album Artwork">
+                            <div class="now-playing-info">
+                                <div id="now-playing-title" class="now-playing-title"></div>
+                                <div id="now-playing-artist" class="now-playing-artist"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="now-playing-fade-top"></div>
+                    <div class="now-playing-fade-bottom"></div>
+                </a>
+            </div>
+        </div>
+        <div class="content">
+            <div id="tab-content" class="tab-content active">
+                
+<h1>Currently.</h1>
+<ul>
+<li>Trying to build the transformer from scratch.</li>
+<li>Working on a LLM benchmark project.</li>
+<li>Experimenting with local computer use agents / RL.</li>
+<li>Continuing to focus on squashing bugs with Auxio.</li>
+<li>Doing some research for the ARIA robotics lab.</li>
+</ul>
+
+            </div>
+            <div class="content-fade-bottom"></div>
+        </div>
+    </div>
+</body>
+</html> 

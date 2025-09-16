@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alexander Capehart | Experience</title>
+    <link rel="stylesheet" href="/styles/core/reset.css">
+    <link rel="stylesheet" href="/styles/core/vars.css">
+    <link rel="stylesheet" href="/styles/core/typography.css">
+    <link rel="stylesheet" href="/styles/core/layout.css">
+    <link rel="stylesheet" href="/styles/components/menu.css">
+    <link rel="stylesheet" href="/styles/components/namebox.css">
+    <link rel="stylesheet" href="/styles/components/tabs.css">
+    <link rel="stylesheet" href="/styles/components/button.css">
+    <link rel="stylesheet" href="/styles/components/contact.css">
+    <link rel="stylesheet" href="/styles/components/nowplaying.css">
+    <link rel="stylesheet" href="/styles/tabs/index.css">
+    <link rel="icon" href="/res/favicon.ico">
+    <script src="https://unpkg.com/htmx.org@1.9.12"></script>
+    <script src="/scripts/tabs.js"></script>
+    <script src="/scripts/menu.js"></script>
+    <script src="/scripts/nowplaying.js"></script>
+</head>
+<body>
+    <div class="mobile-header">
+        <div class="name-box-mobile">
+            <div class="scroll-container-mobile">
+                <div class="scroll-wrapper-mobile">
+                    <div class="text-item-mobile">OxygenCobalt.</div>
+                    <div class="text-item-mobile">Alexander Capehart.</div>
+                    <div class="text-item-mobile">OxygenCobalt.</div>
+                    <div class="text-item-mobile">Alexander Capehart.</div>
+                    <div class="text-item-mobile">OxygenCobalt.</div>
+                </div>
+            </div>
+        </div>
+        <button class="menu-toggle" aria-label="Toggle Menu">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </button>
+    </div>
+    <div class="container">
+        <div class="sidebar">
+            <div class="sidebar-top">
+                <div class="name-box">
+                    <div class="scroll-container">
+                        <div class="scroll-wrapper">
+                            <div class="text-item">OxygenCobalt.</div>
+                            <div class="text-item">Alexander Capehart.</div>
+                            <div class="text-item">OxygenCobalt.</div>
+                            <div class="text-item">Alexander Capehart.</div>
+                            <div class="text-item">OxygenCobalt.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <nav class="tabs">
+                            
+                            
+                    <button class="tab-button "
+                                    hx-get="/partials/"
+                                    hx-target="#tab-content"
+                                    hx-push-url="/"
+                                    hx-swap="innerHTML transition:true"
+                                    hx-trigger="click">
+                                About
+                    </button>
+                            
+                            
+                    <button class="tab-button active"
+                                    hx-get="/partials/experience/"
+                                    hx-target="#tab-content"
+                                    hx-push-url="/experience/"
+                                    hx-swap="innerHTML transition:true"
+                                    hx-trigger="click">
+                                Experience
+                    </button>
+                            
+                            
+                    <button class="tab-button "
+                                    hx-get="/partials/portfolio/"
+                                    hx-target="#tab-content"
+                                    hx-push-url="/portfolio/"
+                                    hx-swap="innerHTML transition:true"
+                                    hx-trigger="click">
+                                Portfolio
+                    </button>
+                            
+                            
+                    <button class="tab-button "
+                                    hx-get="/partials/currently/"
+                                    hx-target="#tab-content"
+                                    hx-push-url="/currently/"
+                                    hx-swap="innerHTML transition:true"
+                                    hx-trigger="click">
+                                Currently
+                    </button>
+                            
+                </nav>
+                        
+                <div class="contact-links">
+                    <a href="https://github.com/OxygenCobalt" class="contact-link github" aria-label="GitHub">
+                        <img src="/res/github.svg" alt="GitHub" class="contact-icon icon">
+                    </a>
+                    <a href="https://linkedin.com/in/alexcpht" class="contact-link linkedin" aria-label="LinkedIn">
+                        <img src="/res/linkedin.png" alt="LinkedIn" class="contact-icon icon">
+                    </a>
+                    <a href="https://x.com/oxycblt" class="contact-link x" aria-label="X (Twitter)">
+                        <img src="/res/xitter.svg" alt="X (Twitter)" class="contact-icon icon">
+                    </a>
+                </div>
+            </div>
+                    
+            <div class="now-playing-widget">
+                <a id="now-playing-container" class="now-playing-container" href="https://listenbrainz.org/user/oxycblt/" target="_blank">
+                    <div class="now-playing-content">
+                        <div class="now-playing-header-row">
+                            <div id="now-playing-header" class="now-playing-header">Not listening to anything!</div>
+                            <div id="now-playing-status" class="now-playing-status"></div>
+                        </div>
+                        <div class="now-playing-details">
+                            <img id="now-playing-artwork" class="now-playing-artwork icon" src="" alt="Album Artwork">
+                            <div class="now-playing-info">
+                                <div id="now-playing-title" class="now-playing-title"></div>
+                                <div id="now-playing-artist" class="now-playing-artist"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="now-playing-fade-top"></div>
+                    <div class="now-playing-fade-bottom"></div>
+                </a>
+            </div>
+        </div>
+        <div class="content">
+            <div id="tab-content" class="tab-content active">
+                
+<!-- Dummy element to get htmx to fetch the stylesheet -->
+<p><span></span></p>
+<link rel="stylesheet" href="/styles/tabs/experience.css" />
+<div class="experience-container">
+    <h1>Experience.</h1>
+    <div class="experience-section">
+        <div class="section-header">
+            <div class="logo-container">
+                <img alt="Salesforce" src="/res/salesforce.png" class="company-logo" />
+            </div>
+            <div class="section-info">
+                <p class="section-title">Full-Stack Software Engineer Intern</p>
+                <p class="section-subtitle">Salesforce</p>
+                <p class="section-date">May 2025 - August 2025</p>
+            </div>
+        </div>
+        <div class="section-description">
+            I built a new web application enabling customers to visualize the costs of pay-as-you-go features in demo instances of the Salesforce platform, unlocking sales deals held up by hesitancy over costs. 
+        </div>
+        <h3 class="section-accomplishments">Notable accomplishments:</h3>
+        <ul>
+            <li>Planned and executed my work as a full member of an AGILE team</li>
+            <li>Transformed an unclear idea into a production-grade product built on top of the existing system</li>
+            <li>Worked in a complex large-scale technical environment with a focus on scaling my app to the 50k+ demo instances created each year</li>
+            <li>Engaged and improved my skills in real-world engineering practices and unit testing</li> 
+        </ul>
+    </div>
+    <hr />
+    <div class="experience-section">
+        <div class="section-header">
+            <div class="logo-container">
+                <img alt="Ombud" src="/res/ombud.png" class="company-logo" />
+            </div>
+            <div class="section-info">
+                <p class="section-title">Full-Stack Software Engineer Intern</p>
+                <p class="section-subtitle">Ombud</p>
+                <p class="section-date">May 2024 - August 2024</p>
+            </div>
+        </div>
+        <div class="section-description">
+            I worked on a production-grade React web application that natively integrates with Microsoft Excel to empower information workers to efficiently access and utilize Ombud's CRM data. In addition, I also redesigned an internal import tool for employees into a customer-facing self-service importer, significantly improving reliability and flexibility.
+        </div>
+        <h3 class="section-accomplishments">Notable accomplishments:</h3>
+        <ul>
+            <li>Developed new CI/CD pipelines for the application with Jenkins</li>
+            <li>Deployed containerized services to internal and production environments</li>
+            <li>Learned and refactored a large existing codebase to maintainably implement new functionality without regressions</li>
+            <li>Engaged with regular unit and QA testing to ensure production-quality code</li>
+        </ul>
+    </div>
+    <hr />
+    <div class="experience-section">
+        <div class="section-header">
+            <div class="logo-container">
+                <img alt="OreCart" src="/res/orecart.png" class="company-logo" />
+            </div>
+            <div class="section-info">
+                <p class="section-title">Full-Stack Software Engineer</p>
+                <p class="section-subtitle">OreCart Transit Program</p>
+                <p class="section-date">August 2023 - June 2024</p>
+            </div>
+        </div>
+        <div class="section-description">
+            I worked for the OreCart Transit System on a cross-platform mobile application with <strong>React Native</strong> that allows Golden residents and Mines students to view route information, shuttle locations, and arrival times. I also created on production-grade web backend with <strong>FastAPI</strong> that will allow transit system administrators to view ridership analytics and easily update information when shuttle routes change.
+        </div>
+        <h3 class="section-accomplishments">Notable accomplishments:</h3>
+        <ul>
+            <li>Designed a consistent and streamlined mobile application UI/UX with an emphasis on immediate ease-of-use</li>
+            <li>Planned a flexible database schema with an emphasis on usability with future management needs</li>
+            <li>Scaled the location backend infrastructure to handle 100k+ location requests per hour while still providing accurate arrival time estimates</li>
+            <li>Containerized the backend with <strong>Docker</strong> to improve development speed and environment consistency</li>
+        </ul>
+    </div>
+    <hr />
+    <div class="experience-section">
+        <div class="section-header">
+            <div class="logo-container">
+                <img alt="Colorado School of Mines" src="/res/mines.png" class="company-logo smaller" />
+            </div>
+            <div class="section-info">
+                <p class="section-title">Teaching Assistant</p>
+                <p class="section-subtitle">Colorado School of Mines</p>
+                <p class="section-date">January 2024 - Present</p>
+            </div>
+        </div>
+        <div class="section-description">
+            I am helping the 40+ students in CSCI448 build their understanding of Android Application Development, alongside assisting Prof. Paone with grading course assignemnts. Previously, I helped the 100+ students of CSCCI200 advance their understanding of the C++ programming language and foundational programming skills.
+            <br /><br />
+            I serve three office hour sessions per week, in which I assist with course material, the 3-4 programming projects assigned each month, and the semester-long final project.
+        </div>
+    </div>
+</div>
+
+            </div>
+            <div class="content-fade-bottom"></div>
+        </div>
+    </div>
+</body>
+</html> 

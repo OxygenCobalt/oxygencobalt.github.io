@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alexander Capehart | {{ title }}</title>
+    <title>Alexander Capehart | Portfolio</title>
     <link rel="stylesheet" href="/styles/core/reset.css">
     <link rel="stylesheet" href="/styles/core/vars.css">
     <link rel="stylesheet" href="/styles/core/typography.css">
@@ -56,17 +56,47 @@
                 </div>
 
                 <nav class="tabs">
-                            {% for item in navigation.items %}
-                            {% set isActive = page.url == item.url or (item.url == "/" and page.url.startsWith("/blog/")) or (page.url == "/" and item.url == "/") %}
-                    <button class="tab-button {% if isActive %}active{% endif %}"
-                                    hx-get="{{ item.partial }}"
+                            
+                            
+                    <button class="tab-button "
+                                    hx-get="/partials/"
                                     hx-target="#tab-content"
-                                    hx-push-url="{{ item.url }}"
+                                    hx-push-url="/"
                                     hx-swap="innerHTML transition:true"
                                     hx-trigger="click">
-                                {{ item.text }}
+                                About
                     </button>
-                            {% endfor %}
+                            
+                            
+                    <button class="tab-button "
+                                    hx-get="/partials/experience/"
+                                    hx-target="#tab-content"
+                                    hx-push-url="/experience/"
+                                    hx-swap="innerHTML transition:true"
+                                    hx-trigger="click">
+                                Experience
+                    </button>
+                            
+                            
+                    <button class="tab-button active"
+                                    hx-get="/partials/portfolio/"
+                                    hx-target="#tab-content"
+                                    hx-push-url="/portfolio/"
+                                    hx-swap="innerHTML transition:true"
+                                    hx-trigger="click">
+                                Portfolio
+                    </button>
+                            
+                            
+                    <button class="tab-button "
+                                    hx-get="/partials/currently/"
+                                    hx-target="#tab-content"
+                                    hx-push-url="/currently/"
+                                    hx-swap="innerHTML transition:true"
+                                    hx-trigger="click">
+                                Currently
+                    </button>
+                            
                 </nav>
                         
                 <div class="contact-links">
@@ -104,7 +134,60 @@
         </div>
         <div class="content">
             <div id="tab-content" class="tab-content active">
-                {{ content | safe }}
+                
+<!-- Dummy element to get htmx to fetch the stylesheet -->
+<p><span></span></p>
+<link rel="stylesheet" href="/styles/tabs/portfolio.css" />
+<h1>Portfolio.</h1>
+<div class="portfolio-item">
+    <div class="portfolio-info">
+        <div class="portfolio-section-header">
+            <img class="portfolio-icon" src="https://github.com/OxygenCobalt/Auxio/raw/dev/fastlane/metadata/android/en-US/images/icon.png" alt="Auxio App Icon" />
+            <div class="portfolio-section-info">
+                <p class="portfolio-section-title">Auxio</p>
+                <p class="portfolio-section-date">August 2020 - Present</p>
+                <a href="https://github.com/OxygenCobalt/Auxio" class="hex-button github">
+                    <span>GitHub</span>
+                </a>
+            </div>
+        </div>
+        <div class="portfolio-section-description">
+            I am the <strong>primary maintainer</strong> of a Music Player App for Android with over <strong>1k+ stars</strong> and <strong>15k+ downloads</strong> on GitHub. It is written in <strong>Kotlin</strong> with modern <strong>MVVM</strong> architecture practices and UI/UX design based on <strong>Material Design 3</strong>. As the project grew, I addressed <strong>user needs</strong> and worked with <strong>external contributors</strong> to fix bugs and improve functionality.
+        </div>
+    </div>
+    <div class="portfolio-screenshots">
+        <div class="screenshot-container">
+            <img src="https://github.com/OxygenCobalt/Auxio/raw/dev/fastlane/metadata/android/en-US/images/phoneScreenshots/shot0.png" alt="Now Playing UI Screenshot" />
+        </div>
+        <div class="screenshot-container">
+            <img src="https://github.com/OxygenCobalt/Auxio/raw/dev/fastlane/metadata/android/en-US/images/phoneScreenshots/shot1.png" alt="Album UI Screenshot" />
+        </div>
+    </div>
+</div>
+<hr />
+<div class="portfolio-item">
+    <div class="portfolio-info">
+        <div class="portfolio-section-header">
+            <img class="portfolio-icon" src="/res/mines-acm.png" alt="Mines ACM Logo" />
+            <div class="portfolio-section-info">
+                <p class="portfolio-section-title">Mines ACM Site</p>
+                <p class="portfolio-section-date">June - August 2023</p>
+                <a href="https://github.com/ColoradoSchoolOfMines/acm-site" class="hex-button github">
+                    <span>GitHub</span>
+                </a>
+            </div>
+        </div>
+        <div class="portfolio-section-description">
+            The new site to be used for the Mines ACM chapter, built with <strong>Bootstrap</strong> on the frontend and <strong>Node.js/Express.js/PostgreSQL</strong> on the backend. I <strong>collaborated</strong> with other contributors on the project's frontend and backend, writing much of <strong>authentication, project management, meeting creation, and attendance systems.</strong>
+        </div>
+    </div>
+    <div class="portfolio-screenshots">
+        <div class="screenshot-container" style="width: 100%;">
+            <img style="width: 100%; height: auto;" src="/res/mines-acm-homepage.png" alt="Mines ACM Site Homepage" />
+        </div>
+    </div>
+</div>
+
             </div>
             <div class="content-fade-bottom"></div>
         </div>
