@@ -1,0 +1,101 @@
+
+.hex-button {
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+    position: relative;
+    display: inline-block;
+    padding: 10px 30px;
+    background: none;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color var(--transition-speed), transform var(--transition-speed);
+    color: var(--text-color);
+    text-align: center;
+    /* Hexagonal shape using clip-path */
+    clip-path: var(--large-hex-clip);
+    border: none;
+    z-index: 1;
+    /* Add consistent height to ensure proper alignment */
+    height: 42px;
+    line-height: 22px;
+    background-color: var(--border-color);
+    transition: background-color var(--transition-speed);
+    width: 100%; /* Make button take full width */
+    box-sizing: border-box; /* Ensure padding is included in width */
+}
+
+/* Pseudo-element for border effect with rounded corners */
+.hex-button::before {
+    content: '';
+    position: absolute;
+    top: var(--border-width);
+    left: var(--border-width);
+    right: var(--border-width);
+    bottom: var(--border-width);
+    background-color: var(--bg-color);
+    z-index: -1;
+    /* Calculate inset hexagonal shape */
+    clip-path: var(--large-inset-hex-clip);
+    transition: all var(--transition-speed);
+}
+
+/* Button gradient overlays */
+.hex-button::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2;
+    pointer-events: none;
+    transition: opacity var(--transition-speed);
+    opacity: 1;
+    /* Hexagonal shape using clip-path */
+    clip-path: var(--large-hex-clip);
+    /* Gradient overlay, radiating from center */
+    background: radial-gradient(
+        circle at center,
+        transparent 60%,
+        var(--bg-color) 120%
+    );
+}
+
+.hex-button:hover, .hex-button.active {
+    background-color: var(--hover-border-color);
+}
+
+/* Hide gradient on hover/active */
+.hex-button:hover::after, .hex-button.active::after {
+    opacity: 0;
+}
+
+.hex-button.active::before {
+    background-color: var(--active-bg);
+}
+
+.hex-button:hover::before {
+    background-color: var(--hover-bg);
+    top: var(--hover-border-width);
+    left: var(--hover-border-width);
+    right: var(--hover-border-width);
+    bottom: var(--hover-border-width);
+    /* Recalculate inset hexagonal shape for thicker border */
+    clip-path: var(--large-hover-inset-hex-clip);
+}
+
+a.hex-button {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    cursor: pointer;
+    height: 42px;
+}
+
+a.hex-button {
+    color: var(--text-color);
+}

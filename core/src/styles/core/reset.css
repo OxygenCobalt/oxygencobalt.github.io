@@ -1,0 +1,18 @@
+
+/* Basic reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Add styling for lists and nested lists */
+ul{
+    padding-left: 1.5rem;
+}
+
+ol{
+    padding-left: 1.75rem;
+}
+
+

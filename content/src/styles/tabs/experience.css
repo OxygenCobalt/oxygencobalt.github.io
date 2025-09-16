@@ -1,0 +1,178 @@
+/* Experience specific styles */
+.experience-container {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.experience-container h1 {
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    word-wrap: break-word;
+}
+
+.experience-section {
+    margin-bottom: 40px;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+.company-logo {
+    max-width: 500px;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+.logo-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(250 248 255);
+    padding: 30px;
+    /* Octagonal shape using clip-path */
+    clip-path: var(--large-oct-clip);
+    max-width: 100%;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .company-logo {
+        max-width: 180px;
+    }
+    
+    .company-logo.smaller {
+        max-width: 160px;
+    }
+    
+    .logo-container {
+        padding: 10px;
+        /* Reduce corner clipping for mobile view */
+        clip-path: var(--small-oct-clip);
+    }
+    
+    .experience-container h1 {
+        font-size: 2rem;
+        margin-bottom: 30px;
+    }
+}
+
+/* Shared Section Styles */
+.section-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.section-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
+    flex: 1;
+    min-width: 250px;
+}
+
+.section-title {
+    margin-bottom: 0px !important;
+    font-size: 1.8rem;
+    font-weight: 600;
+    word-wrap: break-word;
+}
+
+.section-title::after {
+    display: none;
+}
+
+.section-subtitle {
+    font-size: 1.5rem;
+    font-style: italic;
+    margin-bottom: 0px;
+}
+
+.section-date {
+    font-size: 1.5rem;
+    color: #888888;
+    margin-bottom: 0px;
+}
+
+.section-description {
+    margin: 20px 0;
+    line-height: 1.6;
+    width: 100%;
+    word-wrap: break-word;
+}
+
+.section-accomplishments {
+    margin-top: 20px;
+    margin-bottom: 10px !important;
+}
+
+.section-accomplishments::after {
+    display: none;
+}
+
+ul {
+    padding-left: 20px;
+}
+
+/* Responsive adjustments for shared sections */
+@media (max-width: 768px) {
+    .section-header {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
+    
+    .section-title {
+        font-size: 1.5rem;
+    }
+    
+    .section-subtitle, 
+    .section-date {
+        font-size: 1.3rem;
+    }
+    
+    .section-description {
+        font-size: 0.95rem;
+    }
+    
+    ul li {
+        font-size: 0.95rem;
+    }
+}
+
+/* Additional small screen adjustments */
+@media (max-width: 480px) {
+    .section-title {
+        font-size: 1.3rem;
+    }
+    
+    .section-subtitle, 
+    .section-date {
+        font-size: 1.1rem;
+    }
+    
+    .section-description, 
+    ul li {
+        font-size: 0.9rem;
+    }
+    
+    .experience-section {
+        margin-bottom: 30px;
+    }
+    
+    hr {
+        margin: 20px 0;
+    }
+    
+    .experience-container h1 {
+        font-size: 1.8rem;
+        margin-bottom: 25px;
+    }
+}

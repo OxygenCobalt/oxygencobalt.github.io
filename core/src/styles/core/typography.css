@@ -1,0 +1,225 @@
+/* Import Inter font */
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+/* Base font styles */
+body {
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    line-height: 1.6;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+/* Heading styles */
+h1, h2, h3, h4, h5, h6 {
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+    position: relative;
+    transition: color 0.3s ease;
+    margin-top: 0;
+}
+
+h1 {
+    padding-bottom: 7.5px;
+    margin-top: 0;
+    margin-bottom: calc(20px + var(--underline-h1));
+    font-size: 2.5rem;
+}
+
+h2 {
+    padding-bottom: 5px;
+    margin-top: 0;
+    margin-bottom: calc(17.5px + var(--underline-h2));
+    font-size: 2.1rem;
+}
+
+h3 {
+    padding-bottom: 2.5px;
+    margin-top: 0;
+    margin-bottom: calc(15px + var(--underline-h3));
+    font-size: 1.8rem;
+}
+
+h4 {
+    margin-top: 0;
+    margin-bottom: 7.5px;
+    font-size: 1.5rem;
+}
+
+h5 {
+    margin-top: 0;
+    margin-bottom: 5px;
+    font-size: 1.3rem;
+}
+
+h6 {
+    margin-top: 0;
+    margin-bottom: 2.5px;
+    font-size: 1.1rem;
+}
+
+h1::after, h2::after, h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    transition: width 0.3s ease;
+}
+
+h1::after { 
+    width: 120px; 
+    height: var(--underline-h1);
+    background-color: var(--accent);
+    clip-path: var(--small-hex-clip);
+}
+
+h2::after { 
+    width: 100px; 
+    height: var(--underline-h2);
+    background-color: var(--accent-h2);
+    clip-path: var(--small-hex-clip);
+}
+
+h3::after { 
+    width: 80px; 
+    height: var(--underline-h3);
+    background-color: var(--accent-h3);
+    clip-path: var(--small-hex-clip);
+}
+
+h1:hover, h2:hover, h3:hover, h4:hover, h5:hover, h6:hover {
+    color: var(--accent);
+}
+
+h1:hover::after { 
+    width: 180px; 
+    background-color: var(--accent);
+}
+
+h2:hover::after { 
+    width: 150px; 
+    background-color: var(--accent);
+}
+
+h3:hover::after { 
+    width: 120px; 
+    background-color: var(--accent);
+}
+
+h4:hover::after { 
+    width: 90px; 
+    background-color: var(--accent);
+}
+
+h5:hover::after { 
+    width: 60px; 
+    background-color: var(--accent);
+}
+
+h6:hover::after { 
+    width: 45px; 
+    background-color: var(--accent);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    body {
+        padding-top: 60px; /* Make room for fixed header */
+    }
+    
+    .mobile-header {
+        display: flex;
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+        text-align: center;
+    }
+    
+    h1::after, h2::after, h3::after {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    
+    h1.never-center, h2.never-center, h3.never-center, h4.never-center, h5.never-center, h6.never-center {
+        text-align: left;
+    }
+
+    h1.never-center::after, h2.never-center::after, h3.never-center::after {
+        left: 0;
+        transform: translateX(0);
+    }
+    
+    h1 {
+        font-size: 2rem;
+        padding-bottom: 10px;
+        margin-bottom: calc(15px + var(--underline-h1));
+    }
+    
+    h2 {
+        font-size: 1.75rem;
+        padding-bottom: 7.5px;
+        margin-bottom: calc(12.5px + var(--underline-h2));
+    }
+    
+    h3 {
+        font-size: 1.5rem;
+        padding-bottom: 5px;
+        margin-bottom: calc(10px + var(--underline-h3));
+    }
+    
+    h4 {
+        font-size: 1.3rem;
+        margin-bottom: 5px;
+    }
+    
+    h5 {
+        font-size: 1.15rem;
+        margin-bottom: 3.5px;
+    }
+    
+    h6 {
+        font-size: 1rem;
+        margin-bottom: 2px;
+    }
+    
+    h1::after { 
+        width: 100px; 
+    }
+    
+    h2::after { 
+        width: 80px; 
+    }
+    
+    h3::after { 
+        width: 60px; 
+    }
+    
+    h1:hover::after { 
+        width: 150px; 
+    }
+    
+    h2:hover::after { 
+        width: 120px; 
+    }
+    
+    h3:hover::after { 
+        width: 90px; 
+    }
+}
+
+hr {
+    color: var(--sidebar-border);
+    margin: 30px 0;
+}
+
+a {
+    color: var(--accent);
+}
+
+a:visited {
+    color: var(--visited-accent);
+}

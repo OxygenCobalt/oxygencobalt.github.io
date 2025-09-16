@@ -1,0 +1,8 @@
+node_modules/
+src/partials/
+site/
+# No longer needed since we're not using the build directory
+# content/build/
+# Ignore generated partial layouts and content files
+core/src/layouts/partial.*.njk
+content/src/**/partial.*.md

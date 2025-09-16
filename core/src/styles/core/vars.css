@@ -1,0 +1,135 @@
+:root {
+    --bg-color: rgb(250 248 255);
+    --text-color:  rgb(26 27 33);
+    --border-color: rgb(117 118 128);
+    --hover-bg: rgb(232 231 239);
+    --active-bg: rgb(238 237 244);
+    --sidebar-border: rgb(227 226 233);
+    --accent: rgb(74 92 146);
+    --accent-h2: rgba(74, 92, 146, 0.9);
+    --accent-h3: rgba(74, 92, 146, 0.8);
+    --underline-h1: 4px;
+    --underline-h2: 3px;
+    --underline-h3: 2px;
+    --visited-accent: rgb(88 94 113);
+    --sidebar-padding: 20px;
+    --transition-speed: 0.3s;
+    --border-width: 2px;
+    --hover-border-width: 4px;
+    --hover-border-color: rgb(74 92 146);
+    --large-corner-cut: 20px;
+    --large-corner-cut: 20px;
+    --small-corner-cut: 10px;
+    --tiny-corner-cut: 1.5px; /* New variable for menu bar corner cuts */
+    --scroll-height: 80px; /* Height of all scrolling items combined */
+    --item-height: 35px; /* Height of each text item */
+    --name-box-height: 70px; /* Increased height for name box */
+    --mobile-item-height: 20px; /* Height for mobile text items */
+
+
+    --small-oct-clip: polygon(
+        var(--small-corner-cut) 0%, 
+        calc(100% - var(--small-corner-cut)) 0%, 
+        100% var(--small-corner-cut), 
+        100% calc(100% - var(--small-corner-cut)), 
+        calc(100% - var(--small-corner-cut)) 100%, 
+        var(--small-corner-cut) 100%, 
+        0% calc(100% - var(--small-corner-cut)), 
+        0% var(--small-corner-cut)
+    );
+
+    --small-inset-oct-clip: polygon(
+        calc(var(--small-corner-cut) - var(--border-width) * 0.5) 0%, 
+        calc(100% - var(--small-corner-cut) + var(--border-width) * 0.5) 0%, 
+        100% calc(var(--small-corner-cut) - var(--border-width) * 0.5), 
+        100% calc(100% - var(--small-corner-cut) + var(--border-width) * 0.5), 
+        calc(100% - var(--small-corner-cut) + var(--border-width) * 0.5) 100%, 
+        calc(var(--small-corner-cut) - var(--border-width) * 0.5) 100%, 
+        0% calc(100% - var(--small-corner-cut) + var(--border-width) * 0.5), 
+        0% calc(var(--small-corner-cut) - var(--border-width) * 0.5)
+    );
+
+    --small-hover-inset-oct-clip: polygon(
+        calc(var(--small-corner-cut) - var(--hover-border-width) * 0.5) 0%, 
+        calc(100% - var(--small-corner-cut) + var(--hover-border-width) * 0.5) 0%, 
+        100% calc(var(--small-corner-cut) - var(--hover-border-width) * 0.5), 
+        100% calc(100% - var(--small-corner-cut) + var(--hover-border-width) * 0.5), 
+        calc(100% - var(--small-corner-cut) + var(--hover-border-width) * 0.5) 100%, 
+        calc(var(--small-corner-cut) - var(--hover-border-width) * 0.5) 100%, 
+        0% calc(100% - var(--small-corner-cut) + var(--hover-border-width) * 0.5), 
+        0% calc(var(--small-corner-cut) - var(--hover-border-width) * 0.5)
+    );
+
+    --large-oct-clip: polygon(
+        var(--large-corner-cut) 0%, 
+        calc(100% - var(--large-corner-cut)) 0%, 
+        100% var(--large-corner-cut), 
+        100% calc(100% - var(--large-corner-cut)), 
+        calc(100% - var(--large-corner-cut)) 100%, 
+        var(--large-corner-cut) 100%, 
+        0% calc(100% - var(--large-corner-cut)), 
+        0% var(--large-corner-cut)
+    );
+    
+    --large-inset-oct-clip: polygon(
+        calc(var(--large-corner-cut) - var(--border-width) * 0.5) 0%, 
+        calc(100% - var(--large-corner-cut) + var(--border-width) * 0.5) 0%, 
+        100% calc(var(--large-corner-cut) - var(--border-width) * 0.5), 
+        100% calc(100% - var(--large-corner-cut) + var(--border-width) * 0.5), 
+        calc(100% - var(--large-corner-cut) + var(--border-width) * 0.5) 100%, 
+        calc(var(--large-corner-cut) - var(--border-width) * 0.5) 100%, 
+        0% calc(100% - var(--large-corner-cut) + var(--border-width) * 0.5), 
+        0% calc(var(--large-corner-cut) - var(--border-width) * 0.5)
+    );
+
+    --large-hover-inset-oct-clip: polygon(
+        calc(var(--large-corner-cut) - var(--hover-border-width) * 0.5) 0%, 
+        calc(100% - var(--large-corner-cut) + var(--hover-border-width) * 0.5) 0%, 
+        100% calc(var(--large-corner-cut) - var(--hover-border-width) * 0.5), 
+        100% calc(100% - var(--large-corner-cut) + var(--hover-border-width) * 0.5),
+        calc(100% - var(--large-corner-cut) + var(--hover-border-width) * 0.5) 100%,
+        calc(var(--large-corner-cut) - var(--hover-border-width) * 0.5) 100%,
+        0% calc(100% - var(--large-corner-cut) + var(--hover-border-width) * 0.5),
+        0% calc(var(--large-corner-cut) - var(--hover-border-width) * 0.5)
+    );
+
+    --small-hex-clip: polygon(var(--tiny-corner-cut) 0%, calc(100% - var(--tiny-corner-cut)) 0%, 100% 50%, calc(100% - var(--tiny-corner-cut)) 100%, var(--tiny-corner-cut) 100%, 0% 50%);
+    
+
+    --large-hex-clip: polygon(var(--large-corner-cut) 0%, calc(100% - var(--large-corner-cut)) 0%, 100% 50%, calc(100% - var(--large-corner-cut)) 100%, var(--large-corner-cut) 100%, 0% 50%);
+
+    --large-inset-hex-clip: polygon(
+        calc(var(--large-corner-cut) - var(--border-width) * 0.5) 0%, 
+        calc(100% - var(--large-corner-cut) + var(--border-width) * 0.5) 0%, 
+        calc(100% - var(--border-width) * 0.5) 50%, 
+        calc(100% - var(--large-corner-cut) + var(--border-width) * 0.5) 100%, 
+        calc(var(--large-corner-cut) - var(--border-width) * 0.5) 100%, 
+        calc(var(--border-width) * 0.5) 50%
+    );
+
+    --large-hover-inset-hex-clip: polygon(
+        calc(var(--large-corner-cut) - var(--hover-border-width) * 0.5) 0%, 
+        calc(100% - var(--large-corner-cut) + var(--hover-border-width) * 0.5) 0%, 
+        calc(100% - var(--hover-border-width) * 0.5) 50%, 
+        calc(100% - var(--large-corner-cut) + var(--hover-border-width) * 0.5) 100%, 
+        calc(var(--large-corner-cut) - var(--hover-border-width) * 0.5) 100%, 
+        calc(var(--hover-border-width) * 0.5) 50%
+    );
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg-color: rgb(18 19 24);
+        --text-color: rgb(227 226 233);
+        --border-color: rgb(143 144 154);
+        --hover-bg:  rgb(41 42 47);
+        --active-bg:  rgb(30 31 37);
+        --sidebar-border: rgb(69 70 79);
+        --accent: rgb(179 197 255);
+        --accent-h2: rgba(179, 197, 255, 0.9);
+        --accent-h3: rgba(179, 197, 255, 0.8);
+        --accent-dim: rgba(179, 197, 255, 0.5);
+        --accent-visited: rgb(193 198 221);
+        --hover-border-color: rgb(179 197 255);
+    }
+}
