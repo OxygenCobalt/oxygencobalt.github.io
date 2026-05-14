@@ -8,6 +8,5 @@ permalink: "/currently/"
 
 - Trying to build the transformer from scratch.
 - Working on a LLM benchmark project.
-- Experimenting with local computer use agents / RL.
+- Want to do some model interp / RL projects
 - Continuing to focus on squashing bugs with Auxio.
-- Doing some research for the ARIA robotics lab.
